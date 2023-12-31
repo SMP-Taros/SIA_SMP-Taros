@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const siswaSchema = mongoose.Schema(
     {
-        nis: {
+        NIS: {
             type: Number,
             required: true,
         },
-        calon_id: {
+        NISN: {
             type: Number,
             required: true,
         },
@@ -14,32 +14,47 @@ const siswaSchema = mongoose.Schema(
             type: String,
             required: true,
         },
-        // jenis_kelamin: {
-        //     type: String,
-        //     enum: ['laki laki', 'perempuan'],
-        //     required: true,
-        // },
-        // status: {
-        //     type: String,
-        //     enum: ['aktif', 'lulus'],
-        //     required: true,
-        // },
-        // wali: {
-        //     type: String,
-        //     required: true,
-        // },
-        // alamat: {
-        //     type: String,
-        //     required: true,
-        // },
-        // no_telp: {
-        //     type: BigInt,
-        //     required: true,
-        // },
-        // tanggal_masuk: {
-        //     type: Date,
-        //     required: true,
-        // },
+        jenis_kelamin: {
+            type: String,
+            enum: ['laki laki', 'perempuan'],
+            required: true,
+        },
+        tempat_lahir: {
+            type: String,
+            required: true,
+        },
+        tanggal_lahir: {
+            type: Date,
+            required: true,
+        },
+        NIK: {
+            type: Number,
+            required: true,
+        },
+        alamat: {
+            type: String,
+            required: true,
+        },
+        email: {
+            type: String,
+            required: true,
+        },
+        nama_ayah: {
+            type: String,
+            required: true,
+        },
+        pekerjaan_ayah: {
+            type: String,
+            required: true,
+        },
+        nama_ibu: {
+            type: String,
+            required: true,
+        },
+        pekerjaan_ibu: {
+            type: String,
+            required: true,
+        },
         
     },
     {
