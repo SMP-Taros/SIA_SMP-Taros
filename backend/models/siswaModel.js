@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 const siswaSchema = mongoose.Schema(
     {
         NIS: {
-            type: Number,
+            type: String,
             required: true,
         },
         NISN: {
-            type: Number,
+            type: String,
             required: true,
         },
         nama: {

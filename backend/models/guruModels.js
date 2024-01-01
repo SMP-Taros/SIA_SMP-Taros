@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const guruSchema = mongoose.Schema(
     {
         NUPTK: {
-            type: Number,
+            type: String,
             required: true,
         },
         nama: {
@@ -25,15 +25,15 @@ const guruSchema = mongoose.Schema(
             required: true,
         },
         NIPY: {
-            type: Number,
+            type: String,
             required: true,
         },
         NIK: {
-            type: Number,
+            type: String,
             required: true,
         },
         no_kk: {
-            type: Number,
+            type: String,
             required: true,
         },
         status_kepegawaian: {

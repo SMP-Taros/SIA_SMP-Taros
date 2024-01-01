@@ -25,7 +25,7 @@ router.post('/', async (request, response) => {
 
         const siswa = await Siswa.create(newSiswa);
 
-        return response.status(201).send(siswa);dw
+        return response.status(201).send(siswa);
     } catch (error) {
         console.log(error.massage);
         response.status(500).send({ message: error.message})

@@ -9,11 +9,11 @@ Request Body :
 ```json
 {
   "username": "admin",
-  "password": "123",
   "nama_lengkap": "tubagus agus",
   "email": "agus@gmail.com",
-  "NIPTK": "08272346",
-  "nomor_telepon": "089373536"
+  "niptk": "08272346",
+  "nomor_telepon": "089373536",
+  "password": "1234567"
 }
 ```
 
