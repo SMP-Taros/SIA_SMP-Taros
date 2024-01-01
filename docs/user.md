@@ -142,9 +142,9 @@ Response Body Failed:
 }
 ```
 
-## Delete Guru
+## Logout
 
-Endpoint : DELETE /api/users/logout
+Endpoint : POST /api/users/logout
 
 Headers :
 
@@ -154,7 +154,7 @@ Response Body Success:
 
 ```json
 {
-  "message": "Ok"
+  "message": "User logged out"
 }
 ```
 
