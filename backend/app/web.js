@@ -5,6 +5,8 @@ import siswaRoute from "../routes/siswaRoutes.js";
 import guruRoute from "../routes/guruRoutes.js";
 import userRoute from "../routes/userRoutes.js";
 
+import cookieParser from "cookie-parser";
+
 export const app = express();
 
 //middleware for parsing request body
@@ -15,6 +17,7 @@ app.get("/", (request, response) => {
   return response.status(234).send("hello");
 });
 
+app.use(cookieParser());
 app.use("/siswa", siswaRoute);
 app.use("/guru", guruRoute);
 app.use("/api/users", userRoute);

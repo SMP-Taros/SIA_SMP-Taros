@@ -4,10 +4,13 @@ import bcrypt from "bcrypt";
 // import { check, validationResult } from "express-validator";
 import generateToken from "../utils/generateToken.js";
 
+import { protect } from "../middleware/authMiddleware.js";
+
 import {
   loginUser,
   logoutUser,
   registerUser,
+  getuserProfile,
 } from "../controller/userController.js";
 
 // import authMiddleware from "../middleware/auth.js";
@@ -29,6 +32,8 @@ const router = express.Router();
 router.post("/", registerUser);
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
+
+router.route("/profile").get(protect, getuserProfile);
 // router.patch("/current", authMiddleware, async (req, res) => {
 //   try {
 //     const { username, nama_lengkap, email, niptk, nomor_telepon, password } =
