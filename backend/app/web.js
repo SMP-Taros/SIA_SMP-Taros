@@ -18,7 +18,7 @@ app.get("/", (request, response) => {
 });
 
 app.use(cookieParser());
-app.use("/siswa", siswaRoute);
+app.use("/api/siswa", siswaRoute);
 app.use("/guru", guruRoute);
 app.use("/api/users", userRoute);
 
