@@ -159,9 +159,11 @@ const updateSiswa = asyncHandler(async (req, res) => {
       return res.status(400).json({ message: "Siswa not found" });
     }
 
+    const newSiswa = Siswa.findById(id);
+
     return res.status(201).json({
       message: "siswa berhasil di update",
-      data: siswa,
+      data: newSiswa,
     });
   } catch (error) {
     console.log(error.massage);
