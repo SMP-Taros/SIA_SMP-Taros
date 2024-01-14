@@ -17,7 +17,6 @@ import logo2 from "../../assets/logo/logo2.png";
 import { useState } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import "./style.css";
 
 const Login = () => {
   const [showPasssword, setShowPassword] = useState(false);
