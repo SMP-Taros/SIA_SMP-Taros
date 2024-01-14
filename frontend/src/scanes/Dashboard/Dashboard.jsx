@@ -1,5 +1,11 @@
+import Template from "../Template/TemplateScreen";
+
 const Dashboard = () => {
-    return <div>Dashboard</div>
+    return (
+        <Template>
+            <h1>Dashboard</h1>
+        </Template>
+    )
 }
 
 export default Dashboard;
