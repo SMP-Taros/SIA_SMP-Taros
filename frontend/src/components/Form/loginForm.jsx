@@ -1,12 +1,21 @@
 import { Card, Container, Box } from "@mui/material";
+import background from "../../assets/background/background1.png";
 
 const LoginForm = ({ children }) => {
   return (
-    <Container>
-      <Box component="div" margin="auto" width="616px" marginTop="150px" p={2}>
+    <Box
+      style={{
+        width: "100%",
+        height: "100%",
+        backgroundImage: `url(${background})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <Box component="div" margin="auto" width="616px" paddingTop="150px">
         <Card container>{children}</Card>
       </Box>
-    </Container>
+    </Box>
   );
 };
 

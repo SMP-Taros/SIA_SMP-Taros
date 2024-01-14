@@ -7,6 +7,8 @@ import {
   InputAdornment,
   TextField,
   IconButton,
+  CardActions,
+  Button,
 } from "@mui/material";
 import LoginForm from "../../components/Form/loginForm";
 // import background from "../../assets/background/background1.png"
@@ -96,6 +98,32 @@ const Login = () => {
           </Stack>
         </Box>
       </CardContent>
+      <CardActions>
+        <Box
+          component="div"
+          width="87%"
+          margin="auto"
+          marginTop="20px"
+          marginBottom="30px"
+          textAlign="center"
+        >
+          <Button
+            variant="contained"
+            size="large"
+            style={{
+              width: "100%",
+              margin: "auto",
+              backgroundColor: "#F6C03C",
+            }}
+            href="/"
+          >
+            Sign In
+          </Button>
+          <Typography variant="h6" fontSize="16px" paddingTop="20px">
+            Forgot Password ?
+          </Typography>
+        </Box>
+      </CardActions>
     </LoginForm>
   );
 };
