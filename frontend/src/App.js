@@ -1,6 +1,7 @@
 import { ColorModeContext, useMode } from "./Theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import Topbar from "./scanes/global/Topbar"
+import Topbar from "./components/Bar/Topbar";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -12,6 +13,7 @@ function App() {
         <div className="app">
           <main className="content">
             <Topbar />
+            <Outlet />
           </main>
         </div>
       </ThemeProvider>
