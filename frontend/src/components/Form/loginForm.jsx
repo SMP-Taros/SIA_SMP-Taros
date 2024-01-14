@@ -1,16 +1,13 @@
-import { Card, Container, Grid} from "@mui/material";
+import { Card, Container, Box } from "@mui/material";
 
-const LoginForm = ({children}) => {
-    return (
-        <Container>
-            <Grid justifyContent="center">
-                <Card>
-                    {children}
-                </Card>
-            </Grid>
-        </Container>
-    )
-    
+const LoginForm = ({ children }) => {
+  return (
+    <Container>
+      <Box component="div" margin="auto" width="616px" marginTop="150px" p={2}>
+        <Card container>{children}</Card>
+      </Box>
+    </Container>
+  );
 };
 
 export default LoginForm;
