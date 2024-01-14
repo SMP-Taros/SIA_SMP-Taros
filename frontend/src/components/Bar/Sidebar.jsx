@@ -124,8 +124,8 @@ const ProSidebar = () => {
                 setSelected={setSelected}
               />
               <Item
-                title="Karyawan"
-                to="/karyawan"
+                title="Siswa"
+                to="/siswa"
                 selected={selected}
                 setSelected={setSelected}
               />
