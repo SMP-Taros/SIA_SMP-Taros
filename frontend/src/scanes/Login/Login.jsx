@@ -67,9 +67,9 @@ const Login = () => {
         </Box>
         <Box
           component="div"
-          width="100%"
+          width="90%"
           margin="auto"
-          padding="30px"
+          // padding="10px"
           paddingTop="70px"
         >
           <Stack spacing={4}>

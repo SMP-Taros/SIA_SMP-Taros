@@ -1,4 +1,4 @@
-import { Card, Container, Box } from "@mui/material";
+import { Card, Box } from "@mui/material";
 import background from "../../assets/background/background1.png";
 
 const LoginForm = ({ children }) => {
@@ -10,6 +10,7 @@ const LoginForm = ({ children }) => {
         backgroundImage: `url(${background})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        overflow: "hidden",
       }}
     >
       <Box component="div" margin="auto" width="616px" paddingTop="150px">
