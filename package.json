@@ -5,8 +5,10 @@
   "type": "module",
   "main": "app/web.js",
   "scripts": {
-    "start": "node app/web.js",
-    "dev": "nodemon app/web.js",
+    "start": "node backend/app/web.js",
+    "server": "nodemon backend/app/web.js",
+    "client": "npm start --prefix frontend",
+    "dev" : "concurrently \"npm run server\" \"npm run client\"",
     "test": "jest -i"
   },
   "jest": {
@@ -38,6 +40,7 @@
     "@types/supertest": "^6.0.2",
     "@types/uuid": "^9.0.7",
     "babel-jest": "^29.7.0",
+    "concurrently": "^8.2.2",
     "jest": "^29.7.0",
     "supertest": "^6.3.3"
   }

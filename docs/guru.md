@@ -9,12 +9,12 @@ Request Body :
 ```json
 {
   "nama": "Sri",
-  "NUPTK": "12335434",
+  "nuptk": "12335434",
   "jenis_kelamin": "Perempuan",
   "tempat_lahir": "wonogiri",
   "tanggal_lahir": "12 Januari 2004",
-  "NIPY": "0390489585",
-  "NIK": "298238383",
+  "nipy": "0390489585",
+  "nik": "298238383",
   "no_kk": "2023837",
   "status_kepegawaian": "PNS",
   "jenis_ptk": "none",
@@ -35,12 +35,12 @@ Response Body Success:
 {
   "data": {
     "nama": "Sri",
-    "NUPTK": "12335434",
+    "nuptk": "12335434",
     "jenis_kelamin": "Perempuan",
     "tempat_lahir": "wonogiri",
     "tanggal_lahir": "12 Januari 2004",
-    "NIPY": "0390489585",
-    "NIK": "298238383",
+    "nipy": "0390489585",
+    "nipy": "298238383",
     "no_kk": "2023837",
     "status_kepegawaian": "PNS",
     "jenis_ptk": "none",
@@ -61,7 +61,7 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "NIPY sudah terdaftar tidak lengkap"
+  "errors": "NUPTK sudah terdaftar tidak lengkap"
 }
 ```
 
@@ -118,7 +118,7 @@ Response Body Success:
     "nama_pasangan": "Rahman",
     "pekerjaan_pasangan": "nganggur"
   },
-  "meesage": "guru berhasil di update"
+  "meesage": "guru berhasil di perbarui"
 }
 ```
 
@@ -153,7 +153,7 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "data masih kosong"
+  "errors": "Belum ada data"
 }
 ```
 
@@ -200,7 +200,7 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "id tidak ditemukan"
+  "errors": "guru tidak ditemukan"
 }
 ```
 

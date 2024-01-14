@@ -2,7 +2,8 @@ import { useState } from "react";
 import { ColorModeContext, useMode } from "./Theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
-import Topbar from "./scanes/global/Topbar";
+import Topbar from "./components/Bar/Topbar";
+import { Outlet } from "react-router-dom";
 import Sidebar from "./scanes/global/Sidebar";
 import Dashboard from "./scanes/dashboard";
 // import Team from "./scenes/team";
@@ -15,6 +16,7 @@ import Dashboard from "./scanes/dashboard";
 // import FAQ from "./scenes/faq";
 // import Geography from "./scenes/geography";
 // import Calendar from "./scenes/calendar/calendar";
+
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -41,6 +43,7 @@ function App() {
               {/* <Route path="/calendar" element={<Calendar />} /> */}
               {/* <Route path="/geography" element={<Geography />} /> */}
             </Routes>
+            <Outlet />
           </main>
         </div>
       </ThemeProvider>
