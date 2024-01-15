@@ -27,7 +27,7 @@ import Template from "../Template/TemplateScreen";
 import AddIcon from "@mui/icons-material/Add";
 import Header from "../../components/Header";
 
-import { columns, rows, createData } from "../../data/siswaData";
+import { columns, rows, createData } from "../../data/guruData";
 
 const Siswa = () => {
   const theme = useTheme();
@@ -50,7 +50,7 @@ const Siswa = () => {
       <Box component="div" width="100%" padding="40px" paddingRight="70px">
         <Grid container justifyContent="space-between">
           <Grid item>
-            <Header title="Data Master Siswa" />
+            <Header title="Data Master Guru" />
           </Grid>
           <Grid item>
             <Typography variant="h2" fontSize="20px" marginTop="24px">
@@ -62,7 +62,7 @@ const Siswa = () => {
           <CardContent>
             <Grid container justifyContent="space-between">
               <Grid item>
-                <Typography variant="h3">Daftar Siswa SMP IT Taros</Typography>
+                <Typography variant="h3">Daftar Guru SMP IT Taros</Typography>
               </Grid>
               <Grid item>
                 <Stack direction="row">

@@ -14,7 +14,7 @@ const Topbar = () => {
   const colorMode = useContext(ColorModeContext);
 
   return (
-    <Box display="flex" justifyContent="end" p={2}>
+    <Box bgcolor="#fff" display="flex" justifyContent="end" p={2}>
       {/* SEARCH BAR */}
       <Box
         display="flex"
