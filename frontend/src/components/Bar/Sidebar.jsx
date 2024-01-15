@@ -14,21 +14,21 @@ const ProSidebar = () => {
 
   return (
     <Box
-      bgcolor={colors.primary[400]}
+      bgcolor={colors.primary[500]}
       sx={{
         height: "100%",
       }}
     >
-      <Sidebar backgroundColor={colors.primary[400]} collapsed={isCollapsed}>
+      <Sidebar backgroundColor={colors.primary[500]} collapsed={isCollapsed}>
         <Menu
           menuItemStyles={{
-            button: {
-              // the active class will be added automatically by react router
-              // so we can use it to style the active menu item
-              [`&.active`]: {
-                backgroundColor: "#13395e",
-                color: "#b6c8d9",
-              },
+            button: ({ level, active, disabled }) => {
+              // only apply styles on first level elements of the tree
+              if (level === 0)
+                return {
+                  color: disabled ? '#f5d9ff' : '#d359ff',
+                  backgroundColor: active ? '#eecef9' : undefined,
+                };
             },
           }}
         >
@@ -38,7 +38,7 @@ const ProSidebar = () => {
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
               margin: "10px 0 20px 0",
-              color: colors.grey[100],
+              color: colors.grey[900],
             }}
           >
             {!isCollapsed && (
@@ -48,10 +48,15 @@ const ProSidebar = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.grey[100]}>
+                <Typography variant="h3" color="#fff">
                   SMP TAROS
                 </Typography>
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                <IconButton
+                  onClick={() => setIsCollapsed(!isCollapsed)}
+                  style={{
+                    color: colors.grey[900],
+                  }}
+                >
                   <MenuOutlinedIcon />
                 </IconButton>
               </Box>
@@ -73,7 +78,8 @@ const ProSidebar = () => {
               <Box textAlign="center">
                 <Typography
                   variant="h2"
-                  color={colors.grey[100]}
+                  color="#fff"
+                  // color={colors.grey[100]}
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
@@ -88,13 +94,40 @@ const ProSidebar = () => {
 
           {/* MENU ITEM */}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <MenuItem icon={<HomeOutlinedIcon />} component={<Link to="/" />}>
-              {" "}
+            <MenuItem
+              icon={<HomeOutlinedIcon />}
+              component={<Link to="/" />}
+              style={{
+                color: colors.grey[900],
+              }}
+            >
               Dashboard
             </MenuItem>
-            <SubMenu label="Data Master" icon={<GridViewIcon />}>
-              <MenuItem component={<Link to="/siswa" />}> Siswa</MenuItem>
-              <MenuItem component={<Link to="/guru" />}> Guru</MenuItem>
+            <SubMenu
+              label="Data Master"
+              icon={<GridViewIcon />}
+              style={{
+                color: colors.grey[900],
+              }}
+            >
+              <MenuItem
+                component={<Link to="/siswa" />}
+                style={{
+                  color: colors.grey[900],
+                }}
+              >
+                {" "}
+                Siswa
+              </MenuItem>
+              <MenuItem
+                component={<Link to="/guru" />}
+                style={{
+                  color: colors.grey[900],
+                }}
+              >
+                {" "}
+                Guru
+              </MenuItem>
             </SubMenu>
           </Box>
         </Menu>
