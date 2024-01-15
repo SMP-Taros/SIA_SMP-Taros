@@ -7,7 +7,7 @@ body,
 .content {
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   font-family: 'Poppins', sans-serif;
 }
 
@@ -16,9 +16,9 @@ body,
   position: relative;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 10px;
-}
+} */
 
 /* Track */
 ::-webkit-scrollbar-track {

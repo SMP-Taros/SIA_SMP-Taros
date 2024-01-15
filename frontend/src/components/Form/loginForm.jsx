@@ -10,7 +10,9 @@ const LoginForm = ({ children }) => {
         backgroundImage: `url(${background})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        overflow: "hidden",
+        margin: 0,
+        padding: 0,
+        // overflow: "hidden",
       }}
     >
       <Box component="div" margin="auto" width="616px" paddingTop="150px">
