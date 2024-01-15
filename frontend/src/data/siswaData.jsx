@@ -32,24 +32,12 @@ const columns = [
   },
 ];
 
-const renderElement = (value) => {
-  var template = "<div>Hello {username}. Your user id is {userId}.</div>";
-  var r = template.match(/\{[\w]+\}/g);
-  r &&
-    r.forEach((state) => {
-      var regex = new RegExp(state, "g");
-      var stateItem = state.split(/{|}/g)[1];
-      template = template.replace(regex, this.state[stateItem]);
-    });
-  return <div dangerouslySetInnerHTML={{ __html: template }} />;
-};
-
-function createData(nama, nis, nisn, tempat_lahir, tanggal_lahir) {
-  return { nama, nis, nisn, tempat_lahir, tanggal_lahir };
+function createData(nama, nis, nisn, tempat_lahir, tanggal_lahir, action) {
+  return { nama, nis, nisn, tempat_lahir, tanggal_lahir, action };
 }
 
 const rows = [
-  createData("Arif", "02938", "0390489585", "Batang", "12 Juni 2012"),
+  createData("Arif", "02938", "0390489585", "Batang", "12 Juni 2012", "action"),
 ];
 
 export { columns, rows, createData };

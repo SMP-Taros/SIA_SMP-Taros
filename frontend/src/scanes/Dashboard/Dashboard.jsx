@@ -3,7 +3,7 @@ import { tokens } from "../../Theme";
 import Header from "../../components/Header";
 import Template from "../Template/TemplateScreen";
 import Calendar from "../../components/Calendar";
-import StatBox from "../../components/StatBox";
+// import StatBox from "../../components/StatBox";
 
 const Dashboard = () => {
   const theme = useTheme();

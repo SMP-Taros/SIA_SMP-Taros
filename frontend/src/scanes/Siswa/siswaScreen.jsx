@@ -30,7 +30,8 @@ import Template from "../Template/TemplateScreen";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
-
+// import Icon from "../../assets/icon/edit";
+import EditIcon from "@mui/icons-material/Edit";
 import { columns, rows } from "../../data/siswaData";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -63,7 +64,7 @@ const Siswa = () => {
   const conditionalValueTable = (key, value) => {
     if (key === "action") {
       let val =
-        "<List><ListItemButton><ListItemIcon width='100px'><img src='../../assets/icon/edit.png'></ListItemIcon><ListItemText primary='Inbox'/><ListItemButton></List>";
+        "<List><ListItemButton><ListItemIcon style='width: 100px;'><img src=\"../../assets/icon/edit.png\" alt=\"Edit Icon\"></ListItemIcon><ListItemText primary='Inbox'/></ListItemButton></List>";
       return val;
     } else {
       return value;
@@ -80,6 +81,7 @@ const Siswa = () => {
           <Grid item>
             <Typography variant="h2" fontSize="20px" marginTop="24px">
               Admin/Data master
+              <EditIcon />
             </Typography>
           </Grid>
         </Grid>
@@ -155,29 +157,40 @@ const Siswa = () => {
                           >
                             {columns.map((column) => {
                               const value = row[column.id];
-                              var template = conditionalValueTable(
-                                column.id,
-                                value
-                              );
-                              var r = template.match(/\{[\w]+\}/g);
+                              console.log("Value:", value);
 
-                              if (r) {
-                                r.forEach((state) => {
-                                  var regex = new RegExp(state, "g");
-                                  var stateItem = state.split(/{|}/g)[1];
-                                  template = template.replace(regex, stateItem);
-                                });
-                              }
+                              // var template = conditionalValueTable(
+                              //   column.id,
+                              //   value
+                              // );
+                              // var r = template.match(/\{[\w]+\}/g);
+
+                              // if (r) {
+                              //   r.forEach((state) => {
+                              //     var regex = new RegExp(state, "g");
+                              //     var stateItem = state.split(/{|}/g)[1];
+                              //     template = template.replace(regex, stateItem);
+                              //   });
+                              // }
 
                               // Convert the string template to JSX using dangerouslySetInnerHTML
-                              const jsxTemplate = { __html: template };
 
                               return (
                                 <StyledTableCell
                                   key={column.id}
                                   align={column.align}
                                 >
-                                  <div dangerouslySetInnerHTML={jsxTemplate} />
+                                  {value === "action" ? (
+                                    <IconButton
+                                      component={Link}
+                                      to="/siswa/create"
+                                      type="button"
+                                    >
+                                      <EditIcon />
+                                    </IconButton>
+                                  ) : (
+                                    value
+                                  )}
                                 </StyledTableCell>
                               );
                             })}
