@@ -5,54 +5,33 @@ import { Link } from "react-router-dom";
 import { tokens } from "../../Theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import GridViewIcon from '@mui/icons-material/GridView';
-
-const Item = ({ title, to, icon, selected, setSelected }) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  return (
-    <MenuItem
-      active={selected === title}
-      style={{
-        color: colors.grey[100],
-      }}
-      onClick={() => setSelected(title)}
-      icon={icon}
-    >
-      <Typography>{title}</Typography>
-      <Link to={to} />
-    </MenuItem>
-  );
-};
+import GridViewIcon from "@mui/icons-material/GridView";
 
 const ProSidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState("Dashboard");
 
   return (
     <Box
       sx={{
-        "& .pro-sidebar-inner": {
-          background: `${colors.primary[400]} !important`,
-        },
-        "& .pro-icon-wrapper": {
-          backgroundColor: "transparent !important",
-        },
-        "& .pro-inner-item": {
-          padding: "5px 35px 5px 20px !important",
-        },
-        "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
-        },
-        "& .pro-menu-item.active": {
-          color: "#6870fa !important",
-        },
+        bgcolor: "background.paper",
+        height: "100%",
       }}
     >
       <Sidebar collapsed={isCollapsed}>
-        <Menu iconShape="square">
+        <Menu
+          menuItemStyles={{
+            button: {
+              // the active class will be added automatically by react router
+              // so we can use it to style the active menu item
+              [`&.active`]: {
+                backgroundColor: "#13395e",
+                color: "#b6c8d9",
+              },
+            },
+          }}
+        >
           {/* LOGO AND MENU ICON */}
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
@@ -109,26 +88,13 @@ const ProSidebar = () => {
 
           {/* MENU ITEM */}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
-              title="Dashboard"
-              to="/"
-              icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            <MenuItem icon={<HomeOutlinedIcon />} component={<Link to="/" />}>
+              {" "}
+              Dashboard
+            </MenuItem>
             <SubMenu label="Data Master" icon={<GridViewIcon />}>
-              <Item
-                title="Guru"
-                to="/guru"
-                selected={selected}
-                setSelected={setSelected}
-              />
-              <Item
-                title="Siswa"
-                to="/siswa"
-                selected={selected}
-                setSelected={setSelected}
-              />
+              <MenuItem component={<Link to="/siswa" />}> Siswa</MenuItem>
+              <MenuItem component={<Link to="/guru" />}> Guru</MenuItem>
             </SubMenu>
           </Box>
         </Menu>
