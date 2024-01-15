@@ -14,12 +14,12 @@ const ProSidebar = () => {
 
   return (
     <Box
+      bgcolor={colors.primary[400]}
       sx={{
-        bgcolor: "background.paper",
         height: "100%",
       }}
     >
-      <Sidebar collapsed={isCollapsed}>
+      <Sidebar backgroundColor={colors.primary[400]} collapsed={isCollapsed}>
         <Menu
           menuItemStyles={{
             button: {
