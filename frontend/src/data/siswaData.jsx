@@ -1,50 +1,55 @@
 const columns = [
-  { id: "name", label: "Name", minWidth: 170 },
-  { id: "code", label: "ISO\u00a0Code", minWidth: 100 },
+  { id: "nama", label: "Nama", minWidth: 170 },
+  { id: "nis", label: "NIS", minWidth: 100 },
   {
-    id: "population",
-    label: "Population",
+    id: "nisn",
+    label: "NISN",
     minWidth: 170,
     align: "right",
     format: (value) => value.toLocaleString("en-US"),
   },
   {
-    id: "size",
-    label: "Size\u00a0(km\u00b2)",
+    id: "tempat_lahir",
+    label: "Tempat Lahir",
     minWidth: 170,
     align: "right",
     format: (value) => value.toLocaleString("en-US"),
   },
   {
-    id: "density",
-    label: "Density",
+    id: "tanggal_lahir",
+    label: "Tanggal Lahir",
     minWidth: 170,
     align: "right",
     format: (value) => value.toFixed(2),
   },
+  {
+    id: "action",
+    label: "Action",
+    minWidth: 170,
+    align: "right",
+    link: "/siswa/edit",
+    format: (value) => value.toFixed(2),
+  },
 ];
 
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
+const renderElement = (value) => {
+  var template = "<div>Hello {username}. Your user id is {userId}.</div>";
+  var r = template.match(/\{[\w]+\}/g);
+  r &&
+    r.forEach((state) => {
+      var regex = new RegExp(state, "g");
+      var stateItem = state.split(/{|}/g)[1];
+      template = template.replace(regex, this.state[stateItem]);
+    });
+  return <div dangerouslySetInnerHTML={{ __html: template }} />;
+};
+
+function createData(nama, nis, nisn, tempat_lahir, tanggal_lahir) {
+  return { nama, nis, nisn, tempat_lahir, tanggal_lahir };
 }
 
 const rows = [
-  createData("India", "IN", 1324171354, 3287263),
-  createData("China", "CN", 1403500365, 9596961),
-  createData("Italy", "IT", 60483973, 301340),
-  createData("United States", "US", 327167434, 9833520),
-  createData("Canada", "CA", 37602103, 9984670),
-  createData("Australia", "AU", 25475400, 7692024),
-  createData("Germany", "DE", 83019200, 357578),
-  createData("Ireland", "IE", 4857000, 70273),
-  createData("Mexico", "MX", 126577691, 1972550),
-  createData("Japan", "JP", 126317000, 377973),
-  createData("France", "FR", 67022000, 640679),
-  createData("United Kingdom", "GB", 67545757, 242495),
-  createData("Russia", "RU", 146793744, 17098246),
-  createData("Nigeria", "NG", 200962417, 923768),
-  createData("Brazil", "BR", 210147125, 8515767),
+  createData("Arif", "02938", "0390489585", "Batang", "12 Juni 2012"),
 ];
 
 export { columns, rows, createData };

@@ -8,15 +8,18 @@ import {
   useTheme,
   Stack,
 } from "@mui/material";
+
+import { styled } from "@mui/material/styles";
+
 import InputBase from "@mui/material/InputBase";
-import { useContext } from "react";
+// import { useContext } from "react";
 import { ColorModeContext, tokens } from "../../Theme";
 import * as React from "react";
 
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
@@ -25,8 +28,20 @@ import TableRow from "@mui/material/TableRow";
 import SearchIcon from "@mui/icons-material/Search";
 import Template from "../Template/TemplateScreen";
 import AddIcon from "@mui/icons-material/Add";
+import { Link } from "react-router-dom";
 
-import { columns, rows, createData } from "../../data/siswaData";
+import { columns, rows } from "../../data/siswaData";
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+    border: "none",
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
 
 const Siswa = () => {
   const theme = useTheme();
@@ -42,6 +57,16 @@ const Siswa = () => {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  const conditionalValueTable = (key, value) => {
+    if (key === "action") {
+      let val =
+        "<List><ListItemButton><ListItemIcon width='100px'><img src='../../assets/icon/edit.png'></ListItemIcon><ListItemText primary='Inbox'/><ListItemButton></List>";
+      return val;
+    } else {
+      return value;
+    }
   };
   // const colorMode = useContext(ColorModeContext);
   return (
@@ -75,27 +100,41 @@ const Siswa = () => {
                     </IconButton>
                   </Box>
 
-                  <IconButton type="button" sx={{ p: 1 }}>
+                  <IconButton
+                    component={Link}
+                    to="/siswa/create"
+                    type="button"
+                    sx={{ p: 1 }}
+                  >
                     <AddIcon />
                   </IconButton>
                 </Stack>
               </Grid>
             </Grid>
           </CardContent>
-          <CardContent>
-            <Paper sx={{ width: "100%", overflow: "hidden" }}>
-              <TableContainer sx={{ maxHeight: 440 }}>
+          <CardContent sx={{ height: "100%" }}>
+            <Paper
+              sx={{
+                width: "100%",
+                overflow: "hidden",
+                border: "none",
+                boxShadow: "none",
+              }}
+            >
+              <TableContainer
+                sx={{ maxHeight: 440, width: "100%", border: "none" }}
+              >
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow>
                       {columns.map((column) => (
-                        <TableCell
+                        <StyledTableCell
                           key={column.id}
                           align={column.align}
                           style={{ minWidth: column.minWidth }}
                         >
                           {column.label}
-                        </TableCell>
+                        </StyledTableCell>
                       ))}
                     </TableRow>
                   </TableHead>
@@ -115,12 +154,30 @@ const Siswa = () => {
                           >
                             {columns.map((column) => {
                               const value = row[column.id];
+                              var template = conditionalValueTable(
+                                column.id,
+                                value
+                              );
+                              var r = template.match(/\{[\w]+\}/g);
+
+                              if (r) {
+                                r.forEach((state) => {
+                                  var regex = new RegExp(state, "g");
+                                  var stateItem = state.split(/{|}/g)[1];
+                                  template = template.replace(regex, stateItem);
+                                });
+                              }
+
+                              // Convert the string template to JSX using dangerouslySetInnerHTML
+                              const jsxTemplate = { __html: template };
+
                               return (
-                                <TableCell key={column.id} align={column.align}>
-                                  {column.format && typeof value === "number"
-                                    ? column.format(value)
-                                    : value}
-                                </TableCell>
+                                <StyledTableCell
+                                  key={column.id}
+                                  align={column.align}
+                                >
+                                  <div dangerouslySetInnerHTML={jsxTemplate} />
+                                </StyledTableCell>
                               );
                             })}
                           </TableRow>

@@ -12,6 +12,7 @@ import {
 import Dashboard from "./scanes/Dashboard/Dashboard";
 import Login from "./scanes/Login/Login";
 import Siswa from "./scanes/Siswa/siswaScreen";
+import SiswaEdit from "./scanes/Siswa/siswaEdit";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<Dashboard />} />
       <Route path="/login" element={<Login />} />
       <Route path="/siswa" element={<Siswa />} />
+      <Route path="/siswa/create" element={<SiswaEdit />} />
     </Route>
   )
 );
