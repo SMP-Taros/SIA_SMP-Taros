@@ -51,7 +51,7 @@ const Calendar = () => {
       <Box display="flex" justifyContent="space-between">
         {/* CALENDAR SIDEBAR */}
         <Box
-          flex="1 1 20%"
+          flex="20%"
           backgroundColor={colors.primary[400]}
           p="15px"
           borderRadius="4px"
@@ -85,19 +85,18 @@ const Calendar = () => {
         </Box>
 
         {/* CALENDAR */}
-        <Box flex="1 1 100%" ml="15px">
+        <Box flex="80%" ml="25px">
           <FullCalendar
             height="50vh"
             plugins={[
               dayGridPlugin,
               timeGridPlugin,
               interactionPlugin,
-              listPlugin,
             ]}
             headerToolbar={{
               left: "prev,next today",
               center: "title",
-              right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
+              right: "dayGridMonth,timeGridWeek,timeGridDay",
             }}
             initialView="dayGridMonth"
             editable={true}

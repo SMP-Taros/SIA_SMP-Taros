@@ -1,9 +1,13 @@
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, IconButton, Grid, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../Theme";
 import Header from "../../components/Header";
 import Template from "../Template/TemplateScreen";
 import Calendar from "../../components/Calendar";
-// import StatBox from "../../components/StatBox";
+import StatBox from "../../components/StatBox";
+import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import SchoolIcon from "@mui/icons-material/School";
+import GroupsIcon from "@mui/icons-material/Groups";
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -15,23 +19,20 @@ const Dashboard = () => {
         <Header title="Dashboard" />
         <Box display="flex" justifyContent="space-between" alignItems="center">
           {/* GRID & CHARTS */}
-          <Box
-            display="grid"
-            gridTemplateColumns="repeat(12, 1fr)"
-            gridAutoRows="140px"
-            gap="20px"
-          >
+          <Grid container rowSpacing={3} columnSpacing={{ xs: 2, sm: 3, md: 4 }} >
+
             {/* ROW 1 */}
-            <Box gridColumn="span 8" gridRow="span 3" backgroundColor="#fff">
+            <Grid item xs={9}>
               <Box
-                mt="25px"
                 p="0 30px"
+                backgroundColor="#fff"
                 display="flex "
                 justifyContent="space-between"
                 alignItems="center"
               >
                 <Box>
                   <Typography
+                    mt="25px"
                     variant="h5"
                     fontWeight="600"
                     color={colors.grey[100]}
@@ -39,29 +40,154 @@ const Dashboard = () => {
                   >
                     Kalender Akademik
                   </Typography>
-                  <Box height="250px" m="-20px 0 0 0">
+                  <Box m="-20px 0 0 0">
                     <Calendar />
                   </Box>
                 </Box>
               </Box>
-            </Box>
-          </Box>
-          <Box
-            gridColumn="span 4"
-            gridRow="span 1"
-            backgroundColor={colors.primary[400]}
-            overflow="auto"
-          >
+            </Grid>
+            <Grid item xs={3} >
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                backgroundColor="#fff"
+                colors={colors.grey[100]}
+                p="20px"
+              >
+                <StatBox
+                  title="Siswa Pendaftar"
+                  progress="150"
+                  icon={
+                    <PersonAddAlt1Icon
+                      sx={{ color: colors.greenAccent[600], fontSize: "50px" }}
+                    />
+                  }
+                />
+              </Box>
+               <Box
+                display="flex"
+                mt="20px"
+                justifyContent="space-between"
+                alignItems="center"
+                backgroundColor="#fff"
+                colors={colors.grey[100]}
+                p="20px"
+              >
+                <StatBox
+                  title="Siswa Pendaftar"
+                  progress="150"
+                  icon={
+                    <PersonAddAlt1Icon
+                      sx={{ color: colors.greenAccent[600], fontSize: "50px" }}
+                    />
+                  }
+                />
+              </Box>
+              <Box
+                display="flex"
+                mt="20px"
+                justifyContent="space-between"
+                alignItems="center"
+                backgroundColor="#fff"
+                colors={colors.grey[100]}
+                p="20px"
+              >
+                <StatBox
+                  title="Siswa Pendaftar"
+                  progress="150"
+                  icon={
+                    <PersonAddAlt1Icon
+                      sx={{ color: colors.greenAccent[600], fontSize: "50px" }}
+                    />
+                  }
+                />
+              </Box>
+              <Box
+                display="flex"
+                mt="20px"
+                justifyContent="space-between"
+                alignItems="center"
+                backgroundColor="#fff"
+                colors={colors.grey[100]}
+                p="20px"
+              >
+                <StatBox
+                  title="Siswa Pendaftar"
+                  progress="150"
+                  icon={
+                    <PersonAddAlt1Icon
+                      sx={{ color: colors.greenAccent[600], fontSize: "50px" }}
+                    />
+                  }
+                />
+              </Box>
+            </Grid>
+
+            {/* ROW 2 */}
+            <Grid item xs={6}>
             <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              colors={colors.grey[100]}
-              p="15px"
-            >
-              {/* <StatBox /> */}
-            </Box>
-          </Box>
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                backgroundColor="#fff"
+                colors={colors.grey[100]}
+                p="15px"
+              >
+                
+              </Box>
+            </Grid>
+            <Grid item xs={6}>
+            <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                backgroundColor="#fff"
+                colors={colors.grey[100]}
+                p="15px"
+              >
+                
+              </Box>
+            </Grid>
+
+            {/* ROW 3 */}
+            <Grid item xs={4}>
+            <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                backgroundColor="#fff"
+                colors={colors.grey[100]}
+                p="15px"
+              >
+                
+              </Box>
+            </Grid>
+            <Grid item xs={4}>
+            <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                backgroundColor="#fff"
+                colors={colors.grey[100]}
+                p="15px"
+              >
+                
+              </Box>
+            </Grid>
+            <Grid item xs={4}>
+            <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                backgroundColor="#fff"
+                colors={colors.grey[100]}
+                p="15px"
+              >
+                
+              </Box>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Template>
