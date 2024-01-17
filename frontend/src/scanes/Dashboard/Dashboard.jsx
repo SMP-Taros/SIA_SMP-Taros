@@ -19,173 +19,185 @@ const Dashboard = () => {
         <Header title="Dashboard" />
         <Box display="flex" justifyContent="space-between" alignItems="center">
           {/* GRID & CHARTS */}
-          <Grid container rowSpacing={3} columnSpacing={{ xs: 2, sm: 3, md: 4 }} >
-
+          <Grid
+            container
+            rowSpacing={3}
+            columnSpacing={{ xs: 2, sm: 3, md: 4 }}
+          >
             {/* ROW 1 */}
             <Grid item xs={9}>
-              <Box
-                p="0 30px"
-                backgroundColor="#fff"
-                display="flex "
-                justifyContent="space-between"
-                alignItems="center"
-              >
+              <Box p="15px" backgroundColor="#fff">
                 <Box>
                   <Typography
                     mt="25px"
-                    variant="h5"
+                    variant="h4"
                     fontWeight="600"
                     color={colors.grey[100]}
                     pb="20px"
+                    pl="20px"
                   >
                     Kalender Akademik
                   </Typography>
-                  <Box m="-20px 0 0 0">
+                  <Box m="-20px 0 30px 20px">
                     <Calendar />
                   </Box>
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={3} >
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                backgroundColor="#fff"
-                colors={colors.grey[100]}
-                p="20px"
-              >
-                <StatBox
-                  title="Siswa Pendaftar"
-                  progress="150"
-                  icon={
-                    <PersonAddAlt1Icon
-                      sx={{ color: colors.greenAccent[600], fontSize: "50px" }}
+            <Grid item xs={3}>
+              <Grid container spacing={5}>
+                <Grid item xs={12}>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    backgroundColor="#fff"
+                    colors={colors.grey[100]}
+                    p="20px"
+                  >
+                    <StatBox
+                      title="Siswa Pendaftar"
+                      progress="150"
+                      titleColor={colors.greenAccent[600]}
+                      icon={
+                        <PersonAddAlt1Icon
+                          sx={{
+                            color: colors.greenAccent[600],
+                            fontSize: "50px",
+                          }}
+                        />
+                      }
                     />
-                  }
-                />
-              </Box>
-               <Box
-                display="flex"
-                mt="20px"
-                justifyContent="space-between"
-                alignItems="center"
-                backgroundColor="#fff"
-                colors={colors.grey[100]}
-                p="20px"
-              >
-                <StatBox
-                  title="Siswa Pendaftar"
-                  progress="150"
-                  icon={
-                    <PersonAddAlt1Icon
-                      sx={{ color: colors.greenAccent[600], fontSize: "50px" }}
+                  </Box>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    backgroundColor="#fff"
+                    colors={colors.grey[100]}
+                    p="20px"
+                  >
+                    <StatBox
+                      title="Jumlah Siswa"
+                      progress="302"
+                      titleColor={colors.blueAccent[600]}
+                      icon={
+                        <SchoolIcon
+                          sx={{
+                            color: colors.blueAccent[600],
+                            fontSize: "50px",
+                          }}
+                        />
+                      }
                     />
-                  }
-                />
-              </Box>
-              <Box
-                display="flex"
-                mt="20px"
-                justifyContent="space-between"
-                alignItems="center"
-                backgroundColor="#fff"
-                colors={colors.grey[100]}
-                p="20px"
-              >
-                <StatBox
-                  title="Siswa Pendaftar"
-                  progress="150"
-                  icon={
-                    <PersonAddAlt1Icon
-                      sx={{ color: colors.greenAccent[600], fontSize: "50px" }}
+                  </Box>
+                </Grid>
+                <Grid item xs={12}>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    backgroundColor="#fff"
+                    colors={colors.grey[100]}
+                    p="20px"
+                  >
+                    <StatBox
+                      title="Jumlah Tenaga Kerja"
+                      progress="90"
+                      titleColor={colors.greenAccent[800]}
+                      icon={
+                        <GroupsIcon
+                          sx={{
+                            color: colors.greenAccent[800],
+                            fontSize: "50px",
+                          }}
+                        />
+                      }
                     />
-                  }
-                />
-              </Box>
-              <Box
-                display="flex"
-                mt="20px"
-                justifyContent="space-between"
-                alignItems="center"
-                backgroundColor="#fff"
-                colors={colors.grey[100]}
-                p="20px"
-              >
-                <StatBox
-                  title="Siswa Pendaftar"
-                  progress="150"
-                  icon={
-                    <PersonAddAlt1Icon
-                      sx={{ color: colors.greenAccent[600], fontSize: "50px" }}
+                  </Box>
+                </Grid>
+                <Grid item xs={12}>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    backgroundColor="#fff"
+                    colors={colors.grey[100]}
+                    p="20px"
+                  >
+                    <StatBox
+                      title="Akses Pengguna"
+                      progress="50"
+                      titleColor={colors.redAccent[500]}
+                      icon={
+                        <AssignmentIndIcon
+                          sx={{
+                            color: colors.redAccent[500],
+                            fontSize: "50px",
+                          }}
+                        />
+                      }
                     />
-                  }
-                />
-              </Box>
+                  </Box>
+                </Grid>
+              </Grid>
             </Grid>
 
             {/* ROW 2 */}
             <Grid item xs={6}>
-            <Box
+              <Box
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
                 backgroundColor="#fff"
                 colors={colors.grey[100]}
                 p="15px"
-              >
-                
-              </Box>
+              ></Box>
             </Grid>
             <Grid item xs={6}>
-            <Box
+              <Box
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
                 backgroundColor="#fff"
                 colors={colors.grey[100]}
                 p="15px"
-              >
-                
-              </Box>
+              ></Box>
             </Grid>
 
             {/* ROW 3 */}
             <Grid item xs={4}>
-            <Box
+              <Box
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
                 backgroundColor="#fff"
                 colors={colors.grey[100]}
                 p="15px"
-              >
-                
-              </Box>
+              ></Box>
             </Grid>
             <Grid item xs={4}>
-            <Box
+              <Box
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
                 backgroundColor="#fff"
                 colors={colors.grey[100]}
                 p="15px"
-              >
-                
-              </Box>
+              ></Box>
             </Grid>
             <Grid item xs={4}>
-            <Box
+              <Box
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
                 backgroundColor="#fff"
                 colors={colors.grey[100]}
                 p="15px"
-              >
-                
-              </Box>
+              ></Box>
             </Grid>
           </Grid>
         </Box>

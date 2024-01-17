@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../Theme";
 
-const StatBox = ({ title, icon, progress }) => {
+const StatBox = ({ title, icon, progress, titleColor }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -17,9 +17,9 @@ const StatBox = ({ title, icon, progress }) => {
             {title}
           </Typography>
           <Typography
-            variant="h4"
+            variant="h3"
             fontWeight="bold"
-            sx={{ color: colors.grey[100] }}
+            sx={{ color: titleColor }}
           >
             {progress}
           </Typography>
