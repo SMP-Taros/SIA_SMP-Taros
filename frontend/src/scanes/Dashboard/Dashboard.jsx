@@ -8,6 +8,9 @@ import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import SchoolIcon from "@mui/icons-material/School";
 import GroupsIcon from "@mui/icons-material/Groups";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import TabelTertinggi from "../../components/Table/TabelTertinggi";
+import TabelKehadiran from "../../components/Table/TabelKehadiran";
+import TabelPeringkat from "../../components/Table/TebelPeringkat";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -150,54 +153,64 @@ const Dashboard = () => {
             <Grid item xs={6}>
               <Box
                 display="flex"
-                justifyContent="space-between"
+                justifyContent="center" // Mengubah menjadi center
                 alignItems="center"
                 backgroundColor="#fff"
-                colors={colors.grey[100]}
+                color={colors.grey[100]} // Mengganti colors menjadi color
                 p="15px"
-              ></Box>
+              >
+                <TabelKehadiran title="Daftar Hadir Tenaga Kerja" />
+              </Box>
             </Grid>
             <Grid item xs={6}>
               <Box
                 display="flex"
-                justifyContent="space-between"
+                justifyContent="center"
                 alignItems="center"
                 backgroundColor="#fff"
                 colors={colors.grey[100]}
                 p="15px"
-              ></Box>
+              >
+                <TabelPeringkat title="Peringkat Tenaga Kerja Terbaik" />
+              </Box>
             </Grid>
 
             {/* ROW 3 */}
-            <Grid item xs={4}>
+            <Grid item xs={4} marginBottom="30px">
               <Box
                 display="flex"
-                justifyContent="space-between"
+                justifyContent="center"
                 alignItems="center"
                 backgroundColor="#fff"
                 colors={colors.grey[100]}
                 p="15px"
-              ></Box>
+              >
+                <TabelTertinggi title=" Top 3 Rata-Rata Tertinggi Kelas 9 (Angkatan 2021)" />
+              </Box>
             </Grid>
             <Grid item xs={4}>
               <Box
                 display="flex"
-                justifyContent="space-between"
+                justifyContent="center"
                 alignItems="center"
                 backgroundColor="#fff"
                 colors={colors.grey[100]}
                 p="15px"
-              ></Box>
+              >
+                <TabelTertinggi title=" Top 3 Rata-Rata Tertinggi Kelas 8 (Angkatan 2022)" />
+              </Box>
             </Grid>
             <Grid item xs={4}>
               <Box
                 display="flex"
-                justifyContent="space-between"
+                justifyContent="center"
                 alignItems="center"
                 backgroundColor="#fff"
                 colors={colors.grey[100]}
                 p="15px"
-              ></Box>
+              >
+                <TabelTertinggi title=" Top 3 Rata-Rata Tertinggi Kelas 7 (Angkatan 2023)" />
+              </Box>
             </Grid>
           </Grid>
         </Box>

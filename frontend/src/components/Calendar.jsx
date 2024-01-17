@@ -1,5 +1,5 @@
 import { useState } from "react";
-import FullCalendar, { formatDate } from "@fullcalendar/react";
+import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -45,6 +45,14 @@ const Calendar = () => {
     }
   };
 
+  const formatDate = (date) => {
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }).format(date);
+  };
+
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between">
@@ -56,7 +64,12 @@ const Calendar = () => {
           borderRadius="4px"
         >
           <Typography variant="h5">Events</Typography>
-          <List>
+          <List
+            sx={{
+              maxHeight: "300px", // Set the maximum height for the scroll
+              overflowY: "auto", // Enable vertical scrolling
+            }}
+          >
             {currentEvents.map((event) => (
               <ListItem
                 key={event.id}
@@ -66,18 +79,12 @@ const Calendar = () => {
                   borderRadius: "2px",
                 }}
               >
-                {/* <ListItemText
+                <ListItemText
                   primary={event.title}
                   secondary={
-                    <Typography>
-                      {formatDate(event.start, {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </Typography>
+                    <Typography> {formatDate(event.start)} </Typography>
                   }
-                /> */}
+                />
               </ListItem>
             ))}
           </List>
@@ -96,7 +103,7 @@ const Calendar = () => {
             headerToolbar={{
               left: "prev,next today",
               center: "title",
-              right: "dayGridMonth,timeGridWeek,timeGridDay,list",
+              right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
             }}
             initialView="dayGridMonth"
             editable={true}
