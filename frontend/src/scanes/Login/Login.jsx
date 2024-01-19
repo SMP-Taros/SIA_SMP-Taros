@@ -14,16 +14,51 @@ import LoginForm from "../../components/Form/loginForm";
 // import background from "../../assets/background/background1.png"
 import logo1 from "../../assets/logo/logo1.png";
 import logo2 from "../../assets/logo/logo2.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { useLoginMutation } from "../../slices/userApiSlice";
+
+import { setCredentials } from "../../slices/authSlice";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [login, { isLoading, error }] = useLoginMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
+
   const [showPasssword, setShowPassword] = useState(false);
 
   const handlePassword = () => {
     setShowPassword((prev) => !prev);
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDeafult();
+    console.log("submit");
+
+    try {
+      const res = await login({ username, password }).unwrap();
+      dispatch(setCredentials({ ...res }));
+      navigate("/");
+    } catch (err) {
+      console.log(err?.data?.message || err.error);
+    }
   };
 
   return (
@@ -73,29 +108,39 @@ const Login = () => {
           // padding="10px"
           paddingTop="70px"
         >
-          <Stack spacing={4}>
-            <TextField label="Username">Username</TextField>
-            <TextField
-              label="Password"
-              type={showPasssword ? "text" : "password"}
-              InputProps={{
-                // Correct the typo here
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={handlePassword}>
-                      {showPasssword ? (
-                        <VisibilityOffIcon />
-                      ) : (
-                        <VisibilityIcon />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            >
-              Password
-            </TextField>
-          </Stack>
+          <form action="POST" onSubmit={submitHandler}>
+            <Stack spacing={4}>
+              <TextField
+                // value={username}
+                onChange={setUsername}
+                label="Username"
+              >
+                Username
+              </TextField>
+              <TextField
+                label="Password"
+                // value={password}
+                type={showPasssword ? "text" : "password"}
+                onChange={setPassword}
+                InputProps={{
+                  // Correct the typo here
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={handlePassword}>
+                        {showPasssword ? (
+                          <VisibilityOffIcon />
+                        ) : (
+                          <VisibilityIcon />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              >
+                Password
+              </TextField>
+            </Stack>
+          </form>
         </Box>
       </CardContent>
       <CardActions>

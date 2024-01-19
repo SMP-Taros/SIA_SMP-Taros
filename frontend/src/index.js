@@ -9,6 +9,8 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import Store from "./store";
+import { Provider } from "react-redux";
 import Dashboard from "./scanes/Dashboard/Dashboard";
 import Login from "./scanes/Login/Login";
 import Siswa from "./scanes/Siswa/siswaScreen";
@@ -31,7 +33,9 @@ const router = createBrowserRouter(
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <Provider store={Store}>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </Provider>
 );

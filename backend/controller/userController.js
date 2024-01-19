@@ -67,6 +67,7 @@ const loginUser = asyncHandler(async (req, res) => {
     let user = await User.findOne({ username });
 
     if (user && (await user.matchPassword(password))) {
+      console.log(process.env.JWT_SECRET);
       generateToken(res, user._id);
 
       res.status(201).json({

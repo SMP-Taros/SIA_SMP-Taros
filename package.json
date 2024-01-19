@@ -8,7 +8,7 @@
     "start": "node backend/app/web.js",
     "server": "nodemon backend/app/web.js",
     "client": "npm start --prefix frontend",
-    "dev" : "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "jest -i"
   },
   "jest": {
