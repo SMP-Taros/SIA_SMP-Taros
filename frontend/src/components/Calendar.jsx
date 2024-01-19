@@ -1,5 +1,5 @@
 import { useState } from "react";
-import FullCalendar, { formatDate } from "@fullcalendar/react";
+import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -12,7 +12,6 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import Header from "./Header";
 import { tokens } from "../Theme";
 
 const Calendar = () => {
@@ -46,18 +45,31 @@ const Calendar = () => {
     }
   };
 
+  const formatDate = (date) => {
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }).format(date);
+  };
+
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between">
         {/* CALENDAR SIDEBAR */}
         <Box
-          flex="1 1 20%"
+          flex="30%"
           backgroundColor={colors.primary[400]}
           p="15px"
           borderRadius="4px"
         >
           <Typography variant="h5">Events</Typography>
-          <List>
+          <List
+            sx={{
+              maxHeight: "300px", // Set the maximum height for the scroll
+              overflowY: "auto", // Enable vertical scrolling
+            }}
+          >
             {currentEvents.map((event) => (
               <ListItem
                 key={event.id}
@@ -67,25 +79,19 @@ const Calendar = () => {
                   borderRadius: "2px",
                 }}
               >
-                {/* <ListItemText
+                <ListItemText
                   primary={event.title}
                   secondary={
-                    <Typography>
-                      {formatDate(event.start, {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </Typography>
+                    <Typography> {formatDate(event.start)} </Typography>
                   }
-                /> */}
+                />
               </ListItem>
             ))}
           </List>
         </Box>
 
         {/* CALENDAR */}
-        <Box flex="1 1 100%" ml="15px">
+        <Box flex="100%" ml="25px">
           <FullCalendar
             height="50vh"
             plugins={[

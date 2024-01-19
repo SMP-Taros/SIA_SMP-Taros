@@ -13,7 +13,9 @@ function Template({ children }) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <Sidebar />
+          <div className={`sidebar-container ${isSidebar ? "sticky" : ""}`}>
+            <Sidebar />
+          </div>
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
             {children}
