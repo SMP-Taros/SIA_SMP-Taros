@@ -7,7 +7,11 @@ import userRoute from "../routes/userRoutes.js";
 
 import cookieParser from "cookie-parser";
 
+import Cors from "cors";
+
 export const app = express();
+
+app.use(Cors());
 
 //middleware for parsing request body
 app.use(express.json());

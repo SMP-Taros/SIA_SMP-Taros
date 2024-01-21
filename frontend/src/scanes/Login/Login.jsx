@@ -7,7 +7,6 @@ import {
   InputAdornment,
   TextField,
   IconButton,
-  CardActions,
   Button,
 } from "@mui/material";
 import LoginForm from "../../components/Form/loginForm";
@@ -17,7 +16,8 @@ import logo2 from "../../assets/logo/logo2.png";
 import { useState, useEffect } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -32,13 +32,13 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [login, { isLoading, error }] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
   const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (userInfo) {
-      navigate("/");
+      navigate("/dashboard");
     }
   }, [navigate, userInfo]);
 
@@ -49,15 +49,19 @@ const Login = () => {
   };
 
   const submitHandler = async (e) => {
-    e.preventDeafult();
+    e.preventDefault();
     console.log("submit");
+
+    // console.log(res);
 
     try {
       const res = await login({ username, password }).unwrap();
       dispatch(setCredentials({ ...res }));
-      navigate("/");
+
+      navigate("/dashboard");
     } catch (err) {
-      console.log(err?.data?.message || err.error);
+      // console.log(err);
+      toast.error(err?.data?.message || "username or password are wrong");
     }
   };
 
@@ -108,11 +112,11 @@ const Login = () => {
           // padding="10px"
           paddingTop="70px"
         >
-          <form action="POST" onSubmit={submitHandler}>
+          <form onSubmit={submitHandler}>
             <Stack spacing={4}>
               <TextField
-                // value={username}
-                onChange={setUsername}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 label="Username"
               >
                 Username
@@ -121,7 +125,8 @@ const Login = () => {
                 label="Password"
                 // value={password}
                 type={showPasssword ? "text" : "password"}
-                onChange={setPassword}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 InputProps={{
                   // Correct the typo here
                   endAdornment: (
@@ -140,36 +145,36 @@ const Login = () => {
                 Password
               </TextField>
             </Stack>
+            <Box
+              component="div"
+              width="87%"
+              margin="auto"
+              marginTop="20px"
+              marginBottom="30px"
+              textAlign="center"
+            >
+              <Button
+                variant="contained"
+                disabled={isLoading}
+                size="large"
+                style={{
+                  width: "100%",
+                  margin: "auto",
+                  backgroundColor: "#F6C03C",
+                }}
+                // component={Link}
+                // to="/"
+                type="submit"
+              >
+                Sign In
+              </Button>
+              <Typography variant="h6" fontSize="16px" paddingTop="20px">
+                Forgot Password ?
+              </Typography>
+            </Box>
           </form>
         </Box>
       </CardContent>
-      <CardActions>
-        <Box
-          component="div"
-          width="87%"
-          margin="auto"
-          marginTop="20px"
-          marginBottom="30px"
-          textAlign="center"
-        >
-          <Button
-            variant="contained"
-            size="large"
-            style={{
-              width: "100%",
-              margin: "auto",
-              backgroundColor: "#F6C03C",
-            }}
-            component={Link}
-            to="/"
-          >
-            Sign In
-          </Button>
-          <Typography variant="h6" fontSize="16px" paddingTop="20px">
-            Forgot Password ?
-          </Typography>
-        </Box>
-      </CardActions>
     </LoginForm>
   );
 };

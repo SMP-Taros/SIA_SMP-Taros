@@ -7,10 +7,33 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import GridViewIcon from "@mui/icons-material/GridView";
 
+import { useDispatch, useSelector } from "react-redux";
+import LogoutIcon from "@mui/icons-material/Logout";
+
+import { useLogoutMutation } from "../../slices/userApiSlice";
+import { logout } from "../../slices/authSlice";
+import { useNavigate } from "react-router-dom";
+
 const ProSidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [logoutCall] = useLogoutMutation();
+
+  const logoutHandler = async () => {
+    try {
+      await logoutCall().unwrap();
+      dispatch(logout());
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Box
@@ -26,8 +49,8 @@ const ProSidebar = () => {
               // only apply styles on first level elements of the tree
               if (level === 0)
                 return {
-                  color: disabled ? '#f5d9ff' : '#d359ff',
-                  backgroundColor: active ? '#eecef9' : undefined,
+                  color: disabled ? "#f5d9ff" : "#d359ff",
+                  backgroundColor: active ? "#eecef9" : undefined,
                 };
             },
           }}
@@ -83,7 +106,7 @@ const ProSidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Admin
+                  {userInfo ? userInfo.username : "null"}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   SMP TAROS Admin
@@ -129,6 +152,15 @@ const ProSidebar = () => {
                 Guru
               </MenuItem>
             </SubMenu>
+            <MenuItem
+              icon={<LogoutIcon style={{ color: "#FF6868" }} />}
+              style={{
+                color: "#FF6868",
+              }}
+              onClick={logoutHandler}
+            >
+              Logout
+            </MenuItem>
           </Box>
         </Menu>
       </Sidebar>

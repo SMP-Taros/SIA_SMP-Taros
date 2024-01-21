@@ -9,11 +9,12 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducer: {
+  reducers: {
     setCredentials: (state, action) => {
       state.userInfo = action.payload;
       localStorage.setItem("userInfo", JSON.stringify(action.payload));
     },
+    // eslint-disable-next-line no-unused-vars
     logout: (state, action) => {
       state.userInfo = null;
       localStorage.removeItem("userInfo");

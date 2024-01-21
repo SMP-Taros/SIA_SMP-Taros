@@ -61,31 +61,24 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const loginUser = asyncHandler(async (req, res) => {
-  try {
-    let { username, password } = req.body;
+  let { username, password } = req.body;
 
-    let user = await User.findOne({ username });
+  let user = await User.findOne({ username });
 
-    if (user && (await user.matchPassword(password))) {
-      console.log(process.env.JWT_SECRET);
-      generateToken(res, user._id);
+  if (user && (await user.matchPassword(password))) {
+    console.log(process.env.JWT_SECRET);
+    generateToken(res, user._id);
 
-      res.status(201).json({
-        _id: user._id,
-        username: user.username,
-        email: user.email,
-      });
-    } else {
-      res.status(400);
-      throw new Error("username or password are wrong");
-    }
-
-    //   res.status(201).json(user);
-  } catch (err) {
-    console.error(err.message);
-
-    res.status(500).send("Server Error");
+    res.status(201).json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+    });
+  } else {
+    res.status(401);
+    throw new Error("username or password are wrong");
   }
+  //   res.status(201).json(user);
 });
 
 const logoutUser = asyncHandler(async (req, res) => {
