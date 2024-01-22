@@ -11,10 +11,18 @@ import Cors from "cors";
 
 export const app = express();
 
-app.use(Cors());
+const corsOptions = {
+  origin: "http://localhost:3000", // Alamat domain React
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Mengizinkan pengiriman cookies
+  optionsSuccessStatus: 204,
+};
+
+app.use(Cors(corsOptions));
 
 //middleware for parsing request body
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (request, response) => {
   console.log(request);

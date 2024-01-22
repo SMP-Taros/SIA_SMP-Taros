@@ -1,22 +1,22 @@
 import mongoose from "mongoose";
 
-const siswaSchema = mongoose.Schema(
+const kesehatanSiswaSchema = mongoose.Schema(
   {
-    nama: {
+    nis: {
       type: String,
       required: true,
     },
-    nis: {
+    nisn: {
+      type: String,
+      required: true,
+    },
+    nama: {
       type: String,
       required: true,
     },
     jenis_kelamin: {
       type: String,
       enum: ["Laki-Laki", "Perempuan"],
-      required: true,
-    },
-    nisn: {
-      type: String,
       required: true,
     },
     tempat_lahir: {
@@ -31,40 +31,27 @@ const siswaSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    agama: {
-      type: String,
-      required: true,
-    },
-    status: {
-      type: String,
-      enum: ["Anak Kandung", "Anak Angkat"],
-      required: true,
-    },
-    anak_ke: {
-      type: String,
-      required: true,
-    },
-    jumlah_saudara_kandung: {
-      type: Number,
-      required: true,
-    },
-    status_anak: {
-      type: String,
-      enum: ["Yatim", "Yatim Piatu", "Piatu"],
-    },
     alamat: {
       type: String,
       required: true,
     },
-    jarak_rumah_sekolah: {
+    email: {
       type: String,
       required: true,
     },
-    asal_sekolah: {
+    nama_ayah: {
       type: String,
       required: true,
     },
-    alamat_asal_sekolah: {
+    pekerjaan_ayah: {
+      type: String,
+      required: true,
+    },
+    nama_ibu: {
+      type: String,
+      required: true,
+    },
+    pekerjaan_ibu: {
       type: String,
       required: true,
     },
@@ -74,6 +61,9 @@ const siswaSchema = mongoose.Schema(
   }
 );
 
-const Siswa = mongoose.model("Siswa", siswaSchema);
+const KesehatanSiswa = mongoose.model(
+  "KesehatanSiswa",
+  kesehatanSiswaSchemaSchema
+);
 
 export default Siswa;

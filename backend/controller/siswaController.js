@@ -11,12 +11,15 @@ const createSiswa = asyncHandler(async (req, res) => {
       tempat_lahir,
       tanggal_lahir,
       nik,
+      agama,
+      status,
+      anak_ke,
+      jumlah_saudara_kandung,
+      status_anak,
       alamat,
-      email,
-      nama_ayah,
-      pekerjaan_ayah,
-      nama_ibu,
-      pekerjaan_ibu,
+      jarak_rumah_sekolah,
+      asal_sekolah,
+      alamat_asal_sekolah,
     } = req.body;
 
     if (
@@ -27,12 +30,14 @@ const createSiswa = asyncHandler(async (req, res) => {
       !tempat_lahir ||
       !tanggal_lahir ||
       !nik ||
+      !agama ||
+      !status ||
+      !anak_ke ||
+      !jumlah_saudara_kandung ||
       !alamat ||
-      !email ||
-      !nama_ayah ||
-      !pekerjaan_ayah ||
-      !nama_ibu ||
-      !pekerjaan_ibu
+      !jarak_rumah_sekolah ||
+      !asal_sekolah ||
+      !alamat_asal_sekolah
     ) {
       // console.log(request.body.nama)
       return res.status(400).send({
@@ -55,12 +60,15 @@ const createSiswa = asyncHandler(async (req, res) => {
       tempat_lahir: tempat_lahir,
       tanggal_lahir: tanggal_lahir,
       nik: nik,
+      agama: agama,
+      status: status,
+      anak_ke: anak_ke,
+      jumlah_saudara_kandung: jumlah_saudara_kandung,
+      status_anak: status_anak,
       alamat: alamat,
-      email: email,
-      nama_ayah: nama_ayah,
-      pekerjaan_ayah: pekerjaan_ayah,
-      nama_ibu: nama_ibu,
-      pekerjaan_ibu: pekerjaan_ibu,
+      jarak_rumah_sekolah: jarak_rumah_sekolah,
+      asal_sekolah: asal_sekolah,
+      alamat_asal_sekolah: alamat_asal_sekolah,
     };
 
     const siswa = await Siswa.create(newSiswa);
@@ -125,29 +133,18 @@ const updateSiswa = asyncHandler(async (req, res) => {
       tempat_lahir,
       tanggal_lahir,
       nik,
+      agama,
+      status,
+      anak_ke,
+      jumlah_saudara_kandung,
+      status_anak,
       alamat,
-      email,
-      nama_ayah,
-      pekerjaan_ayah,
-      nama_ibu,
-      pekerjaan_ibu,
+      jarak_rumah_sekolah,
+      asal_sekolah,
+      alamat_asal_sekolah,
     } = req.body;
 
-    if (
-      !nama &&
-      !nis &&
-      !jenis_kelamin &&
-      !nisn &&
-      !tempat_lahir &&
-      !tanggal_lahir &&
-      !nik &&
-      !alamat &&
-      !email &&
-      !nama_ayah &&
-      !pekerjaan_ayah &&
-      !nama_ibu &&
-      !pekerjaan_ibu
-    ) {
+    if (!req.body) {
       // console.log(request.body.nama)
       return res.status(400).send("none of your fields have been filled");
     }
@@ -159,11 +156,10 @@ const updateSiswa = asyncHandler(async (req, res) => {
       return res.status(400).json({ message: "Siswa not found" });
     }
 
-    const newSiswa = Siswa.findById(id);
+    // const newSiswa = Siswa.findById(id);
 
     return res.status(201).json({
       message: "siswa berhasil di update",
-      data: newSiswa,
     });
   } catch (error) {
     console.log(error.massage);
