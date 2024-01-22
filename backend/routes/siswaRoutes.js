@@ -13,7 +13,7 @@ const router = express.Router();
 router.post("/", protect, createSiswa);
 
 //get siswa
-router.get("/", protect, getSiswa);
+router.get("/", getSiswa);
 
 router.get("/:id", protect, getdetailSiswa);
 

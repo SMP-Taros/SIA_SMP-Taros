@@ -22,6 +22,8 @@ const protect = asyncHandler(async (req, res, next) => {
     }
   } else {
     res.status(401).send("Unauthorized");
+    console.log("ini protect");
+    console.log(req.cookies);
   }
 });
 

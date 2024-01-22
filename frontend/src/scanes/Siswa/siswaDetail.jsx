@@ -1,7 +1,7 @@
 import Template from "../Template/TemplateScreen";
 
-const siswaEdit = () => {
+const siswaDetail = () => {
   return <Template>Edit</Template>;
 };
 
-export default siswaEdit;
+export default siswaDetail;

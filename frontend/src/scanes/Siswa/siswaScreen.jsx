@@ -32,7 +32,11 @@ import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 // import Icon from "../../assets/icon/edit";
 import EditIcon from "@mui/icons-material/Edit";
-import { columns, rows } from "../../data/siswaData";
+import DeleteIcon from "@mui/icons-material/Delete";
+
+import { useGetAllQuery } from "../../slices/siswaApiSlice";
+
+import { useEffect, useState } from "react";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -49,8 +53,8 @@ const Siswa = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -61,15 +65,32 @@ const Siswa = () => {
     setPage(0);
   };
 
-  const conditionalValueTable = (key, value) => {
-    if (key === "action") {
-      let val =
-        "<List><ListItemButton><ListItemIcon style='width: 100px;'><img src=\"../../assets/icon/edit.png\" alt=\"Edit Icon\"></ListItemIcon><ListItemText primary='Inbox'/></ListItemButton></List>";
-      return val;
-    } else {
-      return value;
-    }
-  };
+  const { data, isLoading, error } = useGetAllQuery();
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // console.log("isLoading:", isLoading);
+        // console.log("data:", data);
+
+        if (!isLoading && data) {
+          var fetchedRows = data.data;
+          // console.log("fetchedRows:", fetchedRows);
+          setRows(fetchedRows); // Update the state with the fetched rows
+        } else {
+          console.log("Data is undefined");
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
+  }, [isLoading, data]); // Adding 'isLoading' and 'data' to the dependency array
+
+  // console.log("rows:", rows);
+
   // const colorMode = useContext(ColorModeContext);
   return (
     <Template>
@@ -130,80 +151,70 @@ const Siswa = () => {
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow>
-                      {columns.map((column) => (
-                        <StyledTableCell
-                          key={column.id}
-                          align={column.align}
-                          style={{ minWidth: column.minWidth }}
-                        >
-                          {column.label}
-                        </StyledTableCell>
-                      ))}
+                      <StyledTableCell
+                        key="nama"
+                        align={"right"}
+                        style={{ minWidth: 170 }}
+                      >
+                        nama
+                      </StyledTableCell>
+                      <StyledTableCell
+                        key="nis"
+                        align={"right"}
+                        style={{ minWidth: 170 }}
+                      >
+                        nis
+                      </StyledTableCell>
+                      <StyledTableCell
+                        key="nisn"
+                        align={"right"}
+                        style={{ minWidth: 170 }}
+                      >
+                        nisn
+                      </StyledTableCell>
+                      <StyledTableCell
+                        key="action"
+                        align={"right"}
+                        style={{ minWidth: 170 }}
+                      >
+                        action
+                      </StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {rows
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((row) => {
-                        return (
-                          <TableRow
-                            hover
-                            role="checkbox"
-                            tabIndex={-1}
-                            key={row.code}
-                          >
-                            {columns.map((column) => {
-                              const value = row[column.id];
-                              console.log("Value:", value);
-
-                              // var template = conditionalValueTable(
-                              //   column.id,
-                              //   value
-                              // );
-                              // var r = template.match(/\{[\w]+\}/g);
-
-                              // if (r) {
-                              //   r.forEach((state) => {
-                              //     var regex = new RegExp(state, "g");
-                              //     var stateItem = state.split(/{|}/g)[1];
-                              //     template = template.replace(regex, stateItem);
-                              //   });
-                              // }
-
-                              // Convert the string template to JSX using dangerouslySetInnerHTML
-
-                              return (
-                                <StyledTableCell
-                                  key={column.id}
-                                  align={column.align}
-                                >
-                                  {value === "action" ? (
-                                    <IconButton
-                                      component={Link}
-                                      to="/siswa/create"
-                                      type="button"
-                                    >
-                                      <EditIcon />
-                                    </IconButton>
-                                  ) : (
-                                    value
-                                  )}
-                                </StyledTableCell>
-                              );
-                            })}
-                          </TableRow>
-                        );
-                      })}
+                    {rows.map((row) => (
+                      <TableRow
+                        key={row.name}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" align="right" scope="row">
+                          {row.nama}
+                        </TableCell>
+                        <TableCell align="right">{row.nis}</TableCell>
+                        <TableCell align="right">{row.nisn}</TableCell>
+                        <TableCell align="right">
+                          <IconButton>
+                            <Grid container gap={2}>
+                              <Grid item>
+                                <EditIcon />
+                              </Grid>
+                              <Grid item>
+                                <DeleteIcon />
+                              </Grid>
+                            </Grid>
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                   </TableBody>
                 </Table>
               </TableContainer>
               <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={rows.length}
+                // count={rows.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}

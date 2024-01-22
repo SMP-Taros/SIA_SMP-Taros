@@ -8,19 +8,22 @@ Request Body :
 
 ```json
 {
-  "nama": "arip",
-  "NIS": "12335434",
-  "jenis_kelamin": "Laki Laki",
-  "NISN": "0390489585",
-  "tempat_lahir": "wonogiri",
-  "tanggal_lahir": "12 Januari 2004",
-  "NIK": "298238383",
-  "alamat": "Batang",
-  "email": "halo@gamil.com",
-  "nama_ayah": "aripin",
-  "pekerjaan_ayah": "dokter",
-  "nama_ibu": "siti",
-  "pekerjaan_ibu": "nganggur"
+  "nama": "arip"*,
+  "NIS": "12335434"*,
+  "jenis_kelamin": "Laki Laki"*,
+  "NISN": "0390489585"*,
+  "tempat_lahir": "wonogiri"*,
+  "tanggal_lahir": "12 Januari 2004"*,
+  "NIK": "298238383"*,
+  "agama": "islam"*,
+  "status": "Anak Kandung"*,
+  "anak_ke": "2"*,
+  "jumlah_saudara_kandung": "3"*,
+  "status_anak": "yatim",
+  "alamat": "Batang"*,
+  "jarak_rumah_sekolah": "500km"*,
+  "asal_sekolah": "smp2"*,
+  "alamat_asal_sekolah": "rejo"*,
 }
 ```
 
@@ -29,19 +32,23 @@ Response Body Success:
 ```json
 {
   "data": {
-    "nama": "arip",
-    "NIS": "12335434",
-    "jenis_kelamin": "Laki Laki",
-    "NISN": "0390489585",
-    "tempat_lahir": "wonogiri",
-    "tanggal_lahir": "12 Januari 2004",
-    "NIK": "298238383",
-    "alamat": "Batang",
-    "email": "halo@gamil.com",
-    "nama_ayah": "aripin",
-    "pekerjaan_ayah": "dokter",
-    "nama_ibu": "siti",
-    "pekerjaan_ibu": "nganggur"
+    "nama": "arip"*,
+  "NIS": "12335434"*,
+  "jenis_kelamin": "Laki Laki"*,
+  "NISN": "0390489585"*,
+  "tempat_lahir": "wonogiri"*,
+  "tanggal_lahir": "12 Januari 2004"*,
+  "NIK": "298238383"*,
+  "agama": "islam"*,
+  "status": "Anak Kandung"*,
+  "anak_ke": "2"*,
+  "jumlah_saudara_kandung": "3"*,
+  "status_anak": "yatim",
+  "alamat": "Batang"*,
+  "jarak_rumah_sekolah": "500km"*,
+  "asal_sekolah": "smp2"*,
+  "alamat_asal_sekolah": "rejo"*,
+  "nisn": "0959595"*
   },
   "meesage": "siswa berhasil ditambahkan"
 }
@@ -63,19 +70,23 @@ Request Body :
 
 ```json
 {
-  "nama": "arip junior", //optional
-  "NIS": "12335434", //optional
-  "jenis_kelamin": "Laki Laki", //optional
-  "NISN": "0390489585", //optional
-  "tempat_lahir": "wonogiri", //optional
-  "tanggal_lahir": "12 Januari 2004", //optional
-  "NIK": "298238383", //optional
-  "alamat": "Batang", //optional
-  "email": "halo@gamil.com", //optional
-  "nama_ayah": "aripin", //optional
-  "pekerjaan_ayah": "dokter", //optional
-  "nama_ibu": "siti", //optional
-  "pekerjaan_ibu": "nganggur" //optional
+  "nama": "arip"*,
+  "NIS": "12335434"*,
+  "jenis_kelamin": "Laki Laki"*,
+  "NISN": "0390489585"*,
+  "tempat_lahir": "wonogiri"*,
+  "tanggal_lahir": "12 Januari 2004"*,
+  "NIK": "298238383"*,
+  "agama": "islam"*,
+  "status": "Anak Kandung"*,
+  "anak_ke": "2"*,
+  "jumlah_saudara_kandung": "3"*,
+  "status_anak": "yatim",
+  "alamat": "Batang"*,
+  "jarak_rumah_sekolah": "500km"*,
+  "asal_sekolah": "smp2"*,
+  "alamat_asal_sekolah": "rejo"*,
+  "nisn": "0959595"*
 }
 ```
 
@@ -84,19 +95,23 @@ Response Body Success:
 ```json
 {
   "data": {
-    "nama": "arip junior",
-    "NIS": "12335434",
-    "jenis_kelamin": "Laki Laki",
-    "NISN": "0390489585",
-    "tempat_lahir": "wonogiri",
-    "tanggal_lahir": "12 Januari 2004",
-    "NIK": "298238383",
-    "alamat": "Batang",
-    "email": "halo@gamil.com",
-    "nama_ayah": "aripin",
-    "pekerjaan_ayah": "dokter",
-    "nama_ibu": "siti",
-    "pekerjaan_ibu": "nganggur"
+    "nama": "arip"*,
+  "NIS": "12335434"*,
+  "jenis_kelamin": "Laki Laki"*,
+  "NISN": "0390489585"*,
+  "tempat_lahir": "wonogiri"*,
+  "tanggal_lahir": "12 Januari 2004"*,
+  "NIK": "298238383"*,
+  "agama": "islam"*,
+  "status": "Anak Kandung"*,
+  "anak_ke": "2"*,
+  "jumlah_saudara_kandung": "3"*,
+  "status_anak": "yatim",
+  "alamat": "Batang"*,
+  "jarak_rumah_sekolah": "500km"*,
+  "asal_sekolah": "smp2"*,
+  "alamat_asal_sekolah": "rejo"*,
+  "nisn": "0959595"*
   },
   "meesage": "siswa berhasil di update"
 }
@@ -153,19 +168,23 @@ Response Body Success:
 ```json
 {
   "data": {
-    "nama": "arip junior",
-    "NIS": "12335434",
-    "jenis_kelamin": "Laki Laki",
-    "NISN": "0390489585",
-    "tempat_lahir": "wonogiri",
-    "tanggal_lahir": "12 Januari 2004",
-    "NIK": "298238383",
-    "alamat": "Batang",
-    "email": "halo@gamil.com",
-    "nama_ayah": "aripin",
-    "pekerjaan_ayah": "dokter",
-    "nama_ibu": "siti",
-    "pekerjaan_ibu": "nganggur"
+    "nama": "arip"*,
+  "NIS": "12335434"*,
+  "jenis_kelamin": "Laki Laki"*,
+  "NISN": "0390489585"*,
+  "tempat_lahir": "wonogiri"*,
+  "tanggal_lahir": "12 Januari 2004"*,
+  "NIK": "298238383"*,
+  "agama": "islam"*,
+  "status": "Anak Kandung"*,
+  "anak_ke": "2"*,
+  "jumlah_saudara_kandung": "3"*,
+  "status_anak": "yatim",
+  "alamat": "Batang"*,
+  "jarak_rumah_sekolah": "500km"*,
+  "asal_sekolah": "smp2"*,
+  "alamat_asal_sekolah": "rejo"*,
+  "nisn": "0959595"*
   }
 }
 ```
