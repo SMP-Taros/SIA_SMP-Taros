@@ -10,7 +10,7 @@ Request Body :
 {
   "siswa_id": "1"*,
   "golongan_darah": "A",
-  "penyakit_yang_pernah_diderita": "asma",
+  "penyakit_pernah_diderita": "asma",
   "kelainan_jasmani": "none",
   "berat_badan": "58",
   "tinggi_badan": "200"

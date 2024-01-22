@@ -2,56 +2,28 @@ import mongoose from "mongoose";
 
 const kesehatanSiswaSchema = mongoose.Schema(
   {
-    nis: {
+    siswa_id: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "Siswa",
+    },
+    golongan_darah: {
       type: String,
       required: true,
     },
-    nisn: {
+    penyakit_pernah_diderita: {
       type: String,
       required: true,
     },
-    nama: {
+    kelainan_jasmani: {
       type: String,
       required: true,
     },
-    jenis_kelamin: {
-      type: String,
-      enum: ["Laki-Laki", "Perempuan"],
-      required: true,
-    },
-    tempat_lahir: {
+    berat_badan: {
       type: String,
       required: true,
     },
-    tanggal_lahir: {
-      type: Date,
-      required: true,
-    },
-    nik: {
-      type: String,
-      required: true,
-    },
-    alamat: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    nama_ayah: {
-      type: String,
-      required: true,
-    },
-    pekerjaan_ayah: {
-      type: String,
-      required: true,
-    },
-    nama_ibu: {
-      type: String,
-      required: true,
-    },
-    pekerjaan_ibu: {
+    tinggi_badan: {
       type: String,
       required: true,
     },
@@ -61,9 +33,6 @@ const kesehatanSiswaSchema = mongoose.Schema(
   }
 );
 
-const KesehatanSiswa = mongoose.model(
-  "KesehatanSiswa",
-  kesehatanSiswaSchemaSchema
-);
+const KesehatanSiswa = mongoose.model("KesehatanSiswa", kesehatanSiswaSchema);
 
-export default Siswa;
+export default KesehatanSiswa;

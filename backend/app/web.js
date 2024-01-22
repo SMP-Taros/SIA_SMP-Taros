@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import siswaRoute from "../routes/siswaRoutes.js";
 import guruRoute from "../routes/guruRoutes.js";
 import userRoute from "../routes/userRoutes.js";
+import kesehatanSiswaRoute from "../routes/kesehatanSiswaRoutes.js";
 
 import cookieParser from "cookie-parser";
 
@@ -31,6 +32,8 @@ app.get("/", (request, response) => {
 
 app.use(cookieParser());
 app.use("/api/siswa", siswaRoute);
+app.use("/api/siswa/kesehatan", kesehatanSiswaRoute);
+
 app.use("/api/guru", guruRoute);
 app.use("/api/users", userRoute);
 
