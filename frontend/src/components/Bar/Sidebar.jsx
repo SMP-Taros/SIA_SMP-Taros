@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Sidebar, Menu, SubMenu, MenuItem } from "react-pro-sidebar";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, IconButton, Typography, colors, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { tokens } from "../../Theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -14,10 +14,60 @@ import { useLogoutMutation } from "../../slices/userApiSlice";
 import { logout } from "../../slices/authSlice";
 import { useNavigate } from "react-router-dom";
 
+const menuItemStyles = {
+  root: {
+    fontSize: "13px",
+    fontWeight: 400,
+  },
+  button: {
+    "&:hover": {
+      backgroundColor: "#1a2226",
+      color: "#666666",
+    },
+    color: "#e0e0e0",
+  },
+  SubMenuExpandIcon: {
+    color: "#b6b7b9",
+  },
+  subMenuContent: ({ level }) => ({
+    backgroundColor: level === 0 ? "#1a2226" : "transparent",
+  }),
+  label: ({ open }) => ({
+    fontWeight: open ? 600 : undefined,
+  }),
+};
+
+const Item = ({ title, to, icon, selected, setSelected }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
+  const isActive = selected === title;
+
+  return (
+    <Link to={to} style={{ textDecoration: "none", color: "inherit" }}>
+      <MenuItem
+        onClick={() => setSelected(title)}
+        icon={icon}
+        style={{
+          ...menuItemStyles.root,
+          ...(isActive && {
+            backgroundColor: "#1a2226", 
+            color: "#666666", 
+          }),
+        }}
+      >
+        <Typography>{title}</Typography>
+      </MenuItem>
+    </Link>
+  );
+};
+
+
 const ProSidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [selected, setSelected] = useState("");
 
   const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -43,18 +93,7 @@ const ProSidebar = () => {
       }}
     >
       <Sidebar backgroundColor={colors.primary[500]} collapsed={isCollapsed}>
-        <Menu
-          menuItemStyles={{
-            button: ({ level, active, disabled }) => {
-              // only apply styles on first level elements of the tree
-              if (level === 0)
-                return {
-                  color: disabled ? "#f5d9ff" : "#d359ff",
-                  backgroundColor: active ? "#eecef9" : undefined,
-                };
-            },
-          }}
-        >
+        <Menu menuItemStyles={menuItemStyles}>
           {/* LOGO AND MENU ICON */}
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
@@ -117,15 +156,13 @@ const ProSidebar = () => {
 
           {/* MENU ITEM */}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <MenuItem
+            <Item
+              title="Dashboard"
+              to="/dashboard"
               icon={<HomeOutlinedIcon />}
-              component={<Link to="/" />}
-              style={{
-                color: colors.grey[900],
-              }}
-            >
-              Dashboard
-            </MenuItem>
+              selected={selected}
+              setSelected={setSelected}
+            />
             <SubMenu
               label="Data Master"
               icon={<GridViewIcon />}
@@ -133,24 +170,20 @@ const ProSidebar = () => {
                 color: colors.grey[900],
               }}
             >
-              <MenuItem
-                component={<Link to="/siswa" />}
-                style={{
-                  color: colors.grey[900],
-                }}
-              >
-                {" "}
-                Siswa
-              </MenuItem>
-              <MenuItem
-                component={<Link to="/guru" />}
-                style={{
-                  color: colors.grey[900],
-                }}
-              >
-                {" "}
-                Guru
-              </MenuItem>
+              <Item
+                title="Siswa"
+                to="/siswa"
+                icon=""
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Guru"
+                to="/guru"
+                icon=""
+                selected={selected}
+                setSelected={setSelected}
+              />
             </SubMenu>
             <MenuItem
               icon={<LogoutIcon style={{ color: "#FF6868" }} />}
