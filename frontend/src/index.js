@@ -18,6 +18,7 @@ import Guru from "./scanes/Guru/guruScreen.jsx";
 import GuruDetail from "./scanes/Guru/GuruDetail/GuruDetail.jsx";
 import PrivateRoute from "./components/privateRoute.jsx";
 import siswaDetail from "./scanes/Siswa/siswaDetail.jsx";
+import Profile from "./scanes/Profile/Profile.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<Login />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/siswa" element={<Siswa />} />
         <Route path="/siswa/detail/:id" element={<siswaDetail />} />
 
