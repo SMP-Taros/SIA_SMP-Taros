@@ -1,12 +1,7 @@
 import React from "react";
-import { Box, Button, Typography, Grid, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
-import { tokens } from "../../Theme";
-import EditIcon from "@mui/icons-material/Edit";
+import { Typography, Grid } from "@mui/material";
 
 const DetailGuru = ({ data }) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   const {
     nama,
     NUPTK,
@@ -164,16 +159,6 @@ const DetailGuru = ({ data }) => {
           <Typography variant="body1">{pekerjaan_pasangan}</Typography>
         </Grid>
       </Grid>
-      <Box marginLeft="30px" marginTop="30px">
-        <Button
-          component={Link}
-          to="/guru/edit"
-          variant="contained"
-          startIcon={<EditIcon />}
-        >
-          Edit Profil
-        </Button>
-      </Box>
     </div>
   );
 };

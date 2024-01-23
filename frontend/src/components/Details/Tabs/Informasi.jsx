@@ -1,7 +1,13 @@
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Button, Grid, useTheme } from "@mui/material";
+import { Link } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
 import DetailGuru from "./DetailGuru";
+import { tokens } from "../../../Theme";
 
 const Informasi = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const teacherData = {
     nama: "Sri rejeki",
     NUPTK: "12335434",
@@ -42,6 +48,17 @@ const Informasi = () => {
             <DetailGuru data={teacherData} />
           </Grid>
         </Grid>
+      </Box>
+      <Box display="flex" justifyContent="flex-end" marginTop="30px">
+        <Button
+          component={Link}
+          to="/guru/edit"
+          variant="contained"
+          startIcon={<EditIcon />}
+          style={{ background: colors.greenAccent[800] }}
+        >
+          Edit Profil
+        </Button>
       </Box>
     </div>
   );

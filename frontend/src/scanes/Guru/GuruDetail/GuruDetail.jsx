@@ -6,19 +6,17 @@ import {
   Tabs,
   Tab,
   Typography,
-  IconButton,
   useTheme,
-  Stack,
 } from "@mui/material";
-import InputBase from "@mui/material/InputBase";
-import { useContext } from "react";
-import { ColorModeContext, tokens } from "../../../Theme";
+import { tokens } from "../../../Theme";
 import * as React from "react";
 
 import Template from "../../Template/TemplateScreen";
 import Header from "../../../components/Header";
 import CustomTabPanel from '../../../components/Details/CustomTabPanel';
-import Informasi from "../../../components/Details/Informasi";
+import Informasi from "../../../components/Details/Tabs/Informasi";
+import Kehadiran from "../../../components/Details/Tabs/Kehadiran";
+import MataPelajaran from "../../../components/Details/Tabs/MataPelajaran";
 
 const GuruDetail = () => {
   const theme = useTheme();
@@ -66,10 +64,10 @@ const GuruDetail = () => {
               <Informasi/>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-              Item Two
+              <Kehadiran/>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-              Item Three
+              <MataPelajaran/>
             </CustomTabPanel>
           </CardContent>
         </Card>
