@@ -89,7 +89,7 @@ Request Body :
 
 ```json
 {
-  "id_siswa": "1"*,
+  "siswa_id": "1"*,
   "membaca_alquran": "lancar",
   "jumlah_hafalan": "1 juz",
   "hobby": "main",
