@@ -89,6 +89,7 @@ const getSiswa = asyncHandler(async (req, res) => {
 
     const formattedData = siswa.map((val) => {
       return {
+        id: val._id,
         nama: val.nama,
         nis: val.nis,
         nisn: val.nisn,
@@ -115,7 +116,6 @@ const getdetailSiswa = asyncHandler(async (req, res) => {
     }
 
     return res.status(200).json({
-      count: siswa.length,
       data: siswa,
     });
   } catch (error) {

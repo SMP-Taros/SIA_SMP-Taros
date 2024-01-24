@@ -32,7 +32,7 @@ import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 // import Icon from "../../assets/icon/edit";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { Delete, Info } from "@mui/icons-material";
 
 import { useGetAllQuery } from "../../slices/siswaApiSlice";
 
@@ -195,15 +195,20 @@ const Siswa = () => {
                         <TableCell align="right">{row.nis}</TableCell>
                         <TableCell align="right">{row.nisn}</TableCell>
                         <TableCell align="right">
-                          <IconButton>
-                            <Grid container gap={2}>
-                              <Grid item>
-                                <EditIcon />
-                              </Grid>
-                              <Grid item>
-                                <DeleteIcon />
-                              </Grid>
-                            </Grid>
+                          <IconButton
+                            component={Link}
+                            to={`/siswa/${row.id}`}
+                            type="button"
+                            style={{ color: colors.blueAccent[500] }}
+                            // onClick={() => dispatch({ type: 'UPDATE_ROOM', payload: params.row })}
+                          >
+                            <Info />
+                          </IconButton>
+                          <IconButton
+                            style={{ color: colors.redAccent[500] }}
+                            // onClick={() => deleteGuru(params.row, currentUser, dispatch)}
+                          >
+                            <Delete />
                           </IconButton>
                         </TableCell>
                       </TableRow>

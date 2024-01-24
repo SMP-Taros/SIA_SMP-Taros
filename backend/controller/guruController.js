@@ -100,6 +100,7 @@ const getGuru = asyncHandler(async (req, res) => {
 
     const formattedData = guru.map((val) => {
       return {
+        id: val_id,
         nama: val.nama,
         nuptk: val.nuptk,
         nipy: val.nipy,

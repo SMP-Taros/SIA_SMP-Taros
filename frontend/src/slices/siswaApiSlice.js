@@ -1,4 +1,6 @@
 import { apiSlice } from "./apiSlice.js";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
 const SISWA_URL = "api/siswa";
 
 export const siswaApiSlice = apiSlice.injectEndpoints({
@@ -11,7 +13,14 @@ export const siswaApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    getDetail: builder.query({
+      query: (id) => ({
+        url: `${SISWA_URL}/${id}`,
+        method: "GET",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useGetAllQuery } = siswaApiSlice;
+export const { useGetAllQuery, useGetDetailQuery } = siswaApiSlice;

@@ -13,10 +13,10 @@ import * as React from "react";
 
 import Template from "../../Template/TemplateScreen";
 import Header from "../../../components/Header";
-import CustomTabPanel from '../../../components/Details/CustomTabPanel';
-import Informasi from "../../../components/Details/Tabs/Informasi";
-import Kehadiran from "../../../components/Details/Tabs/Kehadiran";
-import MataPelajaran from "../../../components/Details/Tabs/MataPelajaran";
+import CustomTabPanel from "../../../components/Details/CustomTabPanel";
+import Informasi from "../../../components/Details/TabsGuru/Informasi";
+import Kehadiran from "../../../components/Details/TabsGuru/Kehadiran";
+import MataPelajaran from "../../../components/Details/TabsGuru/MataPelajaran";
 
 const GuruDetail = () => {
   const theme = useTheme();
@@ -29,11 +29,10 @@ const GuruDetail = () => {
   function a11yProps(index) {
     return {
       id: `tab-${index}`,
-      'aria-controls': `tabpanel-${index}`,
+      "aria-controls": `tabpanel-${index}`,
     };
   }
-  
-  
+
   return (
     <Template>
       <Box component="div" width="100%" padding="40px" paddingRight="70px">
@@ -61,13 +60,13 @@ const GuruDetail = () => {
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-              <Informasi/>
+              <Informasi />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-              <Kehadiran/>
+              <Kehadiran />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-              <MataPelajaran/>
+              <MataPelajaran />
             </CustomTabPanel>
           </CardContent>
         </Card>

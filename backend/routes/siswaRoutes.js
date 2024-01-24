@@ -15,7 +15,7 @@ router.post("/", protect, createSiswa);
 //get siswa
 router.get("/", getSiswa);
 
-router.get("/:id", protect, getdetailSiswa);
+router.get("/:id", getdetailSiswa);
 
 router.put("/:id", protect, updateSiswa);
 
