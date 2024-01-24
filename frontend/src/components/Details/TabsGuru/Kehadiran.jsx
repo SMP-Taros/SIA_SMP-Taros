@@ -170,7 +170,7 @@ export default function BasicTable() {
                               align={column.align}
                             >
                               {value === "action" ? (
-                                <IconButton  style={{ color: colors.redAccent[500] }}>
+                                <IconButton  style={{ color: colors.redAccent[500]}}>
                                   <Delete />
                                 </IconButton>
                               ) : (
