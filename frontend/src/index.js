@@ -16,9 +16,9 @@ import Login from "./scanes/Login/Login.jsx";
 import Siswa from "./scanes/Siswa/siswaScreen.jsx";
 import Guru from "./scanes/Guru/guruScreen.jsx";
 import GuruCreate from "./scanes/Guru/guruCreate.jsx";
-import GuruDetail from "./scanes/Guru/GuruDetail/GuruDetail.jsx";
+import GuruDetail from "./scanes/Guru/guruDetail.jsx";
 import PrivateRoute from "./components/privateRoute.jsx";
-import siswaDetail from "./scanes/Siswa/siswaDetail.jsx";
+import SiswaDetail from "./scanes/Siswa/siswaDetail.jsx";
 import Profile from "./scanes/Profile/Profile.jsx";
 
 const router = createBrowserRouter(
@@ -29,12 +29,12 @@ const router = createBrowserRouter(
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/siswa" element={<Siswa />} />
-        <Route path="/siswa/:id" element={<siswaDetail />} />
+        <Route path="/siswa/:id" element={<SiswaDetail />} />
 
         <Route path="/guru" element={<Guru />} />
         <Route path="/guru/create" element={<GuruCreate />} />
         <Route path="/guru/edit" element={<guruEdit />} />
-        <Route path="/guru/detail" element={<GuruDetail />} />
+        <Route path="/guru/:id" element={<GuruDetail />} />
       </Route>
     </Route>
   )

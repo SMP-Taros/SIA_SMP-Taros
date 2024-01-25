@@ -8,15 +8,15 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { tokens } from "../../../Theme";
+import { tokens } from "../../Theme";
 import * as React from "react";
 
-import Template from "../../Template/TemplateScreen";
-import Header from "../../../components/Header";
-import CustomTabPanel from "../../../components/Details/CustomTabPanel";
-import Informasi from "../../../components/Details/TabsGuru/Informasi";
-import Kehadiran from "../../../components/Details/TabsGuru/Kehadiran";
-import MataPelajaran from "../../../components/Details/TabsGuru/MataPelajaran";
+import Template from "../Template/TemplateScreen";
+import Header from "../../components/Header";
+import CustomTabPanel from "../../components/Details/CustomTabPanel";
+import Informasi from "../../components/Details/TabsGuru/Informasi";
+import Kehadiran from "../../components/Details/TabsGuru/Kehadiran";
+import MataPelajaran from "../../components/Details/TabsGuru/MataPelajaran";
 
 const GuruDetail = () => {
   const theme = useTheme();
