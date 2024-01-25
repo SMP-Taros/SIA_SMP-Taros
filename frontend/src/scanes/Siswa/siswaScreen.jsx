@@ -34,7 +34,7 @@ import Header from "../../components/Header";
 import EditIcon from "@mui/icons-material/Edit";
 import { Delete, Info } from "@mui/icons-material";
 
-import { useGetAllQuery } from "../../slices/siswaApiSlice";
+import { useGetAllSiswaQuery } from "../../slices/siswaApiSlice";
 
 import { useEffect, useState } from "react";
 
@@ -65,7 +65,7 @@ const Siswa = () => {
     setPage(0);
   };
 
-  const { data, isLoading, error } = useGetAllQuery();
+  const { data, isLoading, error } = useGetAllSiswaQuery();
   const [rows, setRows] = useState([]);
 
   useEffect(() => {

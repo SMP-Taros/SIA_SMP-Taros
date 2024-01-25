@@ -1,24 +1,28 @@
 import {
   Box,
-  FormLabel,
   Grid,
-  InputLabel,
-  Stack,
+  
   Table,
   TableBody,
   TableCell,
   TableRow,
-  TextField,
-  Typography,
+  
   TableContainer,
   Button,
 } from "@mui/material";
 
+import { useTheme } from "@emotion/react";
+import { tokens } from "../../../Theme";
+
+import EditIcon from "@mui/icons-material/Edit";
+
 import { useState, useEffect } from "react";
-import { useGetDetailQuery } from "../../../slices/siswaApiSlice";
+import { useGetDetailSiswaQuery } from "../../../slices/siswaApiSlice";
 
 const DetailSiswa = (props) => {
-  const { data, isLoading } = useGetDetailQuery(props.id);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const { data, isLoading } = useGetDetailSiswaQuery(props.id);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [detail, setDetail] = useState();
 
@@ -325,10 +329,23 @@ const DetailSiswa = (props) => {
                 </TableBody>
               </Table>
             </TableContainer>
-
-            <Button variant="contained" style={{ marginTop: "20px" }}>
-              Edit
-            </Button>
+            <Box
+              display="flex"
+              justifyContent="flex-end"
+              marginTop="30px"
+              paddingLeft="40px"
+            >
+              <Button
+                variant="contained"
+                startIcon={<EditIcon />}
+                style={{
+                  background: colors.greenAccent[800],
+                  width: "100px",
+                }}
+              >
+                Edit
+              </Button>
+            </Box>
           </form>
         </Grid>
       </Grid>
