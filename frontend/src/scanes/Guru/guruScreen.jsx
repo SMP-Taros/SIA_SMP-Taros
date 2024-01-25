@@ -32,7 +32,7 @@ import { Add, Info, Delete } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 
-import { useGetAllQuery } from "../../slices/guruApiSlice";
+import { useGetAllGuruQuery } from "../../slices/guruApiSlice";
 
 import { useEffect, useState } from "react";
 
@@ -63,7 +63,7 @@ const Guru = () => {
     setPage(0);
   };
 
-  const { data, isLoading, error } = useGetAllQuery();
+  const { data, isLoading } = useGetAllGuruQuery();
   const [rows, setRows] = useState([]);
 
   useEffect(() => {

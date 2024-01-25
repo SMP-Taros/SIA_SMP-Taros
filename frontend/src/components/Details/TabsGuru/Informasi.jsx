@@ -12,7 +12,7 @@ import {
   Typography,
   TableContainer,
   Button,
-  Modal
+  Modal,
 } from "@mui/material";
 
 import EditIcon from "@mui/icons-material/Edit";
@@ -20,7 +20,7 @@ import { tokens } from "../../../Theme";
 import { useTheme } from "@emotion/react";
 
 import { useState, useEffect } from "react";
-import { useGetDetailQuery } from "../../../slices/guruApiSlice";
+import { useGetDetailGuruQuery } from "../../../slices/guruApiSlice";
 
 const style = {
   position: "absolute",
@@ -37,11 +37,10 @@ const style = {
 const Informasi = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { data, isLoading } = useGetDetailQuery(props.id);
+  const { data, isLoading } = useGetDetailGuruQuery(props.id);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [detail, setDetail] = useState();
 
-    
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -85,334 +84,340 @@ const Informasi = (props) => {
             </Box>
           </Grid>
           <Grid item xs={8}>
-          <form>
-            <TableContainer sx={{ maxHeight: 440 }}>
-              <Table style={{ maxHeight: "693px" }}>
-                <TableBody>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>Nama</TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={!detail ? "loading" : detail.nama}
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>NUPTK</TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={!detail ? "loading" : detail.nuptk}
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>Jenis Kelamin</TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={!detail ? "loading" : detail.jenis_kelamin}
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>Tempat Lahir</TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={!detail ? "loading" : detail.tempat_lahir}
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      Tanggal Lahir
-                    </TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={!detail ? "loading" : detail.tanggal_lahir}
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>NIPY</TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={!detail ? "loading" : detail.nipy}
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      NIK
-                    </TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={!detail ? "loading" : detail.nik}
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      No KK
-                    </TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={!detail ? "loading" : detail.no_kk}
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
+            <form>
+              <TableContainer sx={{ maxHeight: 440 }}>
+                <Table style={{ maxHeight: "693px" }}>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>Nama</TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={!detail ? "loading" : detail.nama}
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>NUPTK</TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={!detail ? "loading" : detail.nuptk}
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        Jenis Kelamin
+                      </TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={
+                            !detail ? "loading" : detail.jenis_kelamin
+                          }
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        Tempat Lahir
+                      </TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={
+                            !detail ? "loading" : detail.tempat_lahir
+                          }
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        Tanggal Lahir
+                      </TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={
+                            !detail ? "loading" : detail.tanggal_lahir
+                          }
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>NIPY</TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={!detail ? "loading" : detail.nipy}
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>NIK</TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={!detail ? "loading" : detail.nik}
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>No KK</TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={!detail ? "loading" : detail.no_kk}
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
 
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>Status Kepegawaian</TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={!detail ? "loading" : detail.status_kepegawaian}
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>Jenis PTK</TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={!detail ? "loading" : detail.jenis_ptk}
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>Alamat</TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={!detail ? "loading" : detail.alamat}
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      No HP
-                    </TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={
-                          !detail ? "loading" : detail.no_hp
-                        }
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      Email
-                    </TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={
-                          !detail ? "loading" : detail.email
-                        }
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      SK Pengangkatan
-                    </TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={!detail ? "loading" : detail.sk_pengangkatan}
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      TMT Pengangkatan
-                    </TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={
-                          !detail ? "loading" : detail.tmt_pengangkatan
-                        }
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      Status Perkawinan
-                    </TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={
-                          !detail ? "loading" : detail.status_perkawinan
-                        }
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      Nama Pasangan
-                    </TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={
-                          !detail ? "loading" : detail.nama_pasangan
-                        }
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      Pekerjaan Pasangan
-                    </TableCell>
-                    <TableCell>
-                      {" "}
-                      :{" "}
-                      <input
-                        placeholder={
-                          !detail ? "loading" : detail.pekerjaan_pasangan
-                        }
-                        style={{
-                          border: "none",
-                          fontSize: "16px",
-                          marginLeft: "20px",
-                        }}
-                        type="text"
-                      />
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        Status Kepegawaian
+                      </TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={
+                            !detail ? "loading" : detail.status_kepegawaian
+                          }
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        Jenis PTK
+                      </TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={!detail ? "loading" : detail.jenis_ptk}
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>Alamat</TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={!detail ? "loading" : detail.alamat}
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>No HP</TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={!detail ? "loading" : detail.no_hp}
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>Email</TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={!detail ? "loading" : detail.email}
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        SK Pengangkatan
+                      </TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={
+                            !detail ? "loading" : detail.sk_pengangkatan
+                          }
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        TMT Pengangkatan
+                      </TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={
+                            !detail ? "loading" : detail.tmt_pengangkatan
+                          }
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        Status Perkawinan
+                      </TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={
+                            !detail ? "loading" : detail.status_perkawinan
+                          }
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        Nama Pasangan
+                      </TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={
+                            !detail ? "loading" : detail.nama_pasangan
+                          }
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        Pekerjaan Pasangan
+                      </TableCell>
+                      <TableCell>
+                        {" "}
+                        :{" "}
+                        <input
+                          placeholder={
+                            !detail ? "loading" : detail.pekerjaan_pasangan
+                          }
+                          style={{
+                            border: "none",
+                            fontSize: "16px",
+                            marginLeft: "20px",
+                          }}
+                          type="text"
+                        />
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </form>
           </Grid>
         </Grid>

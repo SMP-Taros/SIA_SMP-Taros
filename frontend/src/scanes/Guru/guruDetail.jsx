@@ -17,6 +17,7 @@ import CustomTabPanel from "../../components/Details/CustomTabPanel";
 import Informasi from "../../components/Details/TabsGuru/Informasi";
 import Kehadiran from "../../components/Details/TabsGuru/Kehadiran";
 import MataPelajaran from "../../components/Details/TabsGuru/MataPelajaran";
+import { useParams } from "react-router-dom";
 
 const GuruDetail = () => {
   const theme = useTheme();
@@ -32,6 +33,8 @@ const GuruDetail = () => {
       "aria-controls": `tabpanel-${index}`,
     };
   }
+
+  const { id } = useParams();
 
   return (
     <Template>
@@ -60,7 +63,7 @@ const GuruDetail = () => {
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-              <Informasi />
+              <Informasi id={id} />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
               <Kehadiran />

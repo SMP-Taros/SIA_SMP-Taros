@@ -5,7 +5,7 @@ const GURU_URL = "api/guru";
 
 export const guruApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getAll: builder.query({
+    getAllGuru: builder.query({
       query: (data) => ({
         url: `${GURU_URL}`,
         method: "GET",
@@ -13,7 +13,7 @@ export const guruApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
-    getDetail: builder.query({
+    getDetailGuru: builder.query({
       query: (id) => ({
         url: `${GURU_URL}/${id}`,
         method: "GET",
@@ -23,4 +23,4 @@ export const guruApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetAllQuery, useGetDetailQuery } = guruApiSlice;
+export const { useGetAllGuruQuery, useGetDetailGuruQuery } = guruApiSlice;
