@@ -34,6 +34,21 @@ export const siswaApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    updateDetailSiswa: builder.mutation({
+      query: (data) => ({
+        url: `${SISWA_URL}/${data.id}`,
+        method: "PUT",
+        body: data.data,
+        credentials: "include",
+      }),
+    }),
+    getOrangtuaSiswa: builder.query({
+      query: (id) => ({
+        url: `${SISWA_URL}/orang_tua/${id}`,
+        method: "GET",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -42,4 +57,6 @@ export const {
   useGetDetailSiswaQuery,
   useGetKesehatanSiswaQuery,
   useGetPencapaianSiswaQuery,
+  useUpdateDetailSiswaMutation,
+  useGetOrangtuaSiswaQuery,
 } = siswaApiSlice;
