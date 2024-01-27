@@ -7,6 +7,7 @@ import userRoute from "../routes/userRoutes.js";
 import kesehatanSiswaRoute from "../routes/kesehatanSiswaRoutes.js";
 import pencapaianSiswaRoute from "../routes/pencapaianSiswaRoutes.js";
 import orangTuaSiswaRoute from "../routes/orangTuaSiswaRoutes.js";
+import calonSiswaRoute from "../routes/calonSiswaRoutes.js";
 
 import cookieParser from "cookie-parser";
 
@@ -34,6 +35,7 @@ app.get("/", (request, response) => {
 
 app.use(cookieParser());
 app.use("/api/siswa", siswaRoute);
+app.use("/api/calon_siswa", calonSiswaRoute);
 app.use("/api/siswa/kesehatan", kesehatanSiswaRoute);
 app.use("/api/siswa/pencapaian", pencapaianSiswaRoute);
 app.use("/api/siswa/orang_tua", orangTuaSiswaRoute);
