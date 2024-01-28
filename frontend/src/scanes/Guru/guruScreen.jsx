@@ -82,7 +82,7 @@ const Guru = () => {
 
     fetchData();
   }, [isLoading, data]);
-  // console.log("rows:", rows);
+  console.log("rows:", rows);
   return (
     <Template>
       <Box component="div" width="100%" padding="40px" paddingRight="70px">
@@ -164,25 +164,11 @@ const Guru = () => {
                         NUPTK
                       </StyledTableCell>
                       <StyledTableCell
-                        key="jenis_kelamin"
+                        key="status_kepegawaian"
                         align={"right"}
                         style={{ minWidth: 80 }}
                       >
-                        Jenis Kelamin
-                      </StyledTableCell>
-                      <StyledTableCell
-                        key="tempat_lahir"
-                        align={"right"}
-                        style={{ minWidth: 100 }}
-                      >
-                        Tempat Lahir
-                      </StyledTableCell>
-                      <StyledTableCell
-                        key="tanggal_lahir"
-                        align={"right"}
-                        style={{ minWidth: 100 }}
-                      >
-                        Tanggal Lahir
+                        Status Kepegawaian
                       </StyledTableCell>
                       <StyledTableCell
                         key="nipy"
@@ -212,9 +198,7 @@ const Guru = () => {
                           {row.nama}
                         </TableCell>
                         <TableCell align="right">{row.nuptk}</TableCell>
-                        <TableCell align="right">{row.jenis_kelamin}</TableCell>
-                        <TableCell align="right">{row.tempat_lahir}</TableCell>
-                        <TableCell align="right">{row.tanggal_lahir}</TableCell>
+                        <TableCell align="right">{row.status_kepegawaian}</TableCell>
                         <TableCell align="right">{row.nipy}</TableCell>
                         <TableCell align="right">
                           <Tooltip title="Detail Guru">

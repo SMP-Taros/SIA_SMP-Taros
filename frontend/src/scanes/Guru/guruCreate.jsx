@@ -9,6 +9,7 @@ import {
   TextField,
   MenuItem,
   Button,
+  IconButton,
 } from "@mui/material";
 import { tokens } from "../../Theme";
 import * as React from "react";
@@ -17,6 +18,8 @@ import { styled } from "@mui/material/styles";
 import Template from "../Template/TemplateScreen";
 import Header from "../../components/Header";
 import FileUpload from "../../components/FileUpload/FIleUpload";
+import { Link } from "react-router-dom";
+import { ArrowBack } from "@mui/icons-material";
 
 const akses = [
   {
@@ -64,14 +67,26 @@ const GuruCreate = () => {
         </Grid>
         <Card>
           <CardContent>
-            <Typography
-              variant="h4"
-              fontWeight="bold"
-              fontSize="20px"
-              margin="12px"
-            >
-              Tambah Data Guru
-            </Typography>
+            <Box display="flex">
+              <IconButton
+                component={Link}
+                to="/guru"
+                type="button"
+                style={{ color: colors.grey[100] }}
+                // onClick={() => dispatch({ type: 'UPDATE_ROOM', payload: params.row })}
+              >
+                <ArrowBack fontSize="large" />
+              </IconButton>
+              <Typography
+                variant="h4"
+                fontWeight="bold"
+                fontSize="20px"
+                margin="12px"
+              >
+                Tambah Data Guru
+              </Typography>
+            </Box>
+
             <Divider orientation="horizontal" />
             <Box>
               <Grid container spacing={4} paddingLeft={10} paddingRight={10}>
@@ -201,11 +216,19 @@ const GuruCreate = () => {
                   </Box>
                 </Grid>
               </Grid>
-              <Box display="flex" justifyContent="flex-end" marginTop="30px" marginRight={15}>
+              <Box
+                display="flex"
+                justifyContent="flex-end"
+                marginTop="30px"
+                marginRight={15}
+              >
                 <Button
                   type="submit"
                   variant="contained"
-                  style={{ background: colors.greenAccent[500], width: "150px" }}
+                  style={{
+                    background: colors.greenAccent[500],
+                    width: "150px",
+                  }}
                 >
                   Submit
                 </Button>
