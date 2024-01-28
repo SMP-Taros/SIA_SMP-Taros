@@ -18,7 +18,7 @@ router.get("/", getGuru);
 
 router.get("/:id", getdetailGuru);
 
-router.put("/:id", protect, updateGuru);
+router.put("/:id", updateGuru);
 
 router.delete("/:id", protect, deleteGuru);
 

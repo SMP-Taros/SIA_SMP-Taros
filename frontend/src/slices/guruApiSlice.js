@@ -20,7 +20,15 @@ export const guruApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    updateDetailGuru: builder.mutation({
+      query: (data) => ({
+        url: `${GURU_URL}/${data.id}`,
+        method: "PUT",
+        body: data.data,
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useGetAllGuruQuery, useGetDetailGuruQuery } = guruApiSlice;
+export const { useGetAllGuruQuery, useGetDetailGuruQuery, useUpdateDetailGuruMutation } = guruApiSlice;
