@@ -42,6 +42,13 @@ export const siswaApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    deleteSiswa: builder.mutation({
+      query: (data) => ({
+        url: `${SISWA_URL}/${data.id}`,
+        method: "DELETE",
+        credentials: "include",
+      }),
+    }),
     getOrangtuaSiswa: builder.query({
       query: (id) => ({
         url: `${SISWA_URL}/orang_tua/${id}`,
@@ -59,4 +66,5 @@ export const {
   useGetPencapaianSiswaQuery,
   useUpdateDetailSiswaMutation,
   useGetOrangtuaSiswaQuery,
+  useDeleteSiswaMutation,
 } = siswaApiSlice;
