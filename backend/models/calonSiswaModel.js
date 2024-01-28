@@ -163,6 +163,6 @@ const calonSiswaSchema = mongoose.Schema(
   }
 );
 
-const CalonSiswa = mongoose.model("Siswa", calonSiswaSchema);
+const CalonSiswa = mongoose.model("CalonSiswa", calonSiswaSchema);
 
 export default CalonSiswa;
