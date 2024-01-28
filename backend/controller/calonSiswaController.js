@@ -7,7 +7,6 @@ const createCalonSiswa = asyncHandler(async (req, res) => {
   try {
     let {
       nama,
-      nis,
       jenis_kelamin,
       nisn,
       tempat_lahir,
@@ -56,7 +55,6 @@ const createCalonSiswa = asyncHandler(async (req, res) => {
 
     if (
       !nama ||
-      !nis ||
       !jenis_kelamin ||
       !nisn ||
       !tempat_lahir ||
@@ -86,7 +84,6 @@ const createCalonSiswa = asyncHandler(async (req, res) => {
     }
     const newSiswa = {
       nama: nama,
-      nis: nis,
       jenis_kelamin: jenis_kelamin,
       nisn: nisn,
       tempat_lahir: tempat_lahir,
@@ -145,11 +142,63 @@ const createCalonSiswa = asyncHandler(async (req, res) => {
   }
 });
 
-const getCalonSiswa = asyncHandler(async (req, res) => {});
+const getCalonSiswa = asyncHandler(async (req, res) => {
+  try {
+    const calonSiswa = await CalonSiswa.find({});
 
-const getDetailCalonSiswa = asyncHandler(async (req, res) => {});
+    const formattedData = calonSiswa.map((val) => {
+      return {
+        id: val._id,
+        nama: val.nama,
+        nisn: val.nisn,
+        nik: val.nik,
+        tanggal_lahir: val.tanggal_lahir,
+      };
+    });
 
-const deleteCalonSiswa = asyncHandler(async (req, res) => {});
+    return res.status(200).json({
+      count: calonSiswa.length,
+      data: formattedData,
+    });
+  } catch (error) {
+    console.log(error.massage);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+const getDetailCalonSiswa = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const calonSiswa = await CalonSiswa.findById(id);
+
+    if (!calonSiswa) {
+      return res.status(401).send("siswa tidak ditemukan");
+    }
+
+    return res.status(200).json({
+      data: calonSiswa,
+    });
+  } catch (error) {
+    console.log(error.massage);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+const deleteCalonSiswa = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const calonSiswa = await CalonSiswa.findByIdAndDelete(id);
+
+    if (!calonSiswa) {
+      return res.status(401).json({ message: "Siswa not found" });
+    }
+
+    return res.status(201).send("Siswa deleted");
+  } catch (error) {
+    console.log(error.massage);
+    res.status(500).send({ message: error.message });
+  }
+});
 
 export {
   createCalonSiswa,

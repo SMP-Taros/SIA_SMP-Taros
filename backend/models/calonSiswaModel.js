@@ -6,10 +6,6 @@ const calonSiswaSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    nis: {
-      type: String,
-      required: true,
-    },
     jenis_kelamin: {
       type: String,
       enum: ["Laki-Laki", "Perempuan"],

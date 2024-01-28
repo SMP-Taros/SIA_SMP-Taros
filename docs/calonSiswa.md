@@ -9,7 +9,6 @@ Request Body :
 ```json
 {
   "nama": "arip"*,
-  "NIS": "12335434"*,
   "jenis_kelamin": "Laki Laki"*,
   "NISN": "0390489585"*,
   "tempat_lahir": "wonogiri"*,
@@ -24,7 +23,6 @@ Request Body :
   "jarak_rumah_sekolah": "500km"*,
   "asal_sekolah": "smp2"*,
   "alamat_asal_sekolah": "rejo"*,
-  "siswa_id": "1"*,
   "membaca_alquran": "lancar",
   "jumlah_hafalan": "1 juz",
   "hobby": "main",
