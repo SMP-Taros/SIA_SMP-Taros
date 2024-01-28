@@ -20,6 +20,7 @@ import GuruDetail from "./scanes/Guru/guruDetail.jsx";
 import PrivateRoute from "./components/privateRoute.jsx";
 import SiswaDetail from "./scanes/Siswa/siswaDetail.jsx";
 import Profile from "./scanes/Profile/Profile.jsx";
+import CalonSiswa from "./scanes/CalonSiswa/calonSiswaScreen.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,8 @@ const router = createBrowserRouter(
         <Route path="/profile" element={<Profile />} />
         <Route path="/siswa" element={<Siswa />} />
         <Route path="/siswa/:id" element={<SiswaDetail />} />
+
+        <Route path="/calon_siswa" element={<CalonSiswa />} />
 
         <Route path="/guru" element={<Guru />} />
         <Route path="/guru/create" element={<GuruCreate />} />

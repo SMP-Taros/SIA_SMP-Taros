@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const siswaSchema = mongoose.Schema(
   {
     nama: {

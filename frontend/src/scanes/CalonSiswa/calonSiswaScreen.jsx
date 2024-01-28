@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import {
   Box,
   Card,
@@ -34,10 +35,7 @@ import Header from "../../components/Header";
 import EditIcon from "@mui/icons-material/Edit";
 import { Delete, Info } from "@mui/icons-material";
 
-import {
-  useDeleteSiswaMutation,
-  useGetAllSiswaQuery,
-} from "../../slices/siswaApiSlice";
+import { useGetAllCalonSiswaQuery } from "../../slices/calonSiswaApiSlice";
 
 import { useEffect, useState } from "react";
 
@@ -52,10 +50,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const Siswa = () => {
+const calonSiswa = () => {
+  // console.log("rows:", rows);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { data, isLoading, error } = useGetAllSiswaQuery();
+  const { data, isLoading, error } = useGetAllCalonSiswaQuery();
   //const { Delete, isDeleteLoading } = useDeleteSiswaMutation();
   const [rows, setRows] = useState([]);
   const [page, setPage] = useState(0);
@@ -89,10 +88,7 @@ const Siswa = () => {
     };
 
     fetchData();
-  }, [isLoading, data]); // Adding 'isLoading' and 'data' to the dependency array
-
-  // console.log("rows:", rows);
-
+  }, [isLoading, data]);
   // const colorMode = useContext(ColorModeContext);
   return (
     <Template>
@@ -112,7 +108,9 @@ const Siswa = () => {
           <CardContent>
             <Grid container justifyContent="space-between">
               <Grid item>
-                <Typography variant="h3">Daftar Siswa SMP IT Taros</Typography>
+                <Typography variant="h3">
+                  Daftar Calon Siswa SMP IT Taros
+                </Typography>
               </Grid>
               <Grid item>
                 <Stack direction="row">
@@ -165,14 +163,21 @@ const Siswa = () => {
                         align={"right"}
                         style={{ minWidth: 170 }}
                       >
-                        nis
+                        nisn
                       </StyledTableCell>
                       <StyledTableCell
                         key="nisn"
                         align={"right"}
                         style={{ minWidth: 170 }}
                       >
-                        nisn
+                        nik
+                      </StyledTableCell>
+                      <StyledTableCell
+                        key="nisn"
+                        align={"right"}
+                        style={{ minWidth: 170 }}
+                      >
+                        Tanggal Lahir
                       </StyledTableCell>
                       <StyledTableCell
                         key="action"
@@ -194,24 +199,16 @@ const Siswa = () => {
                         <TableCell component="th" align="right" scope="row">
                           {row.nama}
                         </TableCell>
-                        <TableCell align="right">{row.nis}</TableCell>
                         <TableCell align="right">{row.nisn}</TableCell>
+                        <TableCell align="right">{row.nik}</TableCell>
+                        <TableCell align="right">{row.tanggal_lahir}</TableCell>
                         <TableCell align="right">
                           <IconButton
-                            component={Link}
-                            to={`/siswa/${row.id}`}
                             type="button"
                             style={{ color: colors.blueAccent[500] }}
                             // onClick={() => dispatch({ type: 'UPDATE_ROOM', payload: params.row })}
                           >
                             <Info />
-                          </IconButton>
-                          <IconButton
-                            style={{ color: colors.redAccent[500] }}
-
-                            // onClick={() => deleteGuru(params.row, currentUser, dispatch)}
-                          >
-                            <Delete />
                           </IconButton>
                         </TableCell>
                       </TableRow>
@@ -236,4 +233,4 @@ const Siswa = () => {
   );
 };
 
-export default Siswa;
+export default calonSiswa;

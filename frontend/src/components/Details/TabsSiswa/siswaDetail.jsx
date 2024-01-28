@@ -1,12 +1,10 @@
 import {
   Box,
   Grid,
-  
   Table,
   TableBody,
   TableCell,
   TableRow,
-  
   TableContainer,
   Button,
 } from "@mui/material";
@@ -17,14 +15,21 @@ import { tokens } from "../../../Theme";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { useState, useEffect } from "react";
-import { useGetDetailSiswaQuery } from "../../../slices/siswaApiSlice";
+import {
+  useGetDetailSiswaQuery,
+  useUpdateDetailSiswaMutation,
+} from "../../../slices/siswaApiSlice";
 
 const DetailSiswa = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [nama, setNama] = useState();
+  const [nisn, setNisn] = useState();
   const { data, isLoading } = useGetDetailSiswaQuery(props.id);
+  const [update, { isLoadingUpdate }] = useUpdateDetailSiswaMutation();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [detail, setDetail] = useState();
+  const [formData, setFormData] = useState();
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
@@ -48,6 +53,31 @@ const DetailSiswa = (props) => {
 
     fetchData();
   }, [isLoading, data]);
+
+  var token = props.id;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const updateHadler = (e) => {
+    e.preventDefault();
+    console.log("submit");
+
+    // console.log(res);
+    try {
+      const res = update({
+        id: token,
+        data: formData,
+      }).unwrap();
+      console.log(res);
+    } catch (e) {}
+  };
+
   return (
     <Box component="div">
       <Grid container>
@@ -61,7 +91,7 @@ const DetailSiswa = (props) => {
           />
         </Grid>
         <Grid item xs={7}>
-          <form>
+          <form onSubmit={updateHadler}>
             <TableContainer sx={{ maxHeight: 440 }}>
               <Table style={{ maxHeight: "693px" }}>
                 <TableBody>
@@ -77,7 +107,9 @@ const DetailSiswa = (props) => {
                           fontSize: "16px",
                           marginLeft: "20px",
                         }}
+                        name="nama"
                         type="text"
+                        onChange={handleInputChange}
                       />
                     </TableCell>
                   </TableRow>
@@ -93,6 +125,8 @@ const DetailSiswa = (props) => {
                           fontSize: "16px",
                           marginLeft: "20px",
                         }}
+                        name="nis"
+                        onChange={handleInputChange}
                         type="text"
                       />
                     </TableCell>
@@ -110,6 +144,8 @@ const DetailSiswa = (props) => {
                           marginLeft: "20px",
                         }}
                         type="text"
+                        name="nisn"
+                        onChange={handleInputChange}
                       />
                     </TableCell>
                   </TableRow>
@@ -125,6 +161,8 @@ const DetailSiswa = (props) => {
                           fontSize: "16px",
                           marginLeft: "20px",
                         }}
+                        name="nik"
+                        onChange={handleInputChange}
                         type="text"
                       />
                     </TableCell>
@@ -143,6 +181,8 @@ const DetailSiswa = (props) => {
                           fontSize: "16px",
                           marginLeft: "20px",
                         }}
+                        name="jenis_kelamin"
+                        onChange={handleInputChange}
                         type="text"
                       />
                     </TableCell>
@@ -159,7 +199,9 @@ const DetailSiswa = (props) => {
                           fontSize: "16px",
                           marginLeft: "20px",
                         }}
+                        name="alamat"
                         type="text"
+                        onChange={handleInputChange}
                       />
                     </TableCell>
                   </TableRow>
@@ -177,6 +219,8 @@ const DetailSiswa = (props) => {
                           fontSize: "16px",
                           marginLeft: "20px",
                         }}
+                        name="tanggal_lahir"
+                        onChange={handleInputChange}
                         type="text"
                       />
                     </TableCell>
@@ -196,6 +240,8 @@ const DetailSiswa = (props) => {
                           marginLeft: "20px",
                         }}
                         type="text"
+                        name="tempat_lahir"
+                        onChange={handleInputChange}
                       />
                     </TableCell>
                   </TableRow>
@@ -212,6 +258,8 @@ const DetailSiswa = (props) => {
                           fontSize: "16px",
                           marginLeft: "20px",
                         }}
+                        name="agama"
+                        onChange={handleInputChange}
                         type="text"
                       />
                     </TableCell>
@@ -228,6 +276,8 @@ const DetailSiswa = (props) => {
                           fontSize: "16px",
                           marginLeft: "20px",
                         }}
+                        name="status"
+                        onChange={handleInputChange}
                         type="text"
                       />
                     </TableCell>
@@ -245,6 +295,8 @@ const DetailSiswa = (props) => {
                           marginLeft: "20px",
                         }}
                         type="text"
+                        name="anak_ke"
+                        onChange={handleInputChange}
                       />
                     </TableCell>
                   </TableRow>
@@ -265,6 +317,8 @@ const DetailSiswa = (props) => {
                           marginLeft: "20px",
                         }}
                         type="text"
+                        name="jumlah_saudara_kandung"
+                        onChange={handleInputChange}
                       />
                     </TableCell>
                   </TableRow>
@@ -285,6 +339,8 @@ const DetailSiswa = (props) => {
                           marginLeft: "20px",
                         }}
                         type="text"
+                        name="jarak_rumah_sekolah"
+                        onChange={handleInputChange}
                       />
                     </TableCell>
                   </TableRow>
@@ -303,6 +359,8 @@ const DetailSiswa = (props) => {
                           marginLeft: "20px",
                         }}
                         type="text"
+                        name="asal_sekolah"
+                        onChange={handleInputChange}
                       />
                     </TableCell>
                   </TableRow>
@@ -323,6 +381,8 @@ const DetailSiswa = (props) => {
                           marginLeft: "20px",
                         }}
                         type="text"
+                        name="alamat_asal_sekolah"
+                        onChange={handleInputChange}
                       />
                     </TableCell>
                   </TableRow>
@@ -342,6 +402,7 @@ const DetailSiswa = (props) => {
                   background: colors.greenAccent[800],
                   width: "100px",
                 }}
+                type="submit"
               >
                 Edit
               </Button>
