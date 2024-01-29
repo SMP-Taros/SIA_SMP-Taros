@@ -7,8 +7,8 @@ const siswaSchema = mongoose.Schema(
       required: true,
     },
     nis: {
-      type: String,
-      required: true,
+      type: Number,
+      unique: true,
     },
     jenis_kelamin: {
       type: String,
@@ -73,6 +73,23 @@ const siswaSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+siswaSchema.pre("save", async function (next) {
+  const doc = this;
+  // Gunakan Model untuk mendapatkan nilai auto-increment
+  // console.log("tes middleware");
+  try {
+    // Gunakan Model untuk mendapatkan nilai auto-increment
+    const lastDoc = await mongoose.model("Siswa").findOne().sort("-nis").exec();
+    console.log(lastDoc);
+
+    // Tentukan nilai auto-increment untuk dokumen saat ini
+    doc.nis = (lastDoc ? lastDoc.nis : 1) + 1;
+    next();
+  } catch (err) {
+    return next(err);
+  }
+});
 
 const Siswa = mongoose.model("Siswa", siswaSchema);
 

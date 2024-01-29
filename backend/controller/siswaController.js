@@ -5,7 +5,6 @@ const createSiswa = asyncHandler(async (req, res) => {
   try {
     let {
       nama,
-      nis,
       jenis_kelamin,
       nisn,
       tempat_lahir,
@@ -24,7 +23,6 @@ const createSiswa = asyncHandler(async (req, res) => {
 
     if (
       !nama ||
-      !nis ||
       !jenis_kelamin ||
       !nisn ||
       !tempat_lahir ||
@@ -45,16 +43,8 @@ const createSiswa = asyncHandler(async (req, res) => {
       });
     }
 
-    let cekSiswa = await Siswa.findOne({ nis });
-
-    if (cekSiswa) {
-      return res.status(400).send({
-        message: "Siswa sudah terdaftar",
-      });
-    }
     const newSiswa = {
       nama: nama,
-      nis: nis,
       jenis_kelamin: jenis_kelamin,
       nisn: nisn,
       tempat_lahir: tempat_lahir,
