@@ -51,8 +51,8 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
         style={{
           ...menuItemStyles.root,
           ...(isActive && {
-            backgroundColor: "#1a2226", 
-            color: "#666666", 
+            backgroundColor: "#1a2226",
+            color: "#666666",
           }),
         }}
       >
@@ -61,7 +61,6 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
     </Link>
   );
 };
-
 
 const ProSidebar = () => {
   const theme = useTheme();
@@ -173,6 +172,13 @@ const ProSidebar = () => {
               <Item
                 title="Siswa"
                 to="/siswa"
+                icon=""
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Calon Siswa"
+                to="/calon_siswa"
                 icon=""
                 selected={selected}
                 setSelected={setSelected}

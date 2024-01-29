@@ -17,8 +17,8 @@ router.get("/", getSiswa);
 
 router.get("/:id", getdetailSiswa);
 
-router.put("/:id", protect, updateSiswa);
+router.put("/:id", updateSiswa);
 
-router.delete("/:id", protect, deleteSiswa);
+router.delete("/:id", deleteSiswa);
 
 export default router;

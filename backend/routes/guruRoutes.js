@@ -13,13 +13,13 @@ const router = express.Router();
 
 router.post("/", protect, createGuru);
 
-//get siswa
-router.get("/", protect, getGuru);
+//get guru
+router.get("/", getGuru);
 
-router.get("/:id", protect, getdetailGuru);
+router.get("/:id", getdetailGuru);
 
-router.put("/:id", protect, updateGuru);
+router.put("/:id", updateGuru);
 
-router.delete("/:id", protect, deleteGuru);
+router.delete("/:id", deleteGuru);
 
 export default router;

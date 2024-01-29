@@ -11,7 +11,7 @@ const router = express.Router();
 router.post("/", protect, createPencapaianSiswa);
 
 //get siswa
-router.get("/:id", protect, getPencapaianSiswa);
+router.get("/:id", getPencapaianSiswa);
 
 router.put("/:id", protect, updatePencapaianSiswa);
 

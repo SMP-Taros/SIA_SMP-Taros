@@ -7,6 +7,11 @@ import {
   IconButton,
   useTheme,
   Stack,
+  Tooltip,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
 } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
@@ -27,12 +32,16 @@ import TableRow from "@mui/material/TableRow";
 
 import SearchIcon from "@mui/icons-material/Search";
 import Template from "../Template/TemplateScreen";
-import AddIcon from "@mui/icons-material/Add";
+import { Add, Info, Delete } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
-// import Icon from "../../assets/icon/edit";
-import GuruActions from "./guruActions";
-import { columns, rows } from "../../data/guruData";
+
+import {
+  useGetAllGuruQuery,
+  useDeleteGuruMutation,
+} from "../../slices/guruApiSlice";
+
+import { useEffect, useState } from "react";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -45,12 +54,22 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const Siswa = () => {
+const Guru = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -61,16 +80,27 @@ const Siswa = () => {
     setPage(0);
   };
 
-  const conditionalValueTable = (key, value) => {
-    if (key === "action") {
-      let val =
-        "<List><ListItemButton><ListItemIcon style='width: 100px;'><img src=\"../../assets/icon/edit.png\" alt=\"Edit Icon\"></ListItemIcon><ListItemText primary='Inbox'/></ListItemButton></List>";
-      return val;
-    } else {
-      return value;
-    }
-  };
-  // const colorMode = useContext(ColorModeContext);
+  const { data, isLoading } = useGetAllGuruQuery();
+  //const { Delete, isDeleteLoading } = useDeleteGuruMutation();
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (!isLoading && data) {
+          var fetchedRows = data.data;
+          setRows(fetchedRows);
+        } else {
+          console.log("Data is undefined");
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
+  }, [isLoading, data]);
+  console.log("rows:", rows);
   return (
     <Template>
       <Box component="div" width="100%" padding="40px" paddingRight="70px">
@@ -92,7 +122,11 @@ const Siswa = () => {
               </Grid>
               <Grid item>
                 <Stack direction="row">
-                  <Box backgroundColor={colors.primary[400]} borderRadius="3px" marginRight={2}>
+                  <Box
+                    backgroundColor={colors.primary[400]}
+                    borderRadius="3px"
+                    marginRight={2}
+                  >
                     <InputBase
                       sx={{ ml: 2, flex: 1 }}
                       placeholder="Enter Keyword"
@@ -107,9 +141,12 @@ const Siswa = () => {
                     to="/guru/create"
                     type="button"
                     sx={{ p: 1 }}
-                    style={{ background: colors.greenAccent[500], borderRadius: 10 }}
+                    style={{
+                      background: colors.greenAccent[500],
+                      borderRadius: 10,
+                    }}
                   >
-                    <AddIcon />
+                    <Add />
                   </IconButton>
                 </Stack>
               </Grid>
@@ -130,51 +167,82 @@ const Siswa = () => {
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow>
-                      {columns.map((column) => (
-                        <StyledTableCell
-                          key={column.id}
-                          align={column.align}
-                          style={{ minWidth: column.minWidth }}
-                        >
-                          {column.label}
-                        </StyledTableCell>
-                      ))}
+                      <StyledTableCell
+                        key="nama"
+                        align={"right"}
+                        style={{ minWidth: 170 }}
+                      >
+                        Nama
+                      </StyledTableCell>
+                      <StyledTableCell
+                        key="nuptk"
+                        align={"right"}
+                        style={{ minWidth: 80 }}
+                      >
+                        NUPTK
+                      </StyledTableCell>
+                      <StyledTableCell
+                        key="status_kepegawaian"
+                        align={"right"}
+                        style={{ minWidth: 80 }}
+                      >
+                        Status Kepegawaian
+                      </StyledTableCell>
+                      <StyledTableCell
+                        key="nipy"
+                        align={"right"}
+                        style={{ minWidth: 80 }}
+                      >
+                        NIPY
+                      </StyledTableCell>
+                      <StyledTableCell
+                        key="action"
+                        align={"right"}
+                        style={{ minWidth: 80 }}
+                      >
+                        Aksi
+                      </StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {rows
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((row) => {
-                        return (
-                          <TableRow
-                            hover
-                            role="checkbox"
-                            tabIndex={-1}
-                            key={row.code}
-                          >
-                            {columns.map((column) => {
-                              const value = row[column.id];
-                              console.log("Value:", value);
-
-                              return (
-                                <StyledTableCell
-                                  key={column.id}
-                                  align={column.align}
-                                >
-                                  {value === "action" ? (
-                                    <GuruActions/>
-                                  ) : (
-                                    value
-                                  )}
-                                </StyledTableCell>
-                              );
-                            })}
-                          </TableRow>
-                        );
-                      })}
+                    {rows.map((row) => (
+                      <TableRow
+                        key={row.name}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" align="right" scope="row">
+                          {row.nama}
+                        </TableCell>
+                        <TableCell align="right">{row.nuptk}</TableCell>
+                        <TableCell align="right">
+                          {row.status_kepegawaian}
+                        </TableCell>
+                        <TableCell align="right">{row.nipy}</TableCell>
+                        <TableCell align="right">
+                          <Tooltip title="Detail Guru">
+                            <IconButton
+                              component={Link}
+                              to={`/guru/${row.id}`}
+                              type="button"
+                              style={{ color: colors.blueAccent[500] }}
+                              // onClick={() => dispatch({ type: 'UPDATE_ROOM', payload: params.row })}
+                            >
+                              <Info />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip title="Delete">
+                            <IconButton
+                              style={{ color: colors.redAccent[500] }}
+                              onClick={handleClickOpen}
+                            >
+                              <Delete />
+                            </IconButton>
+                          </Tooltip>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                   </TableBody>
                 </Table>
               </TableContainer>
@@ -190,9 +258,28 @@ const Siswa = () => {
             </Paper>
           </CardContent>
         </Card>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Yakin Ingin Menghapus?"}
+          </DialogTitle>
+          <DialogActions>
+            <Button
+              onClick={handleClose}
+              autoFocus 
+              // onClick={() => deleteGuru(params.row, currentUser, dispatch)}
+            >
+              Ya
+            </Button>
+            <Button onClick={handleClose}>Tidak</Button>
+          </DialogActions>
+        </Dialog>
       </Box>
     </Template>
   );
 };
 
-export default Siswa;
+export default Guru;

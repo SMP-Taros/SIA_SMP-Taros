@@ -16,6 +16,9 @@ import Template from "../Template/TemplateScreen";
 import Header from "../../components/Header";
 import CustomTabPanel from "../../components/Details/CustomTabPanel";
 import DetailSiswa from "../../components/Details/TabsSiswa/siswaDetail";
+import KesehatanSiswa from "../../components/Details/TabsSiswa/kesehatanSiswa";
+import PencapaianSiswa from "../../components/Details/TabsSiswa/pencapaianSiswa";
+import OrangtuaSiswa from "../../components/Details/TabsSiswa/orangtuaSiswa";
 
 import { useGetDetailQuery } from "../../slices/siswaApiSlice";
 
@@ -65,15 +68,23 @@ const siswaDetail = () => {
                 aria-label="basic tabs example"
               >
                 <Tab label="Informasi" {...a11yProps(0)} />
-                <Tab label="Kehadiran" {...a11yProps(1)} />
-                <Tab label="Mata Pelajaran" {...a11yProps(2)} />
+                <Tab label="Kesehatan" {...a11yProps(1)} />
+                <Tab label="Pencapaian" {...a11yProps(2)} />
+                <Tab label="Orang Tua" {...a11yProps(3)} />
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
               <DetailSiswa id={id} />
             </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}></CustomTabPanel>
-            <CustomTabPanel value={value} index={2}></CustomTabPanel>
+            <CustomTabPanel value={value} index={1}>
+              <KesehatanSiswa id={id} />
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={2}>
+              <PencapaianSiswa id={id} />
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={3}>
+              <OrangtuaSiswa id={id} />
+            </CustomTabPanel>
           </CardContent>
         </Card>
       </Box>
