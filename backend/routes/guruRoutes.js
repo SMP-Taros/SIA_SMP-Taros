@@ -20,6 +20,6 @@ router.get("/:id", getdetailGuru);
 
 router.put("/:id", updateGuru);
 
-router.delete("/:id", protect, deleteGuru);
+router.delete("/:id", deleteGuru);
 
 export default router;

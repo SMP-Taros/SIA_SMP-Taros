@@ -8,6 +8,10 @@ import {
   useTheme,
   Stack,
   Tooltip,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
 } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
@@ -32,7 +36,10 @@ import { Add, Info, Delete } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 
-import { useGetAllGuruQuery } from "../../slices/guruApiSlice";
+import {
+  useGetAllGuruQuery,
+  useDeleteGuruMutation,
+} from "../../slices/guruApiSlice";
 
 import { useEffect, useState } from "react";
 
@@ -54,6 +61,16 @@ const Guru = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -64,6 +81,7 @@ const Guru = () => {
   };
 
   const { data, isLoading } = useGetAllGuruQuery();
+  //const { Delete, isDeleteLoading } = useDeleteGuruMutation();
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -198,7 +216,9 @@ const Guru = () => {
                           {row.nama}
                         </TableCell>
                         <TableCell align="right">{row.nuptk}</TableCell>
-                        <TableCell align="right">{row.status_kepegawaian}</TableCell>
+                        <TableCell align="right">
+                          {row.status_kepegawaian}
+                        </TableCell>
                         <TableCell align="right">{row.nipy}</TableCell>
                         <TableCell align="right">
                           <Tooltip title="Detail Guru">
@@ -215,7 +235,7 @@ const Guru = () => {
                           <Tooltip title="Delete">
                             <IconButton
                               style={{ color: colors.redAccent[500] }}
-                              // onClick={() => deleteGuru(params.row, currentUser, dispatch)}
+                              onClick={handleClickOpen}
                             >
                               <Delete />
                             </IconButton>
@@ -238,6 +258,25 @@ const Guru = () => {
             </Paper>
           </CardContent>
         </Card>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Yakin Ingin Menghapus?"}
+          </DialogTitle>
+          <DialogActions>
+            <Button
+              onClick={handleClose}
+              autoFocus 
+              // onClick={() => deleteGuru(params.row, currentUser, dispatch)}
+            >
+              Ya
+            </Button>
+            <Button onClick={handleClose}>Tidak</Button>
+          </DialogActions>
+        </Dialog>
       </Box>
     </Template>
   );

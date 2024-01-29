@@ -28,7 +28,14 @@ export const guruApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    deleteGuru: builder.mutation({
+      query: (data) => ({
+        url: `${GURU_URL}/${data.id}`,
+        method: "DELETE",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useGetAllGuruQuery, useGetDetailGuruQuery, useUpdateDetailGuruMutation } = guruApiSlice;
+export const { useGetAllGuruQuery, useGetDetailGuruQuery, useUpdateDetailGuruMutation, useDeleteGuruMutation } = guruApiSlice;

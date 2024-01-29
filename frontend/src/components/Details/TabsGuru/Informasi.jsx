@@ -470,11 +470,11 @@ const Informasi = (props) => {
                 variant="contained"
                 startIcon={<EditIcon />}
                 style={{
-                  background: colors.greenAccent[800],
+                  background: colors.greenAccent[800],  width: "100px",
                 }}
                 type="submit"
               >
-                Edit Profil
+                Edit
               </Button>
             </Box>
           </form>
