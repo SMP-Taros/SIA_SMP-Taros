@@ -4,33 +4,76 @@ import {
   CardContent,
   Grid,
   Typography,
-  MenuItem,
   Button,
   useTheme,
+  Divider,
 } from "@mui/material";
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 
 import { tokens } from "../../Theme";
 import Template from "../Template/TemplateScreen";
-import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 
-const akses = [
-  {
-    value: "admin",
-    label: "Admin",
-  },
-  {
-    value: "guru",
-    label: "Guru",
-  },
-];
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import { useUpdateUserMutation } from "../../slices/userApiSlice";
+import { setCredentials } from '../../slices/authSlice';
 
 const Profile = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const [email, setEmail] = useState('');
+  const [nama_lengkap, setNama_lengkap] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const dispatch = useDispatch();
+
+  const { userInfo } = useSelector((state) => state.auth);
+  const [updateProfile, { isLoading }] = useUpdateUserMutation();
+
+  useEffect(() => {
+    setNama_lengkap(userInfo.nama_lengkap || '');
+    setEmail(userInfo.email || '');
+  }, [userInfo.email, userInfo.nama_lengkap]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'nama_lengkap') {
+      setNama_lengkap(value);
+    } else if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    } else if (name === 'confirmPassword') {
+      setConfirmPassword(value);
+    }
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error('Password tidak sama');
+    } else {
+      try {
+        const res = await updateProfile({
+          _id: userInfo._id,
+          nama_lengkap,
+          email,
+          password,
+        }).unwrap();
+        console.log(res);
+        dispatch(setCredentials(res));
+        toast.success('Profil berhasil diupdate');
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
+  };
+  
   return (
     <Template>
       <Box component="div" width="100%" padding="40px" paddingRight="70px">
@@ -44,96 +87,11 @@ const Profile = () => {
             </Typography>
           </Grid>
         </Grid>
-        <Card>
-          <CardContent style={{ background: colors.grey[700] }}>
-            <Grid container justifyContent="space-between">
-              <Grid item>
-                <Typography variant="h3" marginLeft={2}>Data User</Typography>
-              </Grid>
-              <Grid item>
-                <Button
-                  component={Link}
-                  to="/guru/edit"
-                  variant="contained"
-                  style={{
-                    background: colors.redAccent[600],
-                    marginRight: "20px",
-                  }}
-                >
-                  Reset
-                </Button>
-                <Button
-                  component={Link}
-                  to="/guru/edit"
-                  variant="contained"
-                  style={{ background: colors.greenAccent[500] }}
-                >
-                  Simpan
-                </Button>
-              </Grid>
-            </Grid>
-          </CardContent>
-          <CardContent>
-            <Grid container spacing={4}>
-              <Grid item xs={3} marginLeft={6}>
-                <Typography paddingTop={3}>
-                  <strong>Username</strong>
-                </Typography>
-                <Typography paddingTop={3} marginTop={2}>
-                  <strong>Nama</strong>
-                </Typography>
-                <Typography paddingTop={3} marginTop={2}>
-                  <strong>Alamat</strong>
-                </Typography>
-                <Typography paddingTop={3} marginTop={2}>
-                  <strong>Hak Akses</strong>
-                </Typography>
-              </Grid>
-              <Grid item xs={6} marginLeft={-15}>
-                <TextField
-                  required
-                  id="outlined-basic"
-                  label="Username"
-                  variant="outlined"
-                  size="small"
-                  margin="normal"
-                  fullWidth
-                />
-                <TextField
-                  required
-                  id="outlined-basic"
-                  label="Nama"
-                  variant="outlined"
-                  size="small"
-                  margin="normal"
-                  fullWidth
-                />
-                <TextField
-                  required
-                  id="outlined-basic"
-                  label="Alamat"
-                  variant="outlined"
-                  size="small"
-                  margin="normal"
-                  fullWidth
-                />
-                <TextField
-                  required
-                  id="outlined-select-currency"
-                  select
-                  label="Pilih"
-                  size="small"
-                  margin="normal"
-                  fullWidth
-                >
-                  {akses.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </Grid>
-              <Grid item xs={3} marginLeft={5}>
+
+        <Grid container spacing={3}>
+          <Grid item xs={4}>
+            <Card>
+              <CardContent>
                 <Box display="flex" justifyContent="center" alignItems="center">
                   <img
                     alt="profile-user"
@@ -144,19 +102,164 @@ const Profile = () => {
                   />
                 </Box>
                 <Box display="flex" justifyContent="center" alignItems="center">
+                <Typography
+                    fontWeight="bold"
+                    fontSize="18px"
+                  >
+                    {userInfo.username || ''}
+                  </Typography>
+                </Box>
+                <Box display="flex" justifyContent="center" alignItems="center">
                   <Button
-                    component={Link}
-                    to="/guru/edit"
                     variant="contained"
                     style={{ background: colors.blueAccent[600] }}
                   >
-                    Upload
+                    Ubah Foto
                   </Button>
                 </Box>
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={8}>
+            <Card>
+              <CardContent>
+                <form onSubmit={submitHandler}>
+                  <Typography
+                    variant="h4"
+                    fontWeight="bold"
+                    fontSize="20px"
+                    margin="12px"
+                  >
+                    Informasi Profil User
+                  </Typography>
+
+                  <Divider orientation="horizontal" />
+                  <Grid container spacing={3}>
+                    <Grid item xs={3} marginLeft={6}>
+                      <Typography paddingTop={3}>Username</Typography>
+                      <Typography paddingTop={3} marginTop={2}>
+                        Nama Lengkap
+                      </Typography>
+                      <Typography paddingTop={3} marginTop={2}>
+                        Email
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                    <TextField
+                        required
+                        id="username"
+                        name="username"
+                        type="text"
+                        variant="outlined"
+                        size="small"
+                        margin="normal"
+                        fullWidth
+                        value={userInfo.username || ''}
+                        disabled
+                      />
+                      <TextField
+                        required
+                        id="outlined-basic"
+                        label="Nama Lengkap"
+                        name="nama_lengkap"
+                        type="text"
+                        variant="outlined"
+                        size="small"
+                        margin="normal"
+                        fullWidth
+                        value={nama_lengkap}
+                        onChange={handleInputChange}
+                      />
+                      <TextField
+                        required
+                        id="outlined-basic"
+                        label="Email"
+                        name="email"
+                        type="text"
+                        variant="outlined"
+                        size="small"
+                        margin="normal"
+                        fullWidth
+                        value={email}
+                        onChange={handleInputChange}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Box display={"flex"} alignItems="center">
+                    <Typography
+                      variant="h4"
+                      fontWeight="bold"
+                      fontSize="18px"
+                      margin="12px"
+                    >
+                      Password
+                    </Typography>
+                    <Typography
+                      sx={{ fontStyle: "italic" }}
+                      fontSize="12px"
+                      style={{ color: colors.redAccent[500] }}
+                    >
+                      (Lewati jika tidak ingin mengubah password/kata sandi saat
+                      ini)
+                    </Typography>
+                  </Box>
+                  <Grid container spacing={3}>
+                    <Grid item xs={3} marginLeft={6}>
+                      <Typography paddingTop={3}>Ubah Password</Typography>
+                      <Typography paddingTop={3} marginTop={2}>
+                        Konfirmasi Password
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <TextField
+                        id="outlined-basic"
+                        label="Ubah Password"
+                        name="password"
+                        type="text"
+                        variant="outlined"
+                        size="small"
+                        margin="normal"
+                        fullWidth
+                        value={password}
+                        onChange={handleInputChange}
+                      />
+                      <TextField
+                        id="outlined-basic"
+                        label="Konfirmasi Password"
+                        name="confirmPassword"
+                        type="text"
+                        variant="outlined"
+                        size="small"
+                        margin="normal"
+                        fullWidth
+                        value={confirmPassword}
+                        onChange={handleInputChange}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Box display="flex" justifyContent="end">
+                    <Button
+                      variant="contained"
+                      style={{ background: colors.grey[500], margin: "12px" }}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      variant="contained"
+                      style={{
+                        background: colors.blueAccent[600],
+                        margin: "12px",
+                      }}
+                      type="submit"
+                    >
+                      Update
+                    </Button>
+                  </Box>
+                </form>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
       </Box>
     </Template>
   );

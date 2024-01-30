@@ -11,6 +11,7 @@ import {
   logoutUser,
   registerUser,
   getuserProfile,
+  updateUserProfile
 } from "../controller/userController.js";
 
 // import authMiddleware from "../middleware/auth.js";
@@ -33,7 +34,7 @@ router.post("/", loginUser);
 router.post("/register", registerUser);
 router.post("/logout", logoutUser);
 
-router.route("/profile").get(protect, getuserProfile);
+router.route("/profile").get(getuserProfile).put(updateUserProfile);
 // router.patch("/current", authMiddleware, async (req, res) => {
 //   try {
 //     const { username, nama_lengkap, email, niptk, nomor_telepon, password } =
