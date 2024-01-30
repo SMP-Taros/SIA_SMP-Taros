@@ -206,6 +206,8 @@ const calonSiswa = () => {
                           <IconButton
                             type="button"
                             style={{ color: colors.blueAccent[500] }}
+                            component={Link}
+                            to={`/calon_siswa/${row.id}`}
                             // onClick={() => dispatch({ type: 'UPDATE_ROOM', payload: params.row })}
                           >
                             <Info />

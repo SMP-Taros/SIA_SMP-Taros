@@ -64,6 +64,26 @@ const calonSiswaSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    membaca_alquran: {
+      type: String,
+      required: true,
+    },
+    jumlah_hafalan: {
+      type: String,
+      required: true,
+    },
+    hobby: {
+      type: String,
+      required: true,
+    },
+    cita_cita: {
+      type: String,
+      required: true,
+    },
+    prestasi: {
+      type: String,
+      required: true,
+    },
     golongan_darah: {
       type: String,
       required: true,

@@ -21,6 +21,7 @@ import PrivateRoute from "./components/privateRoute.jsx";
 import SiswaDetail from "./scanes/Siswa/siswaDetail.jsx";
 import Profile from "./scanes/Profile/Profile.jsx";
 import CalonSiswa from "./scanes/CalonSiswa/calonSiswaScreen.jsx";
+import CalonSiswaDetail from "./scanes/CalonSiswa/calonSiswaDetail.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
         <Route path="/siswa/:id" element={<SiswaDetail />} />
 
         <Route path="/calon_siswa" element={<CalonSiswa />} />
+        <Route path="/calon_siswa/:id" element={<CalonSiswaDetail />} />
 
         <Route path="/guru" element={<Guru />} />
         <Route path="/guru/create" element={<GuruCreate />} />

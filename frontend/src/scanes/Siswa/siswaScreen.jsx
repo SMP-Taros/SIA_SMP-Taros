@@ -199,7 +199,7 @@ const Siswa = () => {
                         <TableCell align="right">
                           <IconButton
                             component={Link}
-                            to={`/siswa/${row.id}`}
+                            to={`/siswa/${row.nisn}`}
                             type="button"
                             style={{ color: colors.blueAccent[500] }}
                             // onClick={() => dispatch({ type: 'UPDATE_ROOM', payload: params.row })}

@@ -76,7 +76,7 @@ const updatePencapaianSiswa = asyncHandler(async (req, res) => {
       });
     }
 
-    return res.status(201).json({ 
+    return res.status(201).json({
       message: "data pencapaian siswa berhasil diupdate",
     });
   } catch (error) {
