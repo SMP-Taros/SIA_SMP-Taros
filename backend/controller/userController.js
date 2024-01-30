@@ -72,6 +72,7 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user._id,
       username: user.username,
       email: user.email,
+      nama_lengkap: user.nama_lengkap,
     });
   } else {
     res.status(401);

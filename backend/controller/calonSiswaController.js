@@ -146,8 +146,10 @@ const createCalonSiswa = asyncHandler(async (req, res) => {
 });
 const confirmCalonSiswa = asyncHandler(async (req, res) => {
   try {
+    const { id } = req.body;
+    const calonSiswa = await CalonSiswa.findById(id);
+    console.log(req.body);
     let {
-      id,
       nama,
       jenis_kelamin,
       nisn,
@@ -193,7 +195,7 @@ const confirmCalonSiswa = asyncHandler(async (req, res) => {
       keberadaan_ibu,
       email,
       no_hp,
-    } = req.body;
+    } = calonSiswa;
 
     if (
       !id ||
@@ -220,13 +222,11 @@ const confirmCalonSiswa = asyncHandler(async (req, res) => {
       !tahun_lahir_ibu ||
       !penghasilan_perbulan_ibu
     ) {
-      // console.log(request.body.nama)
       return res.status(400).send({
         message: "Send all required fields",
       });
     }
     const newSiswa = {
-      id: id,
       nama: nama,
       jenis_kelamin: jenis_kelamin,
       nisn: nisn,
@@ -245,7 +245,7 @@ const confirmCalonSiswa = asyncHandler(async (req, res) => {
     };
 
     const newPencapaianSiswa = {
-      siswa_id: id,
+      siswa_id: nisn,
       membaca_alquran: membaca_alquran,
       jumlah_hafalan: jumlah_hafalan,
       hobby: hobby,
@@ -253,7 +253,7 @@ const confirmCalonSiswa = asyncHandler(async (req, res) => {
       prestasi: prestasi,
     };
     const newKesehatanSiswa = {
-      siswa_id: id,
+      siswa_id: nisn,
       golongan_darah: golongan_darah,
       penyakit_pernah_diderita: penyakit_pernah_diderita,
       kelainan_jasmani: kelainan_jasmani,
@@ -262,7 +262,7 @@ const confirmCalonSiswa = asyncHandler(async (req, res) => {
     };
 
     const newOrangtuaSiswa = {
-      siswa_id: id,
+      siswa_id: nisn,
       nama_ayah: nama_ayah,
       nik_ayah: nik_ayah,
       tahun_lahir_ayah: tahun_lahir_ayah,

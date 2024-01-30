@@ -8,9 +8,14 @@ import {
   Tab,
   Typography,
   useTheme,
+  Button,
+  Modal,
+  Backdrop,
+  Fade,
 } from "@mui/material";
 import { tokens } from "../../Theme";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Template from "../Template/TemplateScreen";
 import Header from "../../components/Header";
@@ -20,7 +25,7 @@ import KesehatanSiswa from "../../components/Details/TabsSiswa/kesehatanSiswa";
 import PencapaianSiswa from "../../components/Details/TabsSiswa/pencapaianSiswa";
 import OrangtuaSiswa from "../../components/Details/TabsSiswa/orangtuaSiswa";
 
-import { useGetDetailQuery } from "../../slices/siswaApiSlice";
+import { useDeleteSiswaMutation } from "../../slices/siswaApiSlice";
 
 import { useParams } from "react-router-dom";
 
@@ -33,6 +38,8 @@ const siswaDetail = () => {
   const colors = tokens(theme.palette.mode);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [value, setValue] = useState(0);
+  const [Delete, { isLoadingDelete }] = useDeleteSiswaMutation();
+  const navigate = useNavigate();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -44,7 +51,33 @@ const siswaDetail = () => {
     };
   }
 
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const { id } = useParams();
+
+  const deleteHandle = (e) => {
+    e.preventDefault();
+    console.log("submit");
+    try {
+      const del = Delete({ id: id }).unwrap();
+      navigate("/siswa");
+      window.location.reload();
+    } catch (e) {}
+  };
 
   return (
     <Template>
@@ -71,6 +104,65 @@ const siswaDetail = () => {
                 <Tab label="Kesehatan" {...a11yProps(1)} />
                 <Tab label="Pencapaian" {...a11yProps(2)} />
                 <Tab label="Orang Tua" {...a11yProps(3)} />
+                <Button
+                  variant="contained"
+                  style={{
+                    marginLeft: "1100px",
+                    height: "35px",
+                    background: colors.redAccent[400],
+                  }}
+                  onClick={handleOpen}
+                >
+                  Delete
+                </Button>
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  open={open}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  slots={{ backdrop: Backdrop }}
+                  slotProps={{
+                    backdrop: {
+                      timeout: 500,
+                    },
+                  }}
+                >
+                  <Fade in={open}>
+                    <Box sx={style}>
+                      <Typography
+                        id="transition-modal-title"
+                        variant="h6"
+                        component="h2"
+                      >
+                        Apakah anda yakin?
+                      </Typography>
+                      <Box marginTop="20px">
+                        <Button
+                          variant="contained"
+                          style={{
+                            height: "30px",
+                            background: colors.redAccent[400],
+                          }}
+                          onClick={deleteHandle}
+                        >
+                          Ya
+                        </Button>
+                        <Button
+                          variant="contained"
+                          style={{
+                            height: "30px",
+                            background: colors.greenAccent[400],
+                            marginLeft: "20px",
+                          }}
+                          onClick={handleClose}
+                        >
+                          Tidak
+                        </Button>
+                      </Box>
+                    </Box>
+                  </Fade>
+                </Modal>
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>

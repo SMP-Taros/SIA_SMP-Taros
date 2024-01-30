@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const kesehatanSiswaSchema = mongoose.Schema(
   {
     siswa_id: {
-      type: mongoose.Types.ObjectId,
+      type: String,
       required: true,
       ref: "Siswa",
     },

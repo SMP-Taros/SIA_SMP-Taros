@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const orangTuaSiswaSchema = mongoose.Schema(
   {
     siswa_id: {
-      type: mongoose.Types.ObjectId,
+      type: String,
       required: true,
       ref: "Siswa",
     },
@@ -82,6 +82,6 @@ const orangTuaSiswaSchema = mongoose.Schema(
   }
 );
 
-const orangTuaSiswa = mongoose.model("orangTuaSiswa", orangTuaSiswaSchema);
+const OrangTuaSiswa = mongoose.model("orangTuaSiswa", orangTuaSiswaSchema);
 
-export default orangTuaSiswa;
+export default OrangTuaSiswa;

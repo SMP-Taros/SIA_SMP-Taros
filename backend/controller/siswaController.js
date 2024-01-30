@@ -1,3 +1,6 @@
+import KesehatanSiswa from "../models/kesehatanSiswaModel.js";
+import OrangTuaSiswa from "../models/orangTuaSiswaModel.js";
+import PencapaianSiswa from "../models/pencapaianSiswaModel.js";
 import Siswa from "../models/siswaModel.js";
 import asyncHandler from "express-async-handler";
 
@@ -99,7 +102,7 @@ const getSiswa = asyncHandler(async (req, res) => {
 const getdetailSiswa = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const siswa = await Siswa.findById(id);
+    const siswa = await Siswa.findOne({ nisn: id });
 
     if (!siswa) {
       return res.status(401).send("siswa tidak ditemukan");
@@ -109,7 +112,8 @@ const getdetailSiswa = asyncHandler(async (req, res) => {
       data: siswa,
     });
   } catch (error) {
-    console.log(error.massage);
+    console.log(req.params);
+    // console.log(error.massage);
     res.status(500).send({ message: error.message });
   }
 });
@@ -160,7 +164,10 @@ const updateSiswa = asyncHandler(async (req, res) => {
 const deleteSiswa = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const siswa = await Siswa.findByIdAndDelete(id, req.body);
+    const siswa = await Siswa.findOneAndDelete(id);
+    const kesehatanSiswa = await KesehatanSiswa.findOneAndDelete(id);
+    const pencapaianSiswa = await PencapaianSiswa.findOneAndDelete(id);
+    const orangtuaSiswa = await OrangTuaSiswa.findOneAndDelete(id);
 
     if (!siswa) {
       return res.status(401).json({ message: "Siswa not found" });
