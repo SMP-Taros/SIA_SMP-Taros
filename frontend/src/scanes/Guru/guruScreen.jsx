@@ -100,7 +100,7 @@ const Guru = () => {
 
     fetchData();
   }, [isLoading, data]);
-  console.log("rows:", rows);
+
   return (
     <Template>
       <Box component="div" width="100%" padding="40px" paddingRight="70px">
