@@ -176,6 +176,930 @@ const calonSiswaDetail = () => {
                               />
                             </TableCell>
                           </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Tempat Lahir
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.tempat_lahir
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Tanggal Lahir
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.tanggal_lahir
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              NIK
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={!detail ? "Tidak ada data" : detail.nik}
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Agama
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={
+                                  !detail ? "Tidak ada data" : detail.agama
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Status
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={
+                                  !detail ? "Tidak ada data" : detail.status
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Anak Ke
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={
+                                  !detail ? "Tidak ada data" : detail.anak_ke
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Jumlah Saudara Kandung
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.jumlah_saudara_kandung
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Status Anak
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.status_anak
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Alamat
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={
+                                  !detail ? "Tidak ada data" : detail.alamat
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Jarak Rumah sekolah
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.jarak_rumah_sekolah
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Asal Sekolah
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.asal_sekolah
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Alamat Asal Sekolah
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.alamat_asal_sekolah
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Membaca alquran
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.membaca_alquran
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Jumlah Hafalan
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.jumlah_hafalan
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Hobby
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                value={
+                                  !detail ? "Tidak ada data" : detail.hobby
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                name="nama"
+                                type="text"
+                                readOnly
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Cita - Cita
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail ? "Tidak ada data" : detail.cita_cita
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Prestasi
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail ? "Tidak ada data" : detail.prestasi
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Golongan Darah
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.golongan_darah
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Penyakit yang pernah diderita
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.penyakit_pernah_diderita
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Kelainan Jasmani
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.kelainan_jasmani
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Berat Badan
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.berat_badan
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Tinggi Badan
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.tinggi_badan
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Nama Ayah
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail ? "Tidak ada data" : detail.nama_ayah
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              NIK Ayah
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail ? "Tidak ada data" : detail.nik_ayah
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Tahun Lahir Ayah
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.tahun_lahir_ayah
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Pendidikan Terakhir Ayah
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.pendidikan_terakhir_ayah
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Pekerjaan Ayah
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.pekerjaan_ayah
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Nama Instansi Kerja Ayah
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.nama_instansi_kerja_ayah
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Jabatan Ayah
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.jabatan_ayah
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Penghasilan Perbulan Ayah
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.penghasilan_perbulan_ayah
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Keberdaan Ayah
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.keberadaan_ayah
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Nama Ibu
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail ? "Tidak ada data" : detail.nama_ibu
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              NIK Ibu
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail ? "Tidak ada data" : detail.nik_ibu
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Tahun Lahir Ibu
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.tahun_lahir_ibu
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Pendidikan Terakhir Ibu
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.pendidikan_terakhir_ibu
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Pekerjaan Ibu
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.pekerjaan_ibu
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Nama Instansi Kerja Ibu
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.nama_instansi_kerja_ibu
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Jabatan Ibu
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.jabatan_ibu
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Penghasilan Perbulan Ibu
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.penghasilan_perbulan_ibu
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Keberdaan Ibu
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.keberadaan_ibu
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Email
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail ? "Tidak ada data" : detail.email
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              No Handphone
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail ? "Tidak ada data" : detail.no_hp
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
                         </TableBody>
                       </Table>
                     </TableContainer>

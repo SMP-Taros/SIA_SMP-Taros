@@ -148,7 +148,7 @@ const calonSiswaSchema = mongoose.Schema(
       type: Date,
       required: true,
     },
-    pendidikan_teakhir_ibu: {
+    pendidikan_terakhir_ibu: {
       type: String,
     },
     pekerjaan_ibu: {
