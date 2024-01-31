@@ -38,7 +38,7 @@ app.use("/api/siswa", siswaRoute);
 app.use("/api/calon_siswa", calonSiswaRoute);
 app.use("/api/siswa/kesehatan", kesehatanSiswaRoute);
 app.use("/api/siswa/pencapaian", pencapaianSiswaRoute);
-app.use("/api/siswa/orang_tua", orangTuaSiswaRoute);
+app.use("/api/siswa/orangtua", orangTuaSiswaRoute);
 
 app.use("/api/guru", guruRoute);
 app.use("/api/users", userRoute);

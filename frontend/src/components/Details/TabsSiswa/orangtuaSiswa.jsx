@@ -15,7 +15,10 @@ import { tokens } from "../../../Theme";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { useState, useEffect } from "react";
-import { useGetOrangtuaSiswaQuery } from "../../../slices/siswaApiSlice";
+import {
+  useGetOrangtuaSiswaQuery,
+  useUpdateOrangtuaSiswaMutation,
+} from "../../../slices/siswaApiSlice";
 
 const OrangtuaSiswa = (props) => {
   const theme = useTheme();
@@ -46,10 +49,38 @@ const OrangtuaSiswa = (props) => {
 
     fetchData();
   }, [isLoading, data]);
+
+  const [update, { isUpdateLoading }] = useUpdateOrangtuaSiswaMutation();
+  const [formData, setFormData] = useState();
+  var token = props.id;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const updateHandler = (e) => {
+    e.preventDefault();
+    console.log("submit");
+
+    // console.log(res);
+    try {
+      const res = update({
+        id: token,
+        data: formData,
+      }).unwrap();
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <Box component="div">
       <Grid item xs={12}>
-        <form>
+        <form onSubmit={updateHandler}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table style={{ maxHeight: "693px" }}>
               <TableBody>
@@ -68,6 +99,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="nama_ayah"
                     />
                   </TableCell>
                 </TableRow>
@@ -84,6 +117,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="nik_ayah"
                     />
                   </TableCell>
                 </TableRow>
@@ -104,6 +139,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="tahun_lahir_ayah"
                     />
                   </TableCell>
                 </TableRow>
@@ -126,6 +163,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="penididkan_terakhir_ayah"
                     />
                   </TableCell>
                 </TableRow>
@@ -146,6 +185,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="pekerjaan_ayah"
                     />
                   </TableCell>
                 </TableRow>
@@ -168,6 +209,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      name="nama_instansi_kerja_ayah"
+                      onChange={handleInputChange}
                     />
                   </TableCell>
                 </TableRow>
@@ -188,6 +231,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="jabatan_ayah"
                     />
                   </TableCell>
                 </TableRow>
@@ -210,6 +255,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="penghasilan_perbulan_ayah"
                     />
                   </TableCell>
                 </TableRow>
@@ -230,6 +277,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="keberadaan_ayah"
                     />
                   </TableCell>
                 </TableRow>
@@ -246,6 +295,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="nama_ibu"
                     />
                   </TableCell>
                 </TableRow>
@@ -262,6 +313,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="nik_ibu"
                     />
                   </TableCell>
                 </TableRow>
@@ -282,6 +335,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="tahun_lahir_ibu"
                     />
                   </TableCell>
                 </TableRow>
@@ -304,6 +359,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="pendidikan_terakhir_ibu"
                     />
                   </TableCell>
                 </TableRow>
@@ -324,6 +381,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="pekerjaan_ibu"
                     />
                   </TableCell>
                 </TableRow>
@@ -345,7 +404,9 @@ const OrangtuaSiswa = (props) => {
                         fontSize: "16px",
                         marginLeft: "20px",
                       }}
+                      name="nama_instansi_kerja_ibu"
                       type="text"
+                      onChange={handleInputChange}
                     />
                   </TableCell>
                 </TableRow>
@@ -366,6 +427,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      name="jabatan_ibu"
+                      onChange={handleInputChange}
                     />
                   </TableCell>
                 </TableRow>
@@ -388,6 +451,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="penghasilan_perbulan_ibu"
                     />
                   </TableCell>
                 </TableRow>
@@ -408,6 +473,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="keberadaan_ibu"
                     />
                   </TableCell>
                 </TableRow>
@@ -424,6 +491,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="email"
                     />
                   </TableCell>
                 </TableRow>
@@ -442,6 +511,8 @@ const OrangtuaSiswa = (props) => {
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
+                      name="no_hp"
                     />
                   </TableCell>
                 </TableRow>
@@ -462,6 +533,8 @@ const OrangtuaSiswa = (props) => {
                 background: colors.greenAccent[800],
                 width: "100px",
               }}
+              type="submit"
+              disabled={isUpdateLoading}
             >
               Edit
             </Button>

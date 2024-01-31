@@ -15,12 +15,16 @@ import { tokens } from "../../../Theme";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { useState, useEffect } from "react";
-import { useGetPencapaianSiswaQuery } from "../../../slices/siswaApiSlice";
+import {
+  useGetPencapaianSiswaQuery,
+  useUpdatePencapaianSiswaMutation,
+} from "../../../slices/siswaApiSlice";
 
 const PencapaianSiswa = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { data, isLoading } = useGetPencapaianSiswaQuery(props.id);
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [detail, setDetail] = useState();
 
@@ -46,10 +50,38 @@ const PencapaianSiswa = (props) => {
 
     fetchData();
   }, [isLoading, data]);
+
+  const [update, { isUpdateLoading }] = useUpdatePencapaianSiswaMutation();
+  const [formData, setFormData] = useState();
+  var token = props.id;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const updateHandler = (e) => {
+    e.preventDefault();
+    console.log("submit");
+
+    // console.log(res);
+    try {
+      const res = update({
+        id: token,
+        data: formData,
+      }).unwrap();
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <Box component="div">
       <Grid item xs={12}>
-        <form>
+        <form onSubmit={updateHandler}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table style={{ maxHeight: "693px" }}>
               <TableBody>
@@ -64,12 +96,14 @@ const PencapaianSiswa = (props) => {
                       placeholder={
                         !detail ? "Tidak ada data" : detail.membaca_alquran
                       }
+                      name="membaca_alquran"
                       style={{
                         border: "none",
                         fontSize: "16px",
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
                     />
                   </TableCell>
                 </TableRow>
@@ -89,7 +123,9 @@ const PencapaianSiswa = (props) => {
                         fontSize: "16px",
                         marginLeft: "20px",
                       }}
+                      name="jumlah_hafalan"
                       type="text"
+                      onChange={handleInputChange}
                     />
                   </TableCell>
                 </TableRow>
@@ -105,7 +141,9 @@ const PencapaianSiswa = (props) => {
                         fontSize: "16px",
                         marginLeft: "20px",
                       }}
+                      name="hobby"
                       type="text"
+                      onChange={handleInputChange}
                     />
                   </TableCell>
                 </TableRow>
@@ -120,12 +158,14 @@ const PencapaianSiswa = (props) => {
                       placeholder={
                         !detail ? "Tidak ada data" : detail.cita_cita
                       }
+                      name="cita_cita"
                       style={{
                         border: "none",
                         fontSize: "16px",
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
                     />
                   </TableCell>
                 </TableRow>
@@ -141,7 +181,9 @@ const PencapaianSiswa = (props) => {
                         fontSize: "16px",
                         marginLeft: "20px",
                       }}
+                      name="prestasi"
                       type="text"
+                      onChange={handleInputChange}
                     />
                   </TableCell>
                 </TableRow>
@@ -162,6 +204,8 @@ const PencapaianSiswa = (props) => {
                 background: colors.greenAccent[800],
                 width: "100px",
               }}
+              type="submit"
+              disabled={isUpdateLoading}
             >
               Edit
             </Button>

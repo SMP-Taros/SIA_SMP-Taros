@@ -144,7 +144,7 @@ const updateSiswa = asyncHandler(async (req, res) => {
     }
 
     const { id } = req.params;
-    const siswa = await Siswa.findByIdAndUpdate(id, req.body);
+    const siswa = await Siswa.findOneAndUpdate({ nisn: id }, req.body);
 
     if (!siswa) {
       return res.status(400).json({ message: "Siswa not found" });

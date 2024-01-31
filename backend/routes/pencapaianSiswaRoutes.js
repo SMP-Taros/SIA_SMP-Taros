@@ -13,6 +13,6 @@ router.post("/", protect, createPencapaianSiswa);
 //get siswa
 router.get("/:id", getPencapaianSiswa);
 
-router.put("/:id", protect, updatePencapaianSiswa);
+router.put("/:id", updatePencapaianSiswa);
 
 export default router;

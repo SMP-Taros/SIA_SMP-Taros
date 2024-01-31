@@ -66,6 +66,8 @@ const updatePencapaianSiswa = asyncHandler(async (req, res) => {
       });
     }
 
+    console.log(id);
+
     const PencapaianSiswa = await pencapaianSiswa.findOneAndUpdate(
       { siswa_id: id },
       req.body

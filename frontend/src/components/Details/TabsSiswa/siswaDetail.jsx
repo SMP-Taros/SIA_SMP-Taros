@@ -64,7 +64,7 @@ const DetailSiswa = (props) => {
     });
   };
 
-  const updateHadler = (e) => {
+  const updateHandler = (e) => {
     e.preventDefault();
     console.log("submit");
 
@@ -91,7 +91,7 @@ const DetailSiswa = (props) => {
           />
         </Grid>
         <Grid item xs={7}>
-          <form onSubmit={updateHadler}>
+          <form onSubmit={updateHandler}>
             <TableContainer sx={{ maxHeight: 440 }}>
               <Table style={{ maxHeight: "693px" }}>
                 <TableBody>
@@ -403,6 +403,7 @@ const DetailSiswa = (props) => {
                   width: "100px",
                 }}
                 type="submit"
+                disabled={isLoadingUpdate}
               >
                 Edit
               </Button>

@@ -20,20 +20,6 @@ export const siswaApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
-    getKesehatanSiswa: builder.query({
-      query: (id) => ({
-        url: `${SISWA_URL}/kesehatan/${id}`,
-        method: "GET",
-        credentials: "include",
-      }),
-    }),
-    getPencapaianSiswa: builder.query({
-      query: (id) => ({
-        url: `${SISWA_URL}/pencapaian/${id}`,
-        method: "GET",
-        credentials: "include",
-      }),
-    }),
     updateDetailSiswa: builder.mutation({
       query: (data) => ({
         url: `${SISWA_URL}/${data.id}`,
@@ -49,10 +35,48 @@ export const siswaApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    getKesehatanSiswa: builder.query({
+      query: (id) => ({
+        url: `${SISWA_URL}/kesehatan/${id}`,
+        method: "GET",
+        credentials: "include",
+      }),
+    }),
+    updateKesehatanSiswa: builder.mutation({
+      query: (data) => ({
+        url: `${SISWA_URL}/kesehatan/${data.id}`,
+        method: "PUT",
+        body: data.data,
+        credentials: "include",
+      }),
+    }),
+    getPencapaianSiswa: builder.query({
+      query: (id) => ({
+        url: `${SISWA_URL}/pencapaian/${id}`,
+        method: "GET",
+        credentials: "include",
+      }),
+    }),
+    updatePencapaianSiswa: builder.mutation({
+      query: (data) => ({
+        url: `${SISWA_URL}/pencapaian/${data.id}`,
+        method: "PUT",
+        body: data.data,
+        credentials: "include",
+      }),
+    }),
     getOrangtuaSiswa: builder.query({
       query: (id) => ({
-        url: `${SISWA_URL}/orang_tua/${id}`,
+        url: `${SISWA_URL}/orangtua/${id}`,
         method: "GET",
+        credentials: "include",
+      }),
+    }),
+    updateOrangtuaSiswa: builder.mutation({
+      query: (data) => ({
+        url: `${SISWA_URL}/orangtua/${data.id}`,
+        method: "PUT",
+        body: data.data,
         credentials: "include",
       }),
     }),
@@ -67,4 +91,7 @@ export const {
   useUpdateDetailSiswaMutation,
   useGetOrangtuaSiswaQuery,
   useDeleteSiswaMutation,
+  useUpdateKesehatanSiswaMutation,
+  useUpdatePencapaianSiswaMutation,
+  useUpdateOrangtuaSiswaMutation,
 } = siswaApiSlice;

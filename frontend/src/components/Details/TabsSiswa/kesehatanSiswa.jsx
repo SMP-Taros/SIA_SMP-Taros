@@ -15,7 +15,10 @@ import { tokens } from "../../../Theme";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { useState, useEffect } from "react";
-import { useGetKesehatanSiswaQuery } from "../../../slices/siswaApiSlice";
+import {
+  useGetKesehatanSiswaQuery,
+  useUpdateKesehatanSiswaMutation,
+} from "../../../slices/siswaApiSlice";
 
 const KesehatanSiswa = (props) => {
   const theme = useTheme();
@@ -46,10 +49,38 @@ const KesehatanSiswa = (props) => {
 
     fetchData();
   }, [isLoading, data]);
+
+  const [update, { isUpdateLoading }] = useUpdateKesehatanSiswaMutation();
+  const [formData, setFormData] = useState();
+  var token = props.id;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const updateHandler = (e) => {
+    e.preventDefault();
+    console.log("submit");
+
+    // console.log(res);
+    try {
+      const res = update({
+        id: token,
+        data: formData,
+      }).unwrap();
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <Box component="div">
       <Grid item xs={12}>
-        <form>
+        <form onSubmit={updateHandler}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table style={{ maxHeight: "693px" }}>
               <TableBody>
@@ -64,12 +95,14 @@ const KesehatanSiswa = (props) => {
                       placeholder={
                         !detail ? "Tidak ada data" : detail.golongan_darah
                       }
+                      name="golongan_darah"
                       style={{
                         border: "none",
                         fontSize: "16px",
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
                     />
                   </TableCell>
                 </TableRow>
@@ -86,12 +119,14 @@ const KesehatanSiswa = (props) => {
                           ? "Tidak ada data"
                           : detail.penyakit_pernah_diderita
                       }
+                      name="penyakit_pernah_diderita"
                       style={{
                         border: "none",
                         fontSize: "16px",
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
                     />
                   </TableCell>
                 </TableRow>
@@ -106,12 +141,14 @@ const KesehatanSiswa = (props) => {
                       placeholder={
                         !detail ? "Tidak ada data" : detail.kelainan_jasmani
                       }
+                      name="kelainan_jasmani"
                       style={{
                         border: "none",
                         fontSize: "16px",
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
                     />
                   </TableCell>
                 </TableRow>
@@ -126,12 +163,14 @@ const KesehatanSiswa = (props) => {
                       placeholder={
                         !detail ? "Tidak ada data" : detail.berat_badan
                       }
+                      name="berat_badan"
                       style={{
                         border: "none",
                         fontSize: "16px",
                         marginLeft: "20px",
                       }}
                       type="text"
+                      onChange={handleInputChange}
                     />
                   </TableCell>
                 </TableRow>
@@ -151,7 +190,9 @@ const KesehatanSiswa = (props) => {
                         fontSize: "16px",
                         marginLeft: "20px",
                       }}
+                      name="tinggi_badan"
                       type="text"
+                      onChange={handleInputChange}
                     />
                   </TableCell>
                 </TableRow>
@@ -172,6 +213,8 @@ const KesehatanSiswa = (props) => {
                 background: colors.greenAccent[800],
                 width: "100px",
               }}
+              type="submit"
+              disabled={isUpdateLoading}
             >
               Edit
             </Button>
