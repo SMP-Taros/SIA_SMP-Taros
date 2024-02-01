@@ -44,21 +44,21 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   const isActive = selected === title;
 
   return (
-    <Link to={to} style={{ textDecoration: "none", color: "inherit" }}>
-      <MenuItem
-        onClick={() => setSelected(title)}
-        icon={icon}
-        style={{
-          ...menuItemStyles.root,
-          ...(isActive && {
-            backgroundColor: "#1a2226",
-            color: "#666666",
-          }),
-        }}
-      >
-        <Typography>{title}</Typography>
-      </MenuItem>
-    </Link>
+      <Link to={to} style={{ textDecoration: "none", color: "inherit" }}>
+        <MenuItem
+            onClick={() => setSelected(title)}
+            icon={icon}
+            style={{
+              ...menuItemStyles.root,
+              ...(isActive && {
+                backgroundColor: "#1a2226",
+                color: "#666666",
+              }),
+            }}
+        >
+          <Typography>{title}</Typography>
+        </MenuItem>
+      </Link>
   );
 };
 
@@ -85,125 +85,125 @@ const ProSidebar = () => {
   };
 
   return (
-    <Box
-      bgcolor={colors.primary[500]}
-      sx={{
-        height: "100%",
-      }}
-    >
-      <Sidebar backgroundColor={colors.primary[500]} collapsed={isCollapsed}>
-        <Menu menuItemStyles={menuItemStyles}>
-          {/* LOGO AND MENU ICON */}
-          <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
-            style={{
-              margin: "10px 0 20px 0",
-              color: colors.grey[900],
-            }}
-          >
+      <Box
+          bgcolor={colors.primary[500]}
+          sx={{
+            height: "100%",
+          }}
+      >
+        <Sidebar backgroundColor={colors.primary[500]} collapsed={isCollapsed}>
+          <Menu menuItemStyles={menuItemStyles}>
+            {/* LOGO AND MENU ICON */}
+            <MenuItem
+                onClick={() => setIsCollapsed(!isCollapsed)}
+                icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+                style={{
+                  margin: "10px 0 20px 0",
+                  color: colors.grey[900],
+                }}
+            >
+              {!isCollapsed && (
+                  <Box
+                      display="flex"
+                      justifyContent="space-between"
+                      alignItems="center"
+                      ml="15px"
+                  >
+                    <Typography variant="h3" color="#fff">
+                      SMP TAROS
+                    </Typography>
+                    <IconButton
+                        onClick={() => setIsCollapsed(!isCollapsed)}
+                        style={{
+                          color: colors.grey[900],
+                        }}
+                    >
+                      <MenuOutlinedIcon />
+                    </IconButton>
+                  </Box>
+              )}
+            </MenuItem>
+
+            {/* USER  */}
             {!isCollapsed && (
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                ml="15px"
-              >
-                <Typography variant="h3" color="#fff">
-                  SMP TAROS
-                </Typography>
-                <IconButton
-                  onClick={() => setIsCollapsed(!isCollapsed)}
+                <Box mb="25px">
+                  <Box display="flex" justifyContent="center" alignItems="center">
+                    <img
+                        alt="profile-user"
+                        width="100px"
+                        height="100px"
+                        src={`../../user.png`}
+                        style={{ cursor: "pointer", borderRadius: "50%" }}
+                    />
+                  </Box>
+                  <Box textAlign="center">
+                    <Typography
+                        variant="h2"
+                        color="#fff"
+                        // color={colors.grey[100]}
+                        fontWeight="bold"
+                        sx={{ m: "10px 0 0 0" }}
+                    >
+                      {userInfo ? userInfo.username : "null"}
+                    </Typography>
+                    <Typography variant="h5" color={colors.greenAccent[500]}>
+                      SMP TAROS Admin
+                    </Typography>
+                  </Box>
+                </Box>
+            )}
+
+            {/* MENU ITEM */}
+            <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+              <Item
+                  title="Dashboard"
+                  to="/dashboard"
+                  icon={<HomeOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+              />
+              <SubMenu
+                  label="Data Master"
+                  icon={<GridViewIcon />}
                   style={{
                     color: colors.grey[900],
                   }}
-                >
-                  <MenuOutlinedIcon />
-                </IconButton>
-              </Box>
-            )}
-          </MenuItem>
-
-          {/* USER  */}
-          {!isCollapsed && (
-            <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={`../../user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
+              >
+                <Item
+                    title="Siswa"
+                    to="/siswa"
+                    icon=""
+                    selected={selected}
+                    setSelected={setSelected}
                 />
-              </Box>
-              <Box textAlign="center">
-                <Typography
-                  variant="h2"
-                  color="#fff"
-                  // color={colors.grey[100]}
-                  fontWeight="bold"
-                  sx={{ m: "10px 0 0 0" }}
-                >
-                  {userInfo ? userInfo.username : "null"}
-                </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
-                  SMP TAROS Admin
-                </Typography>
-              </Box>
+                <Item
+                    title="Calon Siswa"
+                    to="/calon_siswa"
+                    icon=""
+                    selected={selected}
+                    setSelected={setSelected}
+                />
+                <Item
+                    title="Guru"
+                    to="/guru"
+                    icon=""
+                    selected={selected}
+                    setSelected={setSelected}
+                />
+              </SubMenu>
+              <MenuItem
+                  icon={<LogoutIcon style={{ color: "#FF6868" }} />}
+                  style={{
+                    color: "#FF6868",
+                  }}
+                  onClick={logoutHandler}
+              >
+                Logout
+              </MenuItem>
             </Box>
-          )}
-
-          {/* MENU ITEM */}
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
-              title="Dashboard"
-              to="/dashboard"
-              icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <SubMenu
-              label="Data Master"
-              icon={<GridViewIcon />}
-              style={{
-                color: colors.grey[900],
-              }}
-            >
-              <Item
-                title="Siswa"
-                to="/siswa"
-                icon=""
-                selected={selected}
-                setSelected={setSelected}
-              />
-              <Item
-                title="Calon Siswa"
-                to="/calon_siswa"
-                icon=""
-                selected={selected}
-                setSelected={setSelected}
-              />
-              <Item
-                title="Guru"
-                to="/guru"
-                icon=""
-                selected={selected}
-                setSelected={setSelected}
-              />
-            </SubMenu>
-            <MenuItem
-              icon={<LogoutIcon style={{ color: "#FF6868" }} />}
-              style={{
-                color: "#FF6868",
-              }}
-              onClick={logoutHandler}
-            >
-              Logout
-            </MenuItem>
-          </Box>
-        </Menu>
-      </Sidebar>
-    </Box>
+          </Menu>
+        </Sidebar>
+      </Box>
   );
 };
 

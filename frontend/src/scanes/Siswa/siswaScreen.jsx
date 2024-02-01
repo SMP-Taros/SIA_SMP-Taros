@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
+import { DataGrid } from '@mui/x-data-grid';
 
 import InputBase from "@mui/material/InputBase";
 // import { useContext } from "react";
@@ -28,7 +29,7 @@ import TableRow from "@mui/material/TableRow";
 import SearchIcon from "@mui/icons-material/Search";
 import Template from "../Template/TemplateScreen";
 import AddIcon from "@mui/icons-material/Add";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 // import Icon from "../../assets/icon/edit";
 import EditIcon from "@mui/icons-material/Edit";
@@ -55,11 +56,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const Siswa = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { data, isLoading, error } = useGetAllSiswaQuery();
+  const { data, isLoading, isError } = useGetAllSiswaQuery();
   //const { Delete, isDeleteLoading } = useDeleteSiswaMutation();
-  const [rows, setRows] = useState([]);
+  // const [rows, setRows] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const navigate = useNavigate()
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -70,26 +72,96 @@ const Siswa = () => {
     setPage(0);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // console.log("isLoading:", isLoading);
-        // console.log("data:", data);
+  function infoClickHandler( row){
+    navigate(`/siswa/${row.nisn}`)
+  }
 
-        if (!isLoading && data) {
-          var fetchedRows = data.data;
-          // console.log("fetchedRows:", fetchedRows);
-          setRows(fetchedRows); // Update the state with the fetched rows
-        } else {
-          console.log("Data is undefined");
-        }
-      } catch (err) {
-        console.error(err);
+  let rows;
+  if (!isLoading) {
+    rows = data.data.map((row, index) => ({ rowNumber: index + 1, ...row }));
+  }
+
+  const columns = [
+    { field: 'rowNumber', headerName: 'NO', width: 90    },
+    {
+      field: '_id',
+      headerName: 'ID',
+      width: 150,
+      headerAlign: 'center',
+      align: 'center'
+    },    {
+      field: 'nama',
+      headerName: 'Nama',
+      width: 150,            headerAlign: 'center',
+      align: 'center'
+
+    },
+    {
+      field: 'nisn',
+      headerName: 'Nisn',
+      type: 'number',
+      width: 150,             headerAlign: 'center',
+      align: 'center'
+    },
+    {
+      field: 'jenis_kelamin',
+      headerName: 'Jenis kelamin',
+      width: 150,      headerAlign: 'center',
+      align: 'center'
+    },
+    {
+      field: 'alamat',
+      headerName: 'Alamat',
+      width: 200,      headerAlign: 'center',
+      align: 'center'
+    },
+    {
+      field: 'action',
+      headerName: 'Action',
+      description: 'This column has a value getter and is not sortable.',
+      sortable: false,
+      width: 150,
+      renderCell: (params) => {
+        return(
+        <IconButton
+            type="button"
+            style={{ color: colors.blueAccent[500] }}
+            onClick={(e) =>{
+              infoClickHandler(params.row)              }
+            }
+        >
+          <Info />
+        </IconButton>
+        )
+        // <IconButton
+        //     style={{ color: colors.redAccent[500] }}
+        //
+        //     // onClick={() => deleteGuru(params.row, currentUser, dispatch)}
+        // >
       }
-    };
+    },
+  ];
 
-    fetchData();
-  }, [isLoading, data]); // Adding 'isLoading' and 'data' to the dependency array
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       // console.log("isLoading:", isLoading);
+  //       // console.log("data:", data);
+  //
+  //       if (!isLoading && data) {
+  //         var fetchedRows = data.data;
+  //         // console.log("fetchedRows:", fetchedRows);
+  //         setRows(fetchedRows); // Update the state with the fetched rows
+  //       } else {
+  //         console.log("Data is undefined");
+  //       }
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
+  //
+  //   fetchData();
+  // }, [isLoading, data]); // Adding 'isLoading' and 'data' to the dependency array
 
   // console.log("rows:", rows);
 
@@ -150,84 +222,31 @@ const Siswa = () => {
               <TableContainer
                 sx={{ maxHeight: 440, width: "100%", border: "none" }}
               >
-                <Table stickyHeader aria-label="sticky table">
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell
-                        key="nama"
-                        align={"right"}
-                        style={{ minWidth: 170 }}
-                      >
-                        nama
-                      </StyledTableCell>
-                      <StyledTableCell
-                        key="nis"
-                        align={"right"}
-                        style={{ minWidth: 170 }}
-                      >
-                        nis
-                      </StyledTableCell>
-                      <StyledTableCell
-                        key="nisn"
-                        align={"right"}
-                        style={{ minWidth: 170 }}
-                      >
-                        nisn
-                      </StyledTableCell>
-                      <StyledTableCell
-                        key="action"
-                        align={"right"}
-                        style={{ minWidth: 170 }}
-                      >
-                        action
-                      </StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow
-                        key={row.name}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
-                        <TableCell component="th" align="right" scope="row">
-                          {row.nama}
-                        </TableCell>
-                        <TableCell align="right">{row.nis}</TableCell>
-                        <TableCell align="right">{row.nisn}</TableCell>
-                        <TableCell align="right">
-                          <IconButton
-                            component={Link}
-                            to={`/siswa/${row.nisn}`}
-                            type="button"
-                            style={{ color: colors.blueAccent[500] }}
-                            // onClick={() => dispatch({ type: 'UPDATE_ROOM', payload: params.row })}
-                          >
-                            <Info />
-                          </IconButton>
-                          <IconButton
-                            style={{ color: colors.redAccent[500] }}
-
-                            // onClick={() => deleteGuru(params.row, currentUser, dispatch)}
-                          >
-                            <Delete />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                {!isLoading  &&
+                <DataGrid
+                    rows={rows}
+                    columns={columns}
+                    initialState={{
+                      pagination: {
+                        paginationModel: { page: 0, pageSize: 5 },
+                      },
+                    }}
+                    pageSizeOptions={[5, 10]}
+                    checkboxSelection
+                    disableRowSelectionOnClick
+                    getRowId={(row) => row._id}
+                />
+              }
               </TableContainer>
-              <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                // count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
+              {/*<TablePagination*/}
+              {/*  rowsPerPageOptions={[10, 25, 100]}*/}
+              {/*  component="div"*/}
+              {/*  // count={rows.length}*/}
+              {/*  rowsPerPage={rowsPerPage}*/}
+              {/*  page={page}*/}
+              {/*  onPageChange={handleChangePage}*/}
+              {/*  onRowsPerPageChange={handleChangeRowsPerPage}*/}
+              {/*/>*/}
             </Paper>
           </CardContent>
         </Card>

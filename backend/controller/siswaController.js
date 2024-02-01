@@ -81,12 +81,7 @@ const getSiswa = asyncHandler(async (req, res) => {
     const siswa = await Siswa.find({});
 
     const formattedData = siswa.map((val) => {
-      return {
-        id: val._id,
-        nama: val.nama,
-        nis: val.nis,
-        nisn: val.nisn,
-      };
+      return val
     });
 
     return res.status(200).json({
