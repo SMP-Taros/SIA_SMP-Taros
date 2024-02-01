@@ -138,13 +138,24 @@ const updateSiswa = asyncHandler(async (req, res) => {
       alamat_asal_sekolah,
     } = req.body;
 
+    console.log(req.file);
+
     if (!req.body) {
       // console.log(request.body.nama)
       return res.status(400).send("none of your fields have been filled");
     }
 
     const { id } = req.params;
-    const siswa = await Siswa.findOneAndUpdate({ nisn: id }, req.body);
+    const updateFields = { ...req.body };
+
+    if (req.file) {
+      updateFields.profil = req.file.filename;
+    }
+
+    const siswa = await Siswa.findOneAndUpdate(
+      { nisn: id },
+      { $set: updateFields }
+    );
 
     if (!siswa) {
       return res.status(400).json({ message: "Siswa not found" });

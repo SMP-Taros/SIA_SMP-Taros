@@ -27,6 +27,7 @@
     "bootstrap": "^5.3.2",
     "formik": "^2.4.5",
     "fullcalendar": "^6.1.10",
+    "multer": "^1.4.5-lts.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.2",
     "react-dom": "^18.2.0",

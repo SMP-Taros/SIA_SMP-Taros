@@ -7,10 +7,13 @@ import {
   TableRow,
   TableContainer,
   Button,
+  TextField,
+  Stack,
 } from "@mui/material";
 
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../../Theme";
+import { toast } from "react-toastify";
 
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -30,6 +33,7 @@ const DetailSiswa = (props) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [detail, setDetail] = useState();
   const [formData, setFormData] = useState();
+  const [image, setImage] = useState();
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
@@ -55,6 +59,7 @@ const DetailSiswa = (props) => {
   }, [isLoading, data]);
 
   var token = props.id;
+  const imageData = new FormData();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -66,7 +71,6 @@ const DetailSiswa = (props) => {
 
   const updateHandler = (e) => {
     e.preventDefault();
-    console.log("submit");
 
     // console.log(res);
     try {
@@ -74,23 +78,54 @@ const DetailSiswa = (props) => {
         id: token,
         data: formData,
       }).unwrap();
-      console.log(res);
-    } catch (e) {}
+
+      toast.success("Profil berhasil diupdate");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
+
+  const uploadHandler = (e) => {
+    e.preventDefault();
+    //console.log(image);
+    imageData.append("file", image);
+    const res = update({
+      id: token,
+      data: imageData,
+    }).unwrap();
   };
 
   return (
     <Box component="div">
       <Grid container>
-        <Grid item xs={5}>
+        <Stack marginLeft="100px">
           <img
             alt="profile-user"
-            width="400px"
-            height="400px"
-            src={`../user.png`}
+            width="300px"
+            height="300px"
+            src={`http://localhost:5555/images/${
+              !detail ? "user.png" : detail.profil
+            }`}
             style={{ cursor: "pointer", borderRadius: "50%" }}
           />
-        </Grid>
-        <Grid item xs={7}>
+          <input
+            style={{ marginTop: "20px" }}
+            type="file"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
+          <Button
+            variant="contained"
+            style={{
+              background: colors.greenAccent[300],
+              width: "400px",
+              marginTop: "20px",
+            }}
+            onClick={uploadHandler}
+          >
+            Upload
+          </Button>
+        </Stack>
+        <Grid item xs={7} marginLeft="100px">
           <form onSubmit={updateHandler}>
             <TableContainer sx={{ maxHeight: 440 }}>
               <Table style={{ maxHeight: "693px" }}>
