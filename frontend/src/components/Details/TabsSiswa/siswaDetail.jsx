@@ -44,9 +44,7 @@ const DetailSiswa = (props) => {
     }
     useEffect(() => {
         if (detail) {
-            console.log(detail);
             setFormData(detail);
-            console.log(formData);
         }
     }, [detail]);
 
@@ -85,14 +83,11 @@ const DetailSiswa = (props) => {
     }
     const uploadHandler = (e) => {
         e.preventDefault();
-        console.log(image);
         imageData.append("file", image);
         const res = update({
             id: token,
             data: imageData,
         }).unwrap();
-        console.log(res);
-
     };
 
     function handleFileInputChange(e) {
