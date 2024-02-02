@@ -13,7 +13,7 @@ function Template({ children }) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <div className={`sidebar-container ${isSidebar ? "sticky" : ""}`}>
+          <div className={`sidebar-container ${isSidebar ? "sticky" : ""}`} >
             <Sidebar />
           </div>
           <main className="content">

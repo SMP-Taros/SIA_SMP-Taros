@@ -91,7 +91,9 @@ const ProSidebar = () => {
             height: "100%",
           }}
       >
-        <Sidebar backgroundColor={colors.primary[500]} collapsed={isCollapsed}>
+        <Sidebar backgroundColor={colors.primary[500]}
+                 collapsed={isCollapsed}
+        >
           <Menu menuItemStyles={menuItemStyles}>
             {/* LOGO AND MENU ICON */}
             <MenuItem

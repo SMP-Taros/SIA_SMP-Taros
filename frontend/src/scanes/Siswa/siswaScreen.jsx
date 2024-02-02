@@ -77,7 +77,8 @@ const Siswa = () => {
   }
 
   let rows;
-  if (!isLoading) {
+  console.log(isLoading, isError)
+  if (!isLoading && !isError) {
     rows = data.data.map((row, index) => ({ rowNumber: index + 1, ...row }));
   }
 
@@ -168,7 +169,7 @@ const Siswa = () => {
   // const colorMode = useContext(ColorModeContext);
   return (
     <Template>
-      <Box component="div" width="100%" padding="40px" paddingRight="70px">
+      <Box component="div" width="100%" paddingLeft="40px" paddingTop="20px" paddingRight="70px">
         <Grid container justifyContent="space-between">
           <Grid item>
             <Header title="Data Master Siswa" />
