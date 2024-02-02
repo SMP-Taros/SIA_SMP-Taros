@@ -107,7 +107,8 @@ const getuserProfile = asyncHandler(async (req, res) => {
 });
 
 const updateUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  console.log(req.body._id);
+  const user = await User.findById(req.body._id);
 
   if (user) {
     user.nama_lengkap = req.body.nama_lengkap || user.nama_lengkap;
@@ -127,8 +128,14 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
 });
 
-export { registerUser, loginUser, logoutUser, getuserProfile, updateUserProfile };
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getuserProfile,
+  updateUserProfile,
+};

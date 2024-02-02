@@ -26,6 +26,7 @@ app.use(Cors(corsOptions));
 
 //middleware for parsing request body
 app.use(express.json());
+app.use(express.static("backend/public"));
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (request, response) => {
@@ -42,6 +43,7 @@ app.use("/api/siswa/orangtua", orangTuaSiswaRoute);
 
 app.use("/api/guru", guruRoute);
 app.use("/api/users", userRoute);
+app.use("/api/image", userRoute);
 
 mongoose.connect(mongoDBURL).then(() => {
   console.log("App connected to database");

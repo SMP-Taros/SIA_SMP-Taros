@@ -54,6 +54,7 @@ const createCalonSiswa = asyncHandler(async (req, res) => {
       keberadaan_ibu,
       email,
       no_hp,
+      tipe_pembayaran,
     } = req.body;
 
     if (
@@ -78,7 +79,8 @@ const createCalonSiswa = asyncHandler(async (req, res) => {
       !nama_ibu ||
       !nik_ibu ||
       !tahun_lahir_ibu ||
-      !penghasilan_perbulan_ibu
+      !penghasilan_perbulan_ibu ||
+      !tipe_pembayaran
     ) {
       // console.log(request.body.nama)
       return res.status(400).send({
@@ -131,6 +133,7 @@ const createCalonSiswa = asyncHandler(async (req, res) => {
       keberadaan_ibu: keberadaan_ibu,
       email: email,
       no_hp: no_hp,
+      tipe_pembayaran: tipe_pembayaran,
     };
 
     const calonSiswa = await CalonSiswa.create(newSiswa);

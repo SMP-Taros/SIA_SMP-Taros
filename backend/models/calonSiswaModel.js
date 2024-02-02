@@ -82,19 +82,15 @@ const calonSiswaSchema = mongoose.Schema(
     },
     prestasi: {
       type: String,
-      required: true,
     },
     golongan_darah: {
       type: String,
-      required: true,
     },
     penyakit_pernah_diderita: {
       type: String,
-      required: true,
     },
     kelainan_jasmani: {
       type: String,
-      required: true,
     },
     berat_badan: {
       type: String,
@@ -134,7 +130,6 @@ const calonSiswaSchema = mongoose.Schema(
     },
     keberadaan_ayah: {
       type: String,
-      required: true,
     },
     nama_ibu: {
       type: String,
@@ -172,6 +167,11 @@ const calonSiswaSchema = mongoose.Schema(
     },
     no_hp: {
       type: String,
+    },
+    tipe_pembayaran: {
+      type: String,
+      enum: ["Transfer", "Langsung"],
+      required: true,
     },
   },
   {

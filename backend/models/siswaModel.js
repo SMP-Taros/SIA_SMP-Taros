@@ -68,6 +68,9 @@ const siswaSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    profil: {
+      type: String,
+    },
   },
   {
     timestamps: true,

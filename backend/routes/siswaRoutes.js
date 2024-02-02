@@ -7,6 +7,7 @@ import {
   updateSiswa,
 } from "../controller/siswaController.js";
 import { protect } from "../middleware/authMiddleware.js";
+import { upload } from "../utils/uploadImage.js";
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.get("/", getSiswa);
 
 router.get("/:id", getdetailSiswa);
 
-router.put("/:id", updateSiswa);
+router.put("/:id", upload.single("file"), updateSiswa);
 
 router.delete("/:id", deleteSiswa);
 

@@ -36,12 +36,11 @@ const calonSiswaDetail = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [value, setValue] = useState(0);
+
   const navigate = useNavigate();
 
   const { id } = useParams();
   const [detail, setDetail] = useState();
-  const [formData, setFormData] = useState();
 
   const { data, isLoading } = useGetDetailCalonSiswaQuery(id);
   const [confirm, { isLoadingConfirm }] = useConfirmCalonSiswaMutation();
@@ -73,7 +72,7 @@ const calonSiswaDetail = () => {
     e.preventDefault();
     try {
       const res = confirm({ id: id, data: "data" }).unwrap();
-      // console.log(res);
+      console.log(res);
       navigate("/calon_siswa");
       window.location.reload();
     } catch (err) {
@@ -1100,6 +1099,50 @@ const calonSiswaDetail = () => {
                               />
                             </TableCell>
                           </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Tipe Pembayaran
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.tipe_pembayaran
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={{ fontSize: "16px" }}>
+                              Bukti Pembayaran
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              :{" "}
+                              <input
+                                placeholder={
+                                  !detail
+                                    ? "Tidak ada data"
+                                    : detail.bukti_pembayaran
+                                }
+                                style={{
+                                  border: "none",
+                                  fontSize: "16px",
+                                  marginLeft: "20px",
+                                }}
+                                type="text"
+                              />
+                            </TableCell>
+                          </TableRow>
                         </TableBody>
                       </Table>
                     </TableContainer>
@@ -1117,6 +1160,7 @@ const calonSiswaDetail = () => {
                           marginRight: "20px",
                         }}
                         type="submit"
+                        disabled={isLoadingConfirm}
                       >
                         Konfirmasi
                       </Button>
@@ -1126,6 +1170,7 @@ const calonSiswaDetail = () => {
                           background: colors.redAccent[400],
                           width: "100px",
                         }}
+                        disabled={isLoadingDelete}
                         onClick={deleteHandler}
                       >
                         Delete
