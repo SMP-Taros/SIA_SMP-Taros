@@ -16,19 +16,22 @@ import Template from "../Template/TemplateScreen";
 import Header from "../../components/Header";
 
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useUpdateUserMutation } from "../../slices/userApiSlice";
-import { setCredentials } from '../../slices/authSlice';
+import { setCredentials } from "../../slices/authSlice";
 
 const Profile = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [email, setEmail] = useState('');
-  const [nama_lengkap, setNama_lengkap] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [nama_lengkap, setNama_lengkap] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [image, setImage] = useState();
+  const imageData = new FormData();
 
   const dispatch = useDispatch();
 
@@ -36,27 +39,27 @@ const Profile = () => {
   const [updateProfile, { isLoading }] = useUpdateUserMutation();
 
   useEffect(() => {
-    setNama_lengkap(userInfo.nama_lengkap || '');
-    setEmail(userInfo.email || '');
+    setNama_lengkap(userInfo.nama_lengkap || "");
+    setEmail(userInfo.email || "");
   }, [userInfo.email, userInfo.nama_lengkap]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'nama_lengkap') {
+    if (name === "nama_lengkap") {
       setNama_lengkap(value);
-    } else if (name === 'email') {
+    } else if (name === "email") {
       setEmail(value);
-    } else if (name === 'password') {
+    } else if (name === "password") {
       setPassword(value);
-    } else if (name === 'confirmPassword') {
+    } else if (name === "confirmPassword") {
       setConfirmPassword(value);
     }
   };
 
-  const submitHandler = async (e) => {
+  const updateHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error('Password tidak sama');
+      toast.error("Password tidak sama");
     } else {
       try {
         const res = await updateProfile({
@@ -67,13 +70,23 @@ const Profile = () => {
         }).unwrap();
         console.log(res);
         dispatch(setCredentials(res));
-        toast.success('Profil berhasil diupdate');
+        toast.success("Profil berhasil diupdate");
       } catch (err) {
         toast.error(err?.data?.message || err.error);
       }
     }
   };
-  
+
+  const uploadHandler = (e) => {
+    e.preventDefault();
+    //console.log(image);
+    imageData.append("file", image);
+    const res = updateProfile({
+      _id: userInfo._id,
+      data: imageData,
+    }).unwrap();
+  };
+
   return (
     <Template>
       <Box component="div" width="100%" padding="40px" paddingRight="70px">
@@ -92,29 +105,39 @@ const Profile = () => {
           <Grid item xs={4}>
             <Card>
               <CardContent>
-                <Box display="flex" justifyContent="center" alignItems="center">
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="center"
+                  alignItems="center"
+                >
                   <img
                     alt="profile-user"
-                    width="200px"
-                    height="200px"
-                    src={`../../user.png`}
+                    width="250px"
+                    height="250px"
+                    src={`http://localhost:5555/images/${
+                      !userInfo ? "user.png" : userInfo.profil
+                    }`}
                     style={{ cursor: "pointer", borderRadius: "50%" }}
                   />
-                </Box>
-                <Box display="flex" justifyContent="center" alignItems="center">
-                <Typography
-                    fontWeight="bold"
-                    fontSize="18px"
-                  >
-                    {userInfo.username || ''}
+                  <input
+                    style={{ marginTop: "20px" }}
+                    type="file"
+                    onChange={(e) => setImage(e.target.files[0])}
+                  />
+                  <Typography fontWeight="600" fontSize="18px" marginTop="20px">
+                    {userInfo.username || ""}
                   </Typography>
-                </Box>
-                <Box display="flex" justifyContent="center" alignItems="center">
                   <Button
                     variant="contained"
-                    style={{ background: colors.blueAccent[600] }}
+                    style={{
+                      background: colors.greenAccent[300],
+                      width: "100px",
+                      marginTop: "10px",
+                    }}
+                    onClick={uploadHandler}
                   >
-                    Ubah Foto
+                    Upload
                   </Button>
                 </Box>
               </CardContent>
@@ -123,7 +146,7 @@ const Profile = () => {
           <Grid item xs={8}>
             <Card>
               <CardContent>
-                <form onSubmit={submitHandler}>
+                <form onSubmit={updateHandler}>
                   <Typography
                     variant="h4"
                     fontWeight="bold"
@@ -145,7 +168,7 @@ const Profile = () => {
                       </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                    <TextField
+                      <TextField
                         required
                         id="username"
                         name="username"
@@ -154,7 +177,7 @@ const Profile = () => {
                         size="small"
                         margin="normal"
                         fullWidth
-                        value={userInfo.username || ''}
+                        value={userInfo.username || ""}
                         disabled
                       />
                       <TextField

@@ -108,7 +108,10 @@ const getuserProfile = asyncHandler(async (req, res) => {
 
 const updateUserProfile = asyncHandler(async (req, res) => {
   console.log(req.body._id);
-  const user = await User.findById(req.body._id);
+  const user = await User.findOneAndUpdate(
+    { id: req.body._id },
+    { $set: updateFields }
+  );
 
   if (user) {
     user.nama_lengkap = req.body.nama_lengkap || user.nama_lengkap;
@@ -116,6 +119,11 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
     if (req.body.password) {
       user.password = req.body.password;
+    }
+    const updateFields = { ...req.body };
+
+    if (req.file) {
+      updateFields.profil = req.file.filename;
     }
 
     const updatedUser = await user.save();
