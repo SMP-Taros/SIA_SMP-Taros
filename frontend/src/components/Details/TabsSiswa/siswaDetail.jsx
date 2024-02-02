@@ -1,26 +1,10 @@
 import {
-  Box,
-  Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-  TableContainer,
-  Button,
-  TextField,
-  Stack,
-    TextField,
-    FormControl,
-    OutlinedInput,
-    FormGroup,
-    InputLabel,
-    Typography,
-    Alert,
-    Dialog,
-    DialogContent,
-    DialogContentText, dialogClasses, dialogContentTextClasses, Modal
+    Box,
+    Grid,
+    Button,
+    Stack, TextField,
 } from "@mui/material";
-
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../../Theme";
 import { toast } from "react-toastify";
@@ -28,7 +12,7 @@ import { toast } from "react-toastify";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 
-import {useState, useEffect, useRef} from "react";
+import {useState, useEffect} from "react";
 import {
     useGetDetailSiswaQuery,
     useUpdateDetailSiswaMutation,
@@ -50,9 +34,7 @@ const DetailSiswa = (props) => {
     const [openConfModal, setOpenConfModal] = useState(false);
     const [infoModal, setInfoModal] = useState({isOpen: false, msg: "Berhasil ubah data!"});
     const [image, setImage] = useState();
-
-
-
+    const imageData = new FormData();
     // eslint-disable-next-line react-hooks/rules-of-hooks
     // eslint-disable-next-line react-hooks/rules-of-hooks
     let detail;
@@ -103,14 +85,21 @@ const DetailSiswa = (props) => {
     }
     const uploadHandler = (e) => {
         e.preventDefault();
-        //console.log(image);
+        console.log(image);
         imageData.append("file", image);
         const res = update({
             id: token,
             data: imageData,
         }).unwrap();
+        console.log(res);
+
     };
 
+    function handleFileInputChange(e) {
+        setImage(e.target.files[0])
+        // console.log(e)
+        // console.log(image)
+    }
     return (
         <Grid container component="div" sx={{pt: 1}}>
             <ConfirmationDialog
@@ -131,31 +120,19 @@ const DetailSiswa = (props) => {
             >
             </InformationDialog>
             <Grid item xs={4}>
-                <Stack marginLeft="100px">
+                <Stack>
                     <img
                         alt="profile-user"
                         width="300px"
                         height="300px"
                         src={`http://localhost:5555/images/${
-                            !detail ? "user.png" : detail.profil
+                            !formData ? "user.png" : formData.profil
                         }`}
                         style={{ cursor: "pointer", borderRadius: "50%" }}
                     />
-                    <input
-                        style={{ marginTop: "20px" }}
-                        type="file"
-                        onChange={(e) => setImage(e.target.files[0])}
-                    />
-                    <Button
-                        variant="contained"
-                        style={{
-                            background: colors.greenAccent[300],
-                            width: "400px",
-                            marginTop: "20px",
-                        }}
-                        onClick={uploadHandler}
-                    >
-                        Upload
+                    <input type="file" defaultValue={image ? image.name : ""} onChange={handleFileInputChange}></input>
+                    <Button component="label" variant="contained" startIcon={<CloudUploadIcon />} onClick={uploadHandler}>
+                        Upload file
                     </Button>
                 </Stack>
             </Grid>
@@ -198,251 +175,6 @@ const DetailSiswa = (props) => {
                         </>
                     }
 
-                    {/*<TableContainer sx={{maxHeight: 440}}>*/}
-                    {/*    <Table>*/}
-                    {/*        <TableBody>*/}
-
-
-                    {/*            <TableRow>*/}
-                    {/*                <TableCell style={{fontSize: "16px"}}>NIK</TableCell>*/}
-                    {/*                <TableCell>*/}
-                    {/*                    {" "}*/}
-                    {/*                    :{" "}*/}
-                    {/*                    <input*/}
-                    {/*                        placeholder={!detail ? "loading" : detail.nik}*/}
-                    {/*                        style={{*/}
-                    {/*                            border: "none",*/}
-                    {/*                            fontSize: "16px",*/}
-                    {/*                            marginLeft: "20px",*/}
-                    {/*                        }}*/}
-                    {/*                        name="nik"*/}
-                    {/*                        onChange={handleInputChange}*/}
-                    {/*                        type="text"*/}
-                    {/*                    />*/}
-                    {/*                </TableCell>*/}
-                    {/*            </TableRow>*/}
-                    {/*            <TableRow>*/}
-                    {/*                <TableCell style={{fontSize: "16px"}}>*/}
-                    {/*                    Jenis Kelamin*/}
-                    {/*                </TableCell>*/}
-                    {/*                <TableCell>*/}
-                    {/*                    {" "}*/}
-                    {/*                    :{" "}*/}
-                    {/*                    <input*/}
-                    {/*                        placeholder={!detail ? "loading" : detail.jenis_kelamin}*/}
-                    {/*                        style={{*/}
-                    {/*                            border: "none",*/}
-                    {/*                            fontSize: "16px",*/}
-                    {/*                            marginLeft: "20px",*/}
-                    {/*                        }}*/}
-                    {/*                        name="jenis_kelamin"*/}
-                    {/*                        onChange={handleInputChange}*/}
-                    {/*                        type="text"*/}
-                    {/*                    />*/}
-                    {/*                </TableCell>*/}
-                    {/*            </TableRow>*/}
-                    {/*            <TableRow>*/}
-                    {/*                <TableCell style={{fontSize: "16px"}}>Alamat</TableCell>*/}
-                    {/*                <TableCell>*/}
-                    {/*                    {" "}*/}
-                    {/*                    :{" "}*/}
-                    {/*                    <input*/}
-                    {/*                        placeholder={!detail ? "loading" : detail.alamat}*/}
-                    {/*                        style={{*/}
-                    {/*                            border: "none",*/}
-                    {/*                            fontSize: "16px",*/}
-                    {/*                            marginLeft: "20px",*/}
-                    {/*                        }}*/}
-                    {/*                        name="alamat"*/}
-                    {/*                        type="text"*/}
-                    {/*                        onChange={handleInputChange}*/}
-                    {/*                    />*/}
-                    {/*                </TableCell>*/}
-                    {/*            </TableRow>*/}
-                    {/*            <TableRow>*/}
-                    {/*                <TableCell style={{fontSize: "16px"}}>*/}
-                    {/*                    Tanggal Lahir*/}
-                    {/*                </TableCell>*/}
-                    {/*                <TableCell>*/}
-                    {/*                    {" "}*/}
-                    {/*                    :{" "}*/}
-                    {/*                    <input*/}
-                    {/*                        placeholder={!detail ? "loading" : detail.tanggal_lahir}*/}
-                    {/*                        style={{*/}
-                    {/*                            border: "none",*/}
-                    {/*                            fontSize: "16px",*/}
-                    {/*                            marginLeft: "20px",*/}
-                    {/*                        }}*/}
-                    {/*                        name="tanggal_lahir"*/}
-                    {/*                        onChange={handleInputChange}*/}
-                    {/*                        type="text"*/}
-                    {/*                    />*/}
-                    {/*                </TableCell>*/}
-                    {/*            </TableRow>*/}
-                    {/*            <TableRow>*/}
-                    {/*                <TableCell style={{fontSize: "16px"}}>*/}
-                    {/*                    Tempat Lahir*/}
-                    {/*                </TableCell>*/}
-                    {/*                <TableCell>*/}
-                    {/*                    {" "}*/}
-                    {/*                    :{" "}*/}
-                    {/*                    <input*/}
-                    {/*                        placeholder={!detail ? "loading" : detail.tempat_lahir}*/}
-                    {/*                        style={{*/}
-                    {/*                            border: "none",*/}
-                    {/*                            fontSize: "16px",*/}
-                    {/*                            marginLeft: "20px",*/}
-                    {/*                        }}*/}
-                    {/*                        type="text"*/}
-                    {/*                        name="tempat_lahir"*/}
-                    {/*                        onChange={handleInputChange}*/}
-                    {/*                    />*/}
-                    {/*                </TableCell>*/}
-                    {/*            </TableRow>*/}
-
-                    {/*            <TableRow>*/}
-                    {/*                <TableCell style={{fontSize: "16px"}}>Agama</TableCell>*/}
-                    {/*                <TableCell>*/}
-                    {/*                    {" "}*/}
-                    {/*                    :{" "}*/}
-                    {/*                    <input*/}
-                    {/*                        placeholder={!detail ? "loading" : detail.agama}*/}
-                    {/*                        style={{*/}
-                    {/*                            border: "none",*/}
-                    {/*                            fontSize: "16px",*/}
-                    {/*                            marginLeft: "20px",*/}
-                    {/*                        }}*/}
-                    {/*                        name="agama"*/}
-                    {/*                        onChange={handleInputChange}*/}
-                    {/*                        type="text"*/}
-                    {/*                    />*/}
-                    {/*                </TableCell>*/}
-                    {/*            </TableRow>*/}
-                    {/*            <TableRow>*/}
-                    {/*                <TableCell style={{fontSize: "16px"}}>Status</TableCell>*/}
-                    {/*                <TableCell>*/}
-                    {/*                    {" "}*/}
-                    {/*                    :{" "}*/}
-                    {/*                    <input*/}
-                    {/*                        placeholder={!detail ? "loading" : detail.status}*/}
-                    {/*                        style={{*/}
-                    {/*                            border: "none",*/}
-                    {/*                            fontSize: "16px",*/}
-                    {/*                            marginLeft: "20px",*/}
-                    {/*                        }}*/}
-                    {/*                        name="status"*/}
-                    {/*                        onChange={handleInputChange}*/}
-                    {/*                        type="text"*/}
-                    {/*                    />*/}
-                    {/*                </TableCell>*/}
-                    {/*            </TableRow>*/}
-                    {/*            <TableRow>*/}
-                    {/*                <TableCell style={{fontSize: "16px"}}>Anak ke</TableCell>*/}
-                    {/*                <TableCell>*/}
-                    {/*                    {" "}*/}
-                    {/*                    :{" "}*/}
-                    {/*                    <input*/}
-                    {/*                        placeholder={!detail ? "loading" : detail.anak_ke}*/}
-                    {/*                        style={{*/}
-                    {/*                            border: "none",*/}
-                    {/*                            fontSize: "16px",*/}
-                    {/*                            marginLeft: "20px",*/}
-                    {/*                        }}*/}
-                    {/*                        type="text"*/}
-                    {/*                        name="anak_ke"*/}
-                    {/*                        onChange={handleInputChange}*/}
-                    {/*                    />*/}
-                    {/*                </TableCell>*/}
-                    {/*            </TableRow>*/}
-                    {/*            <TableRow>*/}
-                    {/*                <TableCell style={{fontSize: "16px"}}>*/}
-                    {/*                    Jumlah Saudara Kandung*/}
-                    {/*                </TableCell>*/}
-                    {/*                <TableCell>*/}
-                    {/*                    {" "}*/}
-                    {/*                    :{" "}*/}
-                    {/*                    <input*/}
-                    {/*                        placeholder={*/}
-                    {/*                            !detail ? "loading" : detail.jumlah_saudara_kandung*/}
-                    {/*                        }*/}
-                    {/*                        style={{*/}
-                    {/*                            border: "none",*/}
-                    {/*                            fontSize: "16px",*/}
-                    {/*                            marginLeft: "20px",*/}
-                    {/*                        }}*/}
-                    {/*                        type="text"*/}
-                    {/*                        name="jumlah_saudara_kandung"*/}
-                    {/*                        onChange={handleInputChange}*/}
-                    {/*                    />*/}
-                    {/*                </TableCell>*/}
-                    {/*            </TableRow>*/}
-                    {/*            <TableRow>*/}
-                    {/*                <TableCell style={{fontSize: "16px"}}>*/}
-                    {/*                    Jarak Rumah ke Sekolah*/}
-                    {/*                </TableCell>*/}
-                    {/*                <TableCell>*/}
-                    {/*                    {" "}*/}
-                    {/*                    :{" "}*/}
-                    {/*                    <input*/}
-                    {/*                        placeholder={*/}
-                    {/*                            !detail ? "loading" : detail.jarak_rumah_sekolah*/}
-                    {/*                        }*/}
-                    {/*                        style={{*/}
-                    {/*                            border: "none",*/}
-                    {/*                            fontSize: "16px",*/}
-                    {/*                            marginLeft: "20px",*/}
-                    {/*                        }}*/}
-                    {/*                        type="text"*/}
-                    {/*                        name="jarak_rumah_sekolah"*/}
-                    {/*                        onChange={handleInputChange}*/}
-                    {/*                    />*/}
-                    {/*                </TableCell>*/}
-                    {/*            </TableRow>*/}
-                    {/*            <TableRow>*/}
-                    {/*                <TableCell style={{fontSize: "16px"}}>*/}
-                    {/*                    Asal sekolah*/}
-                    {/*                </TableCell>*/}
-                    {/*                <TableCell>*/}
-                    {/*                    {" "}*/}
-                    {/*                    :{" "}*/}
-                    {/*                    <input*/}
-                    {/*                        placeholder={!detail ? "loading" : detail.asal_sekolah}*/}
-                    {/*                        style={{*/}
-                    {/*                            border: "none",*/}
-                    {/*                            fontSize: "16px",*/}
-                    {/*                            marginLeft: "20px",*/}
-                    {/*                        }}*/}
-                    {/*                        type="text"*/}
-                    {/*                        name="asal_sekolah"*/}
-                    {/*                        onChange={handleInputChange}*/}
-                    {/*                    />*/}
-                    {/*                </TableCell>*/}
-                    {/*            </TableRow>*/}
-                    {/*            <TableRow>*/}
-                    {/*                <TableCell style={{fontSize: "16px"}}>*/}
-                    {/*                    Alamat Asal Sekolah*/}
-                    {/*                </TableCell>*/}
-                    {/*                <TableCell>*/}
-                    {/*                    {" "}*/}
-                    {/*                    :{" "}*/}
-                    {/*                    <input*/}
-                    {/*                        placeholder={*/}
-                    {/*                            !detail ? "loading" : detail.alamat_asal_sekolah*/}
-                    {/*                        }*/}
-                    {/*                        style={{*/}
-                    {/*                            border: "none",*/}
-                    {/*                            fontSize: "16px",*/}
-                    {/*                            marginLeft: "20px",*/}
-                    {/*                        }}*/}
-                    {/*                        type="text"*/}
-                    {/*                        name="alamat_asal_sekolah"*/}
-                    {/*                        onChange={handleInputChange}*/}
-                    {/*                    />*/}
-                    {/*                </TableCell>*/}
-                    {/*            </TableRow>*/}
-                    {/*        </TableBody>*/}
-                    {/*    </Table>*/}
-                    {/*</TableContainer>*/}
                     <Box
                         display="flex"
                         justifyContent="flex-end"

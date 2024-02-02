@@ -40,6 +40,7 @@ const siswaDetail = () => {
     const [value, setValue] = useState(0);
     const [Delete, {isLoadingDelete}] = useDeleteSiswaMutation();
     const navigate = useNavigate();
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
