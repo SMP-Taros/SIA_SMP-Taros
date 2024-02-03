@@ -12,8 +12,6 @@ function toTitleCase(str) {
 export default function CustomBreadcrumbs() {
     let location = useLocation()
     const pathnames = location.pathname.split('/').filter((x) => x)
-    console.log(pathnames)
-
     function linkCompo(to, value) {
         return (
             <MUILink  underline="hover">
