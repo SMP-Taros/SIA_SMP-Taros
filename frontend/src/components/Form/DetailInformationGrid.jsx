@@ -6,13 +6,18 @@ export default function DetailInformationGrid({
   onInputChange,
 }) {
   return (
-    <Grid container direction="row" spacing={2} sx={{ py: 1 }}>
+    <Grid container direction="row" spacing={1} sx={{ py: 1 }}>
       <Grid item xs={4}>
         <Typography variant="h5" gutterBottom sx={{ pt: 2 }}>
           {title}
         </Typography>
       </Grid>
-      <Grid item xs={8}>
+      <Grid item xs={1}>
+        <Typography variant="h5" gutterBottom sx={{ pt: 2 }}>
+          :
+        </Typography>
+      </Grid>
+      <Grid item xs={7}>
         <TextField
           onChange={onInputChange}
           name="nama"

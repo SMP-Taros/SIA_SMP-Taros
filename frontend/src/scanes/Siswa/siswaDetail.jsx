@@ -28,6 +28,8 @@ import OrangtuaSiswa from "../../components/Details/TabsSiswa/orangtuaSiswa";
 import {useDeleteSiswaMutation} from "../../slices/siswaApiSlice";
 
 import {useParams} from "react-router-dom";
+import Breadcrumbs from "../../components/CustomBreadcrumbs.jsx";
+import CustomBreadcrumbs from "../../components/CustomBreadcrumbs.jsx";
 
 // import Kehadiran from "../../../components/Details/TabsGuru/Kehadiran";
 // import MataPelajaran from "../../../components/Details/TabsGuru/MataPelajaran";
@@ -86,7 +88,8 @@ const siswaDetail = () => {
             <Box component="div" width="100%" padding="10px">
                 <Grid container justifyContent="space-between">
                     <Grid item>
-                        <Header title="Data Master > Siswa > Detail"/>
+                        {/*<Header title="Data Master > Siswa > Detail"/>*/}
+                        <CustomBreadcrumbs></CustomBreadcrumbs>
                     </Grid>
                     <Grid item>
                         <Typography variant="h2" fontSize="20px" marginTop="24px">
