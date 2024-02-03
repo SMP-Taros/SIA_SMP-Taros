@@ -251,9 +251,7 @@ const Siswa = () => {
                 boxShadow: "none",
               }}
             >
-              <TableContainer
-                sx={{ maxHeight: 440, width: "100%", border: "none" }}
-              >
+              <TableContainer sx={{ maxHeight: 440, border: "none" }}>
                 {!isLoading && (
                   <DataGrid
                     rows={!siswa ? rows : siswa}
