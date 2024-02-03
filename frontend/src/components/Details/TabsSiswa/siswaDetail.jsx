@@ -96,7 +96,7 @@ const DetailSiswa = (props) => {
         // console.log(image)
     }
     return (
-        <Grid container component="div" sx={{pt: 1}}>
+        <Grid container component="div" sx={{pt: 1}} spacing={2}>
             <ConfirmationDialog
                 isOpen={openConfModal}
                 content="Perubahan pada data siswa tidak bisa dikembalikan !"
@@ -136,34 +136,34 @@ const DetailSiswa = (props) => {
                     {formData &&
                         <>
                             <DetailInformationGrid
-                                title="Nama :" inputValue={formData.nama} onInputChange={handleInputChange}>
+                                title="Nama" inputValue={formData.nama} onInputChange={handleInputChange}>
                             </DetailInformationGrid>
                             <DetailInformationGrid
-                                title="NIS :" inputValue={formData.nis} onInputChange={handleInputChange}>
+                                title="NIS" inputValue={formData.nis} onInputChange={handleInputChange}>
                             </DetailInformationGrid>
                             <DetailInformationGrid
-                                title="Jenis Kelamin :" inputValue={formData.jenis_kelamin}
+                                title="Jenis Kelamin" inputValue={formData.jenis_kelamin}
                                 onInputChange={handleInputChange}>
                             </DetailInformationGrid>
                             <DetailInformationGrid
-                                title="Tempat Lahir :" inputValue={formData.tempat_lahir}
+                                title="Tempat Lahir" inputValue={formData.tempat_lahir}
                                 onInputChange={handleInputChange}>
                             </DetailInformationGrid>
                             <DetailInformationGrid
-                                title="Tanggal Lahir :" inputValue={formData.tanggal_lahir}
+                                title="Tanggal Lahir" inputValue={formData.tanggal_lahir}
                                 onInputChange={handleInputChange}>
                             </DetailInformationGrid>
                             <DetailInformationGrid
-                                title="NIK :" inputValue={formData.nik} onInputChange={handleInputChange}>
+                                title="NIK" inputValue={formData.nik} onInputChange={handleInputChange}>
                             </DetailInformationGrid>
                             <DetailInformationGrid
-                                title="Agama :" inputValue={formData.agama} onInputChange={handleInputChange}>
+                                title="Agama" inputValue={formData.agama} onInputChange={handleInputChange}>
                             </DetailInformationGrid>
                             <DetailInformationGrid
-                                title="Alamat :" inputValue={formData.alamat} onInputChange={handleInputChange}>
+                                title="Alamat" inputValue={formData.alamat} onInputChange={handleInputChange}>
                             </DetailInformationGrid>
                             <DetailInformationGrid
-                                title="Asal Sekolah :" inputValue={formData.asal_sekolah}
+                                title="Asal Sekolah" inputValue={formData.asal_sekolah}
                                 onInputChange={handleInputChange}>
                             </DetailInformationGrid>
 
