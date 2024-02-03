@@ -6,7 +6,7 @@ import {
   Typography,
   IconButton,
   useTheme,
-  Stack,
+  Stack, CircularProgress,
 } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
@@ -41,6 +41,7 @@ import {
 } from "../../slices/siswaApiSlice";
 
 import { useEffect, useState } from "react";
+import CustomBreadcrumbs from "../../components/CustomBreadcrumbs.jsx";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -154,11 +155,6 @@ const Siswa = () => {
             <Info />
           </IconButton>
         );
-        // <IconButton
-        //     style={{ color: colors.redAccent[500] }}
-        //
-        //     // onClick={() => deleteGuru(params.row, currentUser, dispatch)}
-        // >
       },
     },
   ];
@@ -198,7 +194,8 @@ const Siswa = () => {
       >
         <Grid container justifyContent="space-between">
           <Grid item>
-            <Header title="Data Master Siswa" />
+            {/*<Header title="Data Master Siswa" />*/}
+            <CustomBreadcrumbs></CustomBreadcrumbs>
           </Grid>
           <Grid item>
             <Typography variant="h2" fontSize="20px" marginTop="24px">
@@ -254,7 +251,7 @@ const Siswa = () => {
               <TableContainer
                 sx={{ maxHeight: 440, width: "100%", border: "none" }}
               >
-                {!isLoading && (
+                {!isLoading ?
                   <DataGrid
                     rows={!siswa ? rows : siswa}
                     columns={columns}
@@ -267,8 +264,11 @@ const Siswa = () => {
                     checkboxSelection
                     disableRowSelectionOnClick
                     getRowId={(row) => row._id}
-                  />
-                )}
+                  /> :
+                    <Box sx={{  display: 'flex',height: 200 }} justifyContent="center" alignItems="center">
+                      <CircularProgress />
+                    </Box>
+                }
               </TableContainer>
               {/*<TablePagination*/}
               {/*  rowsPerPageOptions={[10, 25, 100]}*/}

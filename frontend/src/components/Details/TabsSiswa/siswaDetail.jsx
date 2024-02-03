@@ -125,8 +125,8 @@ const DetailSiswa = (props) => {
                         }`}
                         style={{ cursor: "pointer", borderRadius: "50%" }}
                     />
-                    <input type="file" defaultValue={image ? image.name : ""} onChange={handleFileInputChange}></input>
-                    <Button component="label" variant="contained" startIcon={<CloudUploadIcon />} onClick={uploadHandler}>
+                    <TextField sx={{m: 2}} type="file" defaultValue={image ? image.name : ""} onChange={handleFileInputChange}></TextField>
+                    <Button sx={{mx:2}} component="label" variant="contained" startIcon={<CloudUploadIcon />} onClick={uploadHandler}>
                         Upload file
                     </Button>
                 </Stack>
