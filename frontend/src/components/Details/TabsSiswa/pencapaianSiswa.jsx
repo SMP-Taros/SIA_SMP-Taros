@@ -28,18 +28,15 @@ const PencapaianSiswa = (props) => {
   const colors = tokens(theme.palette.mode);
   const { data, isLoading } = useGetPencapaianSiswaQuery(props.id);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  //const [detail, setDetail] = useState();
   const [openConfModal, setOpenConfModal] = useState(false);
   const [infoModal, setInfoModal] = useState({
     isOpen: false,
     msg: "Berhasil ubah data!",
   });
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   let detail;
   var token = props.id;
-  if (!isLoading) {
+  if (!isLoading && data) {
     detail = data.data;
   }
   useEffect(() => {
@@ -109,27 +106,27 @@ const PencapaianSiswa = (props) => {
             {formData && (
               <>
                 <DetailInformationGrid
-                  title="Membaca Alquran :"
+                  title="Membaca Alquran"
                   inputValue={formData.membaca_alquran}
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
-                  title="Jumlah Hafalabn :"
+                  title="Jumlah Hafalan"
                   inputValue={formData.jumlah_hafalan}
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
-                  title="Hobby :"
+                  title="Hobby"
                   inputValue={formData.hobby}
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
-                  title="Cita Cita :"
+                  title="Cita Cita"
                   inputValue={formData.cita_cita}
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
-                  title="Prestasi :"
+                  title="Prestasi"
                   inputValue={formData.prestasi}
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
