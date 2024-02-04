@@ -529,7 +529,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail ? "Tidak ada data" : detail.cita_cita
                                 }
                                 style={{
@@ -549,7 +549,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail ? "Tidak ada data" : detail.prestasi
                                 }
                                 style={{
@@ -569,7 +569,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.golongan_darah
@@ -591,7 +591,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.penyakit_pernah_diderita
@@ -613,7 +613,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.kelainan_jasmani
@@ -635,7 +635,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.berat_badan
@@ -657,7 +657,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.tinggi_badan
@@ -679,7 +679,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail ? "Tidak ada data" : detail.nama_ayah
                                 }
                                 style={{
@@ -699,7 +699,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail ? "Tidak ada data" : detail.nik_ayah
                                 }
                                 style={{
@@ -719,7 +719,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.tahun_lahir_ayah
@@ -741,7 +741,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.pendidikan_terakhir_ayah
@@ -763,7 +763,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.pekerjaan_ayah
@@ -785,7 +785,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.nama_instansi_kerja_ayah
@@ -807,7 +807,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.jabatan_ayah
@@ -829,7 +829,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.penghasilan_perbulan_ayah
@@ -851,7 +851,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.keberadaan_ayah
@@ -873,7 +873,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail ? "Tidak ada data" : detail.nama_ibu
                                 }
                                 style={{
@@ -893,7 +893,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail ? "Tidak ada data" : detail.nik_ibu
                                 }
                                 style={{
@@ -913,7 +913,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.tahun_lahir_ibu
@@ -935,7 +935,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.pendidikan_terakhir_ibu
@@ -957,7 +957,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.pekerjaan_ibu
@@ -979,7 +979,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.nama_instansi_kerja_ibu
@@ -1001,7 +1001,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.jabatan_ibu
@@ -1023,7 +1023,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.penghasilan_perbulan_ibu
@@ -1045,7 +1045,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.keberadaan_ibu
@@ -1067,7 +1067,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail ? "Tidak ada data" : detail.email
                                 }
                                 style={{
@@ -1087,7 +1087,7 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail ? "Tidak ada data" : detail.no_hp
                                 }
                                 style={{
@@ -1107,32 +1107,10 @@ const calonSiswaDetail = () => {
                               {" "}
                               :{" "}
                               <input
-                                placeholder={
+                                value={
                                   !detail
                                     ? "Tidak ada data"
                                     : detail.tipe_pembayaran
-                                }
-                                style={{
-                                  border: "none",
-                                  fontSize: "16px",
-                                  marginLeft: "20px",
-                                }}
-                                type="text"
-                              />
-                            </TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell style={{ fontSize: "16px" }}>
-                              Bukti Pembayaran
-                            </TableCell>
-                            <TableCell>
-                              {" "}
-                              :{" "}
-                              <input
-                                placeholder={
-                                  !detail
-                                    ? "Tidak ada data"
-                                    : detail.bukti_pembayaran
                                 }
                                 style={{
                                   border: "none",

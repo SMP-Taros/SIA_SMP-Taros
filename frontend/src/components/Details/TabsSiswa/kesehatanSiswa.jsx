@@ -19,40 +19,34 @@ import {
   useGetKesehatanSiswaQuery,
   useUpdateKesehatanSiswaMutation,
 } from "../../../slices/siswaApiSlice";
+import DetailInformationGrid from "../../Form/DetailInformationGrid.jsx";
+import { InformationDialog } from "../../Dialog/InformationDialog.jsx";
+import ConfirmationDialog from "../../Dialog/ConfirmationDialog.jsx";
 
 const KesehatanSiswa = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { data, isLoading } = useGetKesehatanSiswaQuery(props.id);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [detail, setDetail] = useState();
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [openConfModal, setOpenConfModal] = useState(false);
+  const [infoModal, setInfoModal] = useState({
+    isOpen: false,
+    msg: "Berhasil ubah data!",
+  });
+
+  let detail;
+  var token = props.id;
+  if (!isLoading && data) {
+    detail = data.data;
+  }
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // console.log("isLoading:", isLoading);
-        // console.log("data:", data);
-
-        if (!isLoading && data) {
-          var fetchedRows = data.data;
-          // console.log("fetchedRows:", fetchedRows);
-          setDetail(fetchedRows);
-          // Update the state with the fetched rows
-        } else {
-          console.log("Data is undefined");
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchData();
-  }, [isLoading, data]);
+    if (detail) {
+      setFormData(detail);
+    }
+  }, [detail]);
 
   const [update, { isUpdateLoading }] = useUpdateKesehatanSiswaMutation();
   const [formData, setFormData] = useState();
-  var token = props.id;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -62,143 +56,82 @@ const KesehatanSiswa = (props) => {
     });
   };
 
-  const updateHandler = (e) => {
+  const onSubmitForm = (e) => {
     e.preventDefault();
-    console.log("submit");
-
-    // console.log(res);
-    try {
-      const res = update({
-        id: token,
-        data: formData,
-      }).unwrap();
-      console.log(res);
-    } catch (e) {
-      console.log(e);
-    }
+    setOpenConfModal(true);
   };
+
+  function updateData() {
+    setOpenConfModal(false);
+    var res = update({
+      id: token,
+      data: formData,
+    }).unwrap();
+    res.then((e) => {
+      if (e.message === "siswa berhasil di update") {
+        setInfoModal((prevState) => {
+          return { ...prevState, isOpen: true };
+        });
+      } else {
+        setInfoModal((prevState) => {
+          return { msg: e.message, isOpen: true };
+        });
+      }
+    });
+  }
   return (
     <Box component="div">
+      <ConfirmationDialog
+        isOpen={openConfModal}
+        content="Perubahan pada data siswa tidak bisa dikembalikan !"
+        onAgree={updateData}
+        onClose={() => {
+          setOpenConfModal(false);
+          setFormData(detail);
+        }}
+      ></ConfirmationDialog>
+      <InformationDialog
+        isOpen={infoModal.isOpen}
+        content="Berhasil mengubah data !"
+        onClose={() =>
+          setInfoModal((prevState) => {
+            return { ...prevState, isOpen: false };
+          })
+        }
+      ></InformationDialog>
       <Grid item xs={12}>
-        <form onSubmit={updateHandler}>
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table style={{ maxHeight: "693px" }}>
-              <TableBody>
-                <TableRow>
-                  <TableCell style={{ fontSize: "16px" }}>
-                    Golongan Darah
-                  </TableCell>
-                  <TableCell>
-                    {" "}
-                    :{" "}
-                    <input
-                      placeholder={
-                        !detail ? "Tidak ada data" : detail.golongan_darah
-                      }
-                      name="golongan_darah"
-                      style={{
-                        border: "none",
-                        fontSize: "16px",
-                        marginLeft: "20px",
-                      }}
-                      type="text"
-                      onChange={handleInputChange}
-                    />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell style={{ fontSize: "16px" }}>
-                    Penyakit yang pernah diderita
-                  </TableCell>
-                  <TableCell>
-                    {" "}
-                    :{" "}
-                    <input
-                      placeholder={
-                        !detail
-                          ? "Tidak ada data"
-                          : detail.penyakit_pernah_diderita
-                      }
-                      name="penyakit_pernah_diderita"
-                      style={{
-                        border: "none",
-                        fontSize: "16px",
-                        marginLeft: "20px",
-                      }}
-                      type="text"
-                      onChange={handleInputChange}
-                    />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell style={{ fontSize: "16px" }}>
-                    Kelainan Jasmani
-                  </TableCell>
-                  <TableCell>
-                    {" "}
-                    :{" "}
-                    <input
-                      placeholder={
-                        !detail ? "Tidak ada data" : detail.kelainan_jasmani
-                      }
-                      name="kelainan_jasmani"
-                      style={{
-                        border: "none",
-                        fontSize: "16px",
-                        marginLeft: "20px",
-                      }}
-                      type="text"
-                      onChange={handleInputChange}
-                    />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell style={{ fontSize: "16px" }}>
-                    Berat Badan
-                  </TableCell>
-                  <TableCell>
-                    {" "}
-                    :{" "}
-                    <input
-                      placeholder={
-                        !detail ? "Tidak ada data" : detail.berat_badan
-                      }
-                      name="berat_badan"
-                      style={{
-                        border: "none",
-                        fontSize: "16px",
-                        marginLeft: "20px",
-                      }}
-                      type="text"
-                      onChange={handleInputChange}
-                    />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell style={{ fontSize: "16px" }}>
-                    Tinggi Badan
-                  </TableCell>
-                  <TableCell>
-                    {" "}
-                    :{" "}
-                    <input
-                      placeholder={
-                        !detail ? "Tidak ada data" : detail.tinggi_badan
-                      }
-                      style={{
-                        border: "none",
-                        fontSize: "16px",
-                        marginLeft: "20px",
-                      }}
-                      name="tinggi_badan"
-                      type="text"
-                      onChange={handleInputChange}
-                    />
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
+        <form onSubmit={onSubmitForm}>
+          <Box maxHeight="400px" overflow="auto" padding="10px">
+            {formData && (
+              <>
+                <DetailInformationGrid
+                  title="Golongan Darah"
+                  inputValue={formData.golongan_darah}
+                  onInputChange={handleInputChange}
+                ></DetailInformationGrid>
+                <DetailInformationGrid
+                  title="Penyakit yang pernah diderita"
+                  inputValue={formData.penyakit_pernah_diderita}
+                  onInputChange={handleInputChange}
+                ></DetailInformationGrid>
+                <DetailInformationGrid
+                  title="Kelainan Jasmani"
+                  inputValue={formData.kelainan_jamani}
+                  onInputChange={handleInputChange}
+                ></DetailInformationGrid>
+                <DetailInformationGrid
+                  title="Berat Badan"
+                  inputValue={formData.berat_badan}
+                  onInputChange={handleInputChange}
+                ></DetailInformationGrid>
+                <DetailInformationGrid
+                  title="Tinggi Badan"
+                  inputValue={formData.tinggi_badan}
+                  onInputChange={handleInputChange}
+                ></DetailInformationGrid>
+              </>
+            )}
+          </Box>
 
           <Box
             display="flex"

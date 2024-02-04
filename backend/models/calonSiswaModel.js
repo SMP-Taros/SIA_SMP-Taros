@@ -46,7 +46,7 @@ const calonSiswaSchema = mongoose.Schema(
     },
     status_anak: {
       type: String,
-      enum: ["Yatim", "Yatim Piatu", "Piatu"],
+      enum: ["Yatim", "Yatim Piatu", "Piatu", "Lengkap"],
     },
     alamat: {
       type: String,

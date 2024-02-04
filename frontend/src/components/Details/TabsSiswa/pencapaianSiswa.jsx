@@ -19,39 +19,33 @@ import {
   useGetPencapaianSiswaQuery,
   useUpdatePencapaianSiswaMutation,
 } from "../../../slices/siswaApiSlice";
+import DetailInformationGrid from "../../Form/DetailInformationGrid.jsx";
+import { InformationDialog } from "../../Dialog/InformationDialog.jsx";
+import ConfirmationDialog from "../../Dialog/ConfirmationDialog.jsx";
 
 const PencapaianSiswa = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { data, isLoading } = useGetPencapaianSiswaQuery(props.id);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [detail, setDetail] = useState();
+  const [openConfModal, setOpenConfModal] = useState(false);
+  const [infoModal, setInfoModal] = useState({
+    isOpen: false,
+    msg: "Berhasil ubah data!",
+  });
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  let detail;
+  var token = props.id;
+  if (!isLoading && data) {
+    detail = data.data;
+  }
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // console.log("isLoading:", isLoading);
-        // console.log("data:", data);
+    if (detail) {
+      setFormData(detail);
+    }
+  }, [detail]);
 
-        if (!isLoading && data) {
-          var fetchedRows = data.data;
-          // console.log("fetchedRows:", fetchedRows);
-          setDetail(fetchedRows);
-          // Update the state with the fetched rows
-        } else {
-          console.log("Data is undefined");
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchData();
-  }, [isLoading, data]);
-
-  const [update, { isUpdateLoading }] = useUpdatePencapaianSiswaMutation();
+  const [update, { isLoadingUpdate }] = useUpdatePencapaianSiswaMutation();
   const [formData, setFormData] = useState();
   var token = props.id;
 
@@ -63,140 +57,84 @@ const PencapaianSiswa = (props) => {
     });
   };
 
-  const updateHandler = (e) => {
+  const onSubmitForm = (e) => {
     e.preventDefault();
-    console.log("submit");
-
-    // console.log(res);
-    try {
-      const res = update({
-        id: token,
-        data: formData,
-      }).unwrap();
-      console.log(res);
-    } catch (e) {
-      console.log(e);
-    }
+    setOpenConfModal(true);
   };
+
+  function updateData() {
+    setOpenConfModal(false);
+    var res = update({
+      id: token,
+      data: formData,
+    }).unwrap();
+    res.then((e) => {
+      if (e.message === "siswa berhasil di update") {
+        setInfoModal((prevState) => {
+          return { ...prevState, isOpen: true };
+        });
+      } else {
+        setInfoModal((prevState) => {
+          return { msg: e.message, isOpen: true };
+        });
+      }
+    });
+  }
   return (
     <Box component="div">
+      <ConfirmationDialog
+        isOpen={openConfModal}
+        content="Perubahan pada data siswa tidak bisa dikembalikan !"
+        onAgree={updateData}
+        onClose={() => {
+          setOpenConfModal(false);
+          setFormData(detail);
+        }}
+      ></ConfirmationDialog>
+      <InformationDialog
+        isOpen={infoModal.isOpen}
+        content="Berhasil mengubah data !"
+        onClose={() =>
+          setInfoModal((prevState) => {
+            return { ...prevState, isOpen: false };
+          })
+        }
+      ></InformationDialog>
       <Grid item xs={12}>
-        <form onSubmit={updateHandler}>
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table style={{ maxHeight: "693px" }}>
-              <TableBody>
-                <TableRow>
-                  <TableCell style={{ fontSize: "16px" }}>
-                    Membaca Alquran
-                  </TableCell>
-                  <TableCell>
-                    {" "}
-                    :{" "}
-                    <input
-                      placeholder={
-                        !detail ? "Tidak ada data" : detail.membaca_alquran
-                      }
-                      name="membaca_alquran"
-                      style={{
-                        border: "none",
-                        fontSize: "16px",
-                        marginLeft: "20px",
-                      }}
-                      type="text"
-                      onChange={handleInputChange}
-                    />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell style={{ fontSize: "16px" }}>
-                    Jumlah Hafalan
-                  </TableCell>
-                  <TableCell>
-                    {" "}
-                    :{" "}
-                    <input
-                      placeholder={
-                        !detail ? "Tidak ada data" : detail.jumlah_hafalan
-                      }
-                      style={{
-                        border: "none",
-                        fontSize: "16px",
-                        marginLeft: "20px",
-                      }}
-                      name="jumlah_hafalan"
-                      type="text"
-                      onChange={handleInputChange}
-                    />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell style={{ fontSize: "16px" }}>Hobby</TableCell>
-                  <TableCell>
-                    {" "}
-                    :{" "}
-                    <input
-                      placeholder={!detail ? "Tidak ada data" : detail.hobby}
-                      style={{
-                        border: "none",
-                        fontSize: "16px",
-                        marginLeft: "20px",
-                      }}
-                      name="hobby"
-                      type="text"
-                      onChange={handleInputChange}
-                    />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell style={{ fontSize: "16px" }}>
-                    Cita - Cita
-                  </TableCell>
-                  <TableCell>
-                    {" "}
-                    :{" "}
-                    <input
-                      placeholder={
-                        !detail ? "Tidak ada data" : detail.cita_cita
-                      }
-                      name="cita_cita"
-                      style={{
-                        border: "none",
-                        fontSize: "16px",
-                        marginLeft: "20px",
-                      }}
-                      type="text"
-                      onChange={handleInputChange}
-                    />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell style={{ fontSize: "16px" }}>Prestasi</TableCell>
-                  <TableCell>
-                    {" "}
-                    :{" "}
-                    <input
-                      placeholder={!detail ? "Tidak ada data" : detail.prestasi}
-                      style={{
-                        border: "none",
-                        fontSize: "16px",
-                        marginLeft: "20px",
-                      }}
-                      name="prestasi"
-                      type="text"
-                      onChange={handleInputChange}
-                    />
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
+        <form onSubmit={onSubmitForm}>
+          <Box maxHeight="400px" overflow="auto" padding="10px">
+            {formData && (
+              <>
+                <DetailInformationGrid
+                  title="Membaca Alquran"
+                  inputValue={formData.membaca_alquran}
+                  onInputChange={handleInputChange}
+                ></DetailInformationGrid>
+                <DetailInformationGrid
+                  title="Jumlah Hafalan"
+                  inputValue={formData.jumlah_hafalan}
+                  onInputChange={handleInputChange}
+                ></DetailInformationGrid>
+                <DetailInformationGrid
+                  title="Hobby"
+                  inputValue={formData.hobby}
+                  onInputChange={handleInputChange}
+                ></DetailInformationGrid>
+                <DetailInformationGrid
+                  title="Cita Cita"
+                  inputValue={formData.cita_cita}
+                  onInputChange={handleInputChange}
+                ></DetailInformationGrid>
+                <DetailInformationGrid
+                  title="Prestasi"
+                  inputValue={formData.prestasi}
+                  onInputChange={handleInputChange}
+                ></DetailInformationGrid>
+              </>
+            )}
+          </Box>
 
-          <Box
-            display="flex"
-            justifyContent="flex-end"
-            marginTop="30px"
-            paddingLeft="40px"
-          >
+          <Box display="flex" justifyContent="flex-end">
             <Button
               variant="contained"
               startIcon={<EditIcon />}
@@ -205,7 +143,7 @@ const PencapaianSiswa = (props) => {
                 width: "100px",
               }}
               type="submit"
-              disabled={isUpdateLoading}
+              disabled={isLoadingUpdate}
             >
               Edit
             </Button>

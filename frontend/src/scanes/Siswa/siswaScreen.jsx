@@ -7,10 +7,11 @@ import {
   IconButton,
   useTheme,
   Stack,
+  CircularProgress,
 } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid } from "@mui/x-data-grid";
 
 import InputBase from "@mui/material/InputBase";
 // import { useContext } from "react";
@@ -41,6 +42,7 @@ import {
 } from "../../slices/siswaApiSlice";
 
 import { useEffect, useState } from "react";
+import CustomBreadcrumbs from "../../components/CustomBreadcrumbs.jsx";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -61,7 +63,7 @@ const Siswa = () => {
   // const [rows, setRows] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -72,73 +74,89 @@ const Siswa = () => {
     setPage(0);
   };
 
-  function infoClickHandler( row){
-    navigate(`/siswa/${row.nisn}`)
+  function infoClickHandler(row) {
+    navigate(`/siswa/${row.nisn}`);
   }
 
   let rows;
-  if (!isLoading) {
+  //console.log(isLoading, isError);
+  if (!isLoading && !isError) {
     rows = data.data.map((row, index) => ({ rowNumber: index + 1, ...row }));
   }
+  //console.log(nameData);
+  const [siswa, setSiswa] = useState("");
+  const [searchVal, setSearchVal] = useState("");
+  function handleSearchClick(e) {
+    if (searchVal === "") {
+      setSiswa(rows);
+      return;
+    }
+    const filterBySearch = rows.filter((item) => {
+      return item["nama"].toLowerCase().includes(searchVal.toLowerCase());
+    });
+    setSiswa(filterBySearch);
+  }
+  useEffect(() => {
+    console.log(siswa);
+  }, [siswa]);
 
   const columns = [
-    { field: 'rowNumber', headerName: 'NO', width: 90    },
+    { field: "rowNumber", headerName: "NO", width: 90 },
     {
-      field: '_id',
-      headerName: 'ID',
+      field: "_id",
+      headerName: "ID",
       width: 150,
-      headerAlign: 'center',
-      align: 'center'
-    },    {
-      field: 'nama',
-      headerName: 'Nama',
-      width: 150,            headerAlign: 'center',
-      align: 'center'
-
+      headerAlign: "center",
+      align: "center",
     },
     {
-      field: 'nisn',
-      headerName: 'Nisn',
-      type: 'number',
-      width: 150,             headerAlign: 'center',
-      align: 'center'
+      field: "nama",
+      headerName: "Nama",
+      width: 150,
+      headerAlign: "center",
+      align: "center",
     },
     {
-      field: 'jenis_kelamin',
-      headerName: 'Jenis kelamin',
-      width: 150,      headerAlign: 'center',
-      align: 'center'
+      field: "nisn",
+      headerName: "Nisn",
+      type: "number",
+      width: 150,
+      headerAlign: "center",
+      align: "center",
     },
     {
-      field: 'alamat',
-      headerName: 'Alamat',
-      width: 200,      headerAlign: 'center',
-      align: 'center'
+      field: "jenis_kelamin",
+      headerName: "Jenis kelamin",
+      width: 150,
+      headerAlign: "center",
+      align: "center",
     },
     {
-      field: 'action',
-      headerName: 'Action',
-      description: 'This column has a value getter and is not sortable.',
+      field: "alamat",
+      headerName: "Alamat",
+      width: 200,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      description: "This column has a value getter and is not sortable.",
       sortable: false,
       width: 150,
       renderCell: (params) => {
-        return(
-        <IconButton
+        return (
+          <IconButton
             type="button"
             style={{ color: colors.blueAccent[500] }}
-            onClick={(e) =>{
-              infoClickHandler(params.row)              }
-            }
-        >
-          <Info />
-        </IconButton>
-        )
-        // <IconButton
-        //     style={{ color: colors.redAccent[500] }}
-        //
-        //     // onClick={() => deleteGuru(params.row, currentUser, dispatch)}
-        // >
-      }
+            onClick={(e) => {
+              infoClickHandler(params.row);
+            }}
+          >
+            <Info />
+          </IconButton>
+        );
+      },
     },
   ];
 
@@ -168,10 +186,17 @@ const Siswa = () => {
   // const colorMode = useContext(ColorModeContext);
   return (
     <Template>
-      <Box component="div" width="100%" padding="40px" paddingRight="70px">
+      <Box
+        component="div"
+        width="100%"
+        paddingLeft="40px"
+        paddingTop="20px"
+        paddingRight="70px"
+      >
         <Grid container justifyContent="space-between">
           <Grid item>
-            <Header title="Data Master Siswa" />
+            {/*<Header title="Data Master Siswa" />*/}
+            <CustomBreadcrumbs></CustomBreadcrumbs>
           </Grid>
           <Grid item>
             <Typography variant="h2" fontSize="20px" marginTop="24px">
@@ -192,8 +217,13 @@ const Siswa = () => {
                     <InputBase
                       sx={{ ml: 2, flex: 1 }}
                       placeholder="Enter Keyword"
+                      onChange={(e) => setSearchVal(e.target.value)}
                     />
-                    <IconButton type="button" sx={{ p: 1 }}>
+                    <IconButton
+                      onClick={handleSearchClick}
+                      type="button"
+                      sx={{ p: 1 }}
+                    >
                       <SearchIcon />
                     </IconButton>
                   </Box>
@@ -222,9 +252,9 @@ const Siswa = () => {
               <TableContainer
                 sx={{ maxHeight: 440, width: "100%", border: "none" }}
               >
-                {!isLoading  &&
-                <DataGrid
-                    rows={rows}
+                {!isLoading ? (
+                  <DataGrid
+                    rows={!siswa ? rows : siswa}
                     columns={columns}
                     initialState={{
                       pagination: {
@@ -235,8 +265,16 @@ const Siswa = () => {
                     checkboxSelection
                     disableRowSelectionOnClick
                     getRowId={(row) => row._id}
-                />
-              }
+                  />
+                ) : (
+                  <Box
+                    sx={{ display: "flex", height: 200 }}
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <CircularProgress />
+                  </Box>
+                )}
               </TableContainer>
               {/*<TablePagination*/}
               {/*  rowsPerPageOptions={[10, 25, 100]}*/}

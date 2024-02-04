@@ -22,11 +22,13 @@ import SiswaDetail from "./scanes/Siswa/siswaDetail.jsx";
 import Profile from "./scanes/Profile/Profile.jsx";
 import CalonSiswa from "./scanes/CalonSiswa/calonSiswaScreen.jsx";
 import CalonSiswaDetail from "./scanes/CalonSiswa/calonSiswaDetail.jsx";
+import Ppdb from "./scanes/ppdb/ppdb.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<Login />} />
+      <Route index={true} path="/ppdb" element={<Ppdb />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
