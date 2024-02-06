@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import generateToken from "../utils/generateToken.js";
 
 import { protect } from "../middleware/authMiddleware.js";
+import { upload } from "../utils/uploadImage.js";
 
 import {
   loginUser,
@@ -34,7 +35,7 @@ router.post("/", loginUser);
 router.post("/register", registerUser);
 router.post("/logout", logoutUser);
 
-router.route("/profile").get(getuserProfile).put(updateUserProfile);
+router.route("/profile", upload.single("file")).get(getuserProfile).put(updateUserProfile);
 // router.patch("/current", authMiddleware, async (req, res) => {
 //   try {
 //     const { username, nama_lengkap, email, niptk, nomor_telepon, password } =
