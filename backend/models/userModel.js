@@ -23,12 +23,15 @@ const userSchema = mongoose.Schema(
       required: true,
     },
     nomor_telepon: {
-      type: Number,
+      type: String,
       required: true,
     },
     password: {
       type: String,
       required: true,
+    },
+    profil: {
+      type: String,
     },
   },
   {
