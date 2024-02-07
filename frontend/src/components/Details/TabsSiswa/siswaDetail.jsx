@@ -2,27 +2,24 @@ import { Box, Grid, Button, Stack, TextField } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../../Theme";
-import { toast } from "react-toastify";
 
 import EditIcon from "@mui/icons-material/Edit";
-import CheckIcon from "@mui/icons-material/Check";
 
 import { useState, useEffect } from "react";
 import {
   useGetDetailSiswaQuery,
   useUpdateDetailSiswaMutation,
 } from "../../../slices/siswaApiSlice";
-import { InputOutlined } from "@mui/icons-material";
 
 import DetailInformationGrid from "../../Form/DetailInformationGrid.jsx";
-import { render } from "@testing-library/react";
+
 import { InformationDialog } from "../../Dialog/InformationDialog.jsx";
 import ConfirmationDialog from "../../Dialog/ConfirmationDialog.jsx";
 
 const DetailSiswa = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { data, isLoading, isError } = useGetDetailSiswaQuery(props.id);
+  const { data, isLoading } = useGetDetailSiswaQuery(props.id);
   const [update, { isLoadingUpdate }] = useUpdateDetailSiswaMutation();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   // const [detail, setDetail] = useState();
@@ -63,6 +60,7 @@ const DetailSiswa = (props) => {
 
   function updateData() {
     setOpenConfModal(false);
+
     var res = update({
       id: token,
       data: formData,
@@ -87,6 +85,7 @@ const DetailSiswa = (props) => {
       id: token,
       data: imageData,
     }).unwrap();
+
     window.location.reload();
   };
 
@@ -101,7 +100,7 @@ const DetailSiswa = (props) => {
       <ConfirmationDialog
         isOpen={openConfModal}
         content="Perubahan pada data siswa tidak bisa dikembalikan !"
-        onAgree={updateData}
+        onAgree={updateData && uploadHandler}
         onClose={() => {
           setOpenConfModal(false);
           setFormData(detail);
@@ -143,7 +142,7 @@ const DetailSiswa = (props) => {
             component="label"
             variant="contained"
             startIcon={<CloudUploadIcon />}
-            onClick={uploadHandler}
+            onClick={onSubmitForm}
           >
             Upload file
           </Button>
@@ -157,50 +156,58 @@ const DetailSiswa = (props) => {
                 <DetailInformationGrid
                   title="Nama"
                   inputValue={formData.nama}
+                  inputName="nama"
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="NIS"
                   inputValue={formData.nis}
-                  onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Jenis Kelamin"
+                  inputName="jenis_kelamin"
                   inputValue={formData.jenis_kelamin}
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Tempat Lahir"
+                  inputName="tempat_lahir"
                   inputValue={formData.tempat_lahir}
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Tanggal Lahir"
                   inputValue={formData.tanggal_lahir}
+                  inputName="tanggal_lahir"
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="NIK"
                   inputValue={formData.nik}
+                  inputName="nik"
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Agama"
                   inputValue={formData.agama}
+                  inputName="agama"
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Alamat"
+                  inputName="alamat"
                   inputValue={formData.alamat}
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Asal Sekolah"
+                  inputName="asal_sekolah"
                   inputValue={formData.asal_sekolah}
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Status"
+                  inputName="status_anak"
                   inputValue={formData.status_anak}
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>

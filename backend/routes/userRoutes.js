@@ -12,7 +12,7 @@ import {
   logoutUser,
   registerUser,
   getuserProfile,
-  updateUserProfile
+  updateUserProfile,
 } from "../controller/userController.js";
 
 // import authMiddleware from "../middleware/auth.js";
@@ -35,7 +35,8 @@ router.post("/", loginUser);
 router.post("/register", registerUser);
 router.post("/logout", logoutUser);
 
-router.route("/profile", upload.single("file")).get(getuserProfile).put(updateUserProfile);
+router.get("/profile", getuserProfile);
+router.put("/profile/:id", upload.single("file"), updateUserProfile);
 // router.patch("/current", authMiddleware, async (req, res) => {
 //   try {
 //     const { username, nama_lengkap, email, niptk, nomor_telepon, password } =

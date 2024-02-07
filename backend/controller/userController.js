@@ -73,6 +73,7 @@ const loginUser = asyncHandler(async (req, res) => {
       username: user.username,
       email: user.email,
       nama_lengkap: user.nama_lengkap,
+      profil: user.profil,
     });
   } else {
     res.status(401);
@@ -91,7 +92,8 @@ const logoutUser = asyncHandler(async (req, res) => {
 });
 
 const getuserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  console.log(req);
+  const user = await User.findById(req.userInfo._id);
   if (user) {
     res.json({
       username: user.username,
@@ -107,36 +109,49 @@ const getuserProfile = asyncHandler(async (req, res) => {
 });
 
 const updateUserProfile = asyncHandler(async (req, res) => {
-  console.log(req.body._id);
-  const user = await User.findOneAndUpdate(
-    { id: req.body._id },
-    { $set: updateFields }
-  );
+  try {
+    console.log("re1 file :", req.params);
 
-  if (user) {
-    user.nama_lengkap = req.body.nama_lengkap || user.nama_lengkap;
-    user.email = req.body.email || user.email;
-
-    if (req.body.password) {
-      user.password = req.body.password;
-    }
+    const { id } = req.params;
     const updateFields = { ...req.body };
 
     if (req.file) {
       updateFields.profil = req.file.filename;
     }
 
-    const updatedUser = await user.save();
+    const user = await User.findOneAndUpdate(
+      { _id: id },
+      { $set: updateFields }
+    );
 
-    res.json({
-      _id: updatedUser._id,
-      username: updatedUser.username,
-      nama_lengkap: updatedUser.nama_lengkap,
-      email: updatedUser.email,
-    });
-  } else {
-    res.status(404);
-    throw new Error("User not found");
+    if (user) {
+      user.nama_lengkap = req.body.nama_lengkap || user.nama_lengkap;
+      user.email = req.body.email || user.email;
+
+      if (req.body.password) {
+        user.password = req.body.password;
+      }
+      const updateFields = { ...req.body };
+
+      if (req.file) {
+        updateFields.profil = req.file.filename;
+      }
+
+      const updatedUser = await user.save();
+
+      res.json({
+        _id: updatedUser._id,
+        username: updatedUser.username,
+        nama_lengkap: updatedUser.nama_lengkap,
+        email: updatedUser.email,
+      });
+    } else {
+      res.status(404);
+      throw new Error("User not found");
+    }
+  } catch (err) {
+    console.log(err.massage);
+    res.status(500).send({ message: err.message });
   }
 });
 

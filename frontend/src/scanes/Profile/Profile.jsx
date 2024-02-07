@@ -81,11 +81,17 @@ const Profile = () => {
     e.preventDefault();
     //console.log(image);
     imageData.append("file", image);
+    //console.log(image);
     const res = updateProfile({
-      _id: userInfo._id,
       data: imageData,
+      id: userInfo._id,
     }).unwrap();
   };
+
+  function handleFileInputChange(e) {
+    setImage(e.target.files[0]);
+    // console.log(e)
+  }
 
   return (
     <Template>
@@ -120,11 +126,12 @@ const Profile = () => {
                     }`}
                     style={{ cursor: "pointer", borderRadius: "50%" }}
                   />
-                  <input
-                    style={{ marginTop: "20px" }}
+                  <TextField
+                    sx={{ m: 2 }}
                     type="file"
-                    onChange={(e) => setImage(e.target.files[0])}
-                  />
+                    defaultValue={image ? image.name : ""}
+                    onChange={handleFileInputChange}
+                  ></TextField>
                   <Typography fontWeight="600" fontSize="18px" marginTop="20px">
                     {userInfo.username || ""}
                   </Typography>
@@ -274,6 +281,7 @@ const Profile = () => {
                         margin: "12px",
                       }}
                       type="submit"
+                      disabled={isLoading}
                     >
                       Update
                     </Button>

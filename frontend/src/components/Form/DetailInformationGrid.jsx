@@ -4,6 +4,7 @@ export default function DetailInformationGrid({
   title,
   inputValue,
   onInputChange,
+  inputName,
 }) {
   return (
     <Grid container direction="row" spacing={1} sx={{ py: 1 }}>
@@ -20,7 +21,7 @@ export default function DetailInformationGrid({
       <Grid item xs={7}>
         <TextField
           onChange={onInputChange}
-          name="nama"
+          name={inputName}
           value={inputValue}
           sx={{ width: "100%" }}
         />
