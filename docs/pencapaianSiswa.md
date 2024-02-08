@@ -8,7 +8,6 @@ Request Body :
 
 ```json
 {
-  "id_siswa": "1"*,
   "membaca_alquran": "lancar",
   "jumlah_hafalan": "1 juz",
   "hobby": "main",
@@ -21,15 +20,16 @@ Response Body Success:
 
 ```json
 {
+  "status" : "success",
+  "message": "data pencapaian berhasil ditambahkan",
   "data": {
     "id_siswa": "1"*,
-  "membaca_alquran": "lancar",
-  "jumlah_hafalan": "1 juz",
-  "hobby": "main",
-  "cita_cita": "badminton",
-  "prestasi": "prestasi"
+    "membaca_alquran": "lancar",
+    "jumlah_hafalan": "1 juz",
+    "hobby": "main",
+    "cita_cita": "badminton",
+    "prestasi": "prestasi"
   },
-  "meesage": "data pencapaian berhasil ditambahkan"
 }
 ```
 
@@ -37,7 +37,17 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "data tidak lengkap"
+  "status": "fail",
+  "message": error.message
+}
+```
+
+Process Failed:
+
+```json
+{
+  "status": "error",
+  "message": error.message
 }
 ```
 
@@ -49,7 +59,6 @@ Request Body :
 
 ```json
 {
-  "id_siswa": "1"*,
   "membaca_alquran": "lancar",
   "jumlah_hafalan": "1 juz",
   "hobby": "main",
@@ -62,13 +71,14 @@ Response Body Success:
 
 ```json
 {
+  "status": "success",
   "data": {
     "id_siswa": "1"*,
-  "membaca_alquran": "lancar",
-  "jumlah_hafalan": "1 juz",
-  "hobby": "main",
-  "cita_cita": "badminton",
-  "prestasi": "prestasi"
+    "membaca_alquran": "lancar",
+    "jumlah_hafalan": "1 juz",
+    "hobby": "main",
+    "cita_cita": "badminton",
+    "prestasi": "prestasi"
   }
 }
 ```
@@ -77,7 +87,17 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "id salah"
+  "status": "fail",
+  "message": error.message
+}
+```
+
+Process Failed:
+
+```json
+{
+  "status": "error",
+  "message": error.message
 }
 ```
 
@@ -89,7 +109,6 @@ Request Body :
 
 ```json
 {
-  "siswa_id": "1"*,
   "membaca_alquran": "lancar",
   "jumlah_hafalan": "1 juz",
   "hobby": "main",
@@ -102,14 +121,8 @@ Response Body Success:
 
 ```json
 {
-  "data": {
-    "id_siswa": "1"*,
-  "membaca_alquran": "lancar",
-  "jumlah_hafalan": "1 juz",
-  "hobby": "main",
-  "cita_cita": "badminton",
-  "prestasi": "prestasi"
-  }
+  "status": "success",
+  "message": "data kesehatan berhasil di update"
 }
 ```
 
@@ -117,6 +130,16 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "id salah"
+  "status": "fail",
+  "message": error.message
+}
+```
+
+Process Failed:
+
+```json
+{
+  "status": "error",
+  "message": error.message
 }
 ```
