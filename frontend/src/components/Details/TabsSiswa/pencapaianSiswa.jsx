@@ -109,26 +109,31 @@ const PencapaianSiswa = (props) => {
                   title="Membaca Alquran"
                   inputValue={formData.membaca_alquran}
                   onInputChange={handleInputChange}
+                  inputName="membaca_alquran"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Jumlah Hafalan"
                   inputValue={formData.jumlah_hafalan}
                   onInputChange={handleInputChange}
+                  inputName="jumlah_hafalan"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Hobby"
                   inputValue={formData.hobby}
                   onInputChange={handleInputChange}
+                  inputName="hobby"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Cita Cita"
                   inputValue={formData.cita_cita}
                   onInputChange={handleInputChange}
+                  inputName="cita_cita"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Prestasi"
                   inputValue={formData.prestasi}
                   onInputChange={handleInputChange}
+                  inputName="prestasi"
                 ></DetailInformationGrid>
               </>
             )}

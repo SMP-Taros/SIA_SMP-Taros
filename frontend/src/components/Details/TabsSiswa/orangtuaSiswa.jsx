@@ -106,82 +106,98 @@ const OrangtuaSiswa = (props) => {
                 <DetailInformationGrid
                   title="Nama Ayah"
                   inputValue={formData.nama_ayah}
+                  inputName="nama_ayah"
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="NIK Ayah"
                   inputValue={formData.nik_ayah}
                   onInputChange={handleInputChange}
+                  inputName="nik_ayah"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Tahun Lahir Ayah"
                   inputValue={formData.tahun_lahir_ayah}
                   onInputChange={handleInputChange}
+                  inputName="tahun_lahir_ayah"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Pendidikan Terakhir Ayah"
                   inputValue={formData.pendidikan_terakhir_ayah}
                   onInputChange={handleInputChange}
+                  inputName="pendidikan_terakhir_ayah"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Nama Instansi Ayah Bekerja"
                   inputValue={formData.nama_instansi_kerja_ayah}
                   onInputChange={handleInputChange}
+                  inputName="nama_instansi_kerja_ayah"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Jabatan Ayah"
                   inputValue={formData.jabatan_ayah}
                   onInputChange={handleInputChange}
+                  inputName="jabatan_ayah"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Penghasilan Perbulan Ayah"
                   inputValue={formData.penghasilan_perbulan_ayah}
                   onInputChange={handleInputChange}
+                  inputName="penghasilan_perbulan_ayah"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Keberadaan Ayah"
                   inputValue={formData.keberadaan_ayah}
                   onInputChange={handleInputChange}
+                  inputName="keberadaan_ayah"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Nama Ibu"
                   inputValue={formData.nama_ibu}
+                  inputName="nama_ibu"
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="NIK Ibu"
                   inputValue={formData.nik_ibu}
                   onInputChange={handleInputChange}
+                  inputName="nik_ibu"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Tahun Lahir Ibu"
                   inputValue={formData.tahun_lahir_ibu}
                   onInputChange={handleInputChange}
+                  inputName="tahun_lahir_ibu"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Pendidikan Terakhir Ibu"
                   inputValue={formData.pendidikan_terakhir_ibu}
                   onInputChange={handleInputChange}
+                  inputName="pendidikan_terakhir_ibu"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Nama Instansi Ibu Bekerja"
                   inputValue={formData.nama_instansi_kerja_ibu}
                   onInputChange={handleInputChange}
+                  inputName="nama_instansi_kerja_ibu"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Jabatan Ibu"
                   inputValue={formData.jabatan_ibu}
                   onInputChange={handleInputChange}
+                  inputName="jabatan_ibu"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Penghasilan Perbulan Ibu"
                   inputValue={formData.penghasilan_perbulan_ibu}
                   onInputChange={handleInputChange}
+                  inputName="penghasilan_perbulan_ibu"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Keberadaan Ibu"
                   inputValue={formData.keberadaan_ibu}
                   onInputChange={handleInputChange}
+                  inputName="keberadaan_ibu"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Email"

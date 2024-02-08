@@ -64,6 +64,7 @@ const loginUser = asyncHandler(async (req, res) => {
   let { username, password } = req.body;
 
   let user = await User.findOne({ username });
+  console.log(req.headers);
 
   if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id);

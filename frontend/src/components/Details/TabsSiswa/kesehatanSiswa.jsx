@@ -107,27 +107,32 @@ const KesehatanSiswa = (props) => {
                 <DetailInformationGrid
                   title="Golongan Darah"
                   inputValue={formData.golongan_darah}
+                  inputName="golongan_darah"
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Penyakit yang pernah diderita"
                   inputValue={formData.penyakit_pernah_diderita}
                   onInputChange={handleInputChange}
+                  inputName="penyakit_pernah_diderita"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Kelainan Jasmani"
                   inputValue={formData.kelainan_jamani}
                   onInputChange={handleInputChange}
+                  inputName="kelainan_jasmani"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Berat Badan"
                   inputValue={formData.berat_badan}
                   onInputChange={handleInputChange}
+                  inputName="berat_badan"
                 ></DetailInformationGrid>
                 <DetailInformationGrid
                   title="Tinggi Badan"
                   inputValue={formData.tinggi_badan}
                   onInputChange={handleInputChange}
+                  inputName="tinggi_badan"
                 ></DetailInformationGrid>
               </>
             )}

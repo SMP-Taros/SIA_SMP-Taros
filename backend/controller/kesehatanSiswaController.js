@@ -26,12 +26,16 @@ const createKesehatanSiswa = asyncHandler(async (req, res) => {
     const kesehatanSiswa = await KesehatanSiswa.create(newKesehatanSiswa);
 
     return res.status(201).json({
+      error: false,
       message: "data kesehatan siswa berhasil ditambahkan",
       data: kesehatanSiswa,
     });
   } catch (error) {
     console.log(error.message);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      error: true,
+      message: error.message,
+    });
   }
 });
 
@@ -43,7 +47,10 @@ const getKesehatanSiswa = asyncHandler(async (req, res) => {
     });
 
     if (!kesehatanSiswa) {
-      return res.status(401).send("siswa tidak ditemukan");
+      return res.status(401).json({
+        error: true,
+        message: "Siswa tidak ditemukan",
+      });
     }
     // console.log(req);
 
@@ -52,7 +59,10 @@ const getKesehatanSiswa = asyncHandler(async (req, res) => {
     });
   } catch (error) {
     console.log(error.massage);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      error: true,
+      message: error.message,
+    });
   }
 });
 
@@ -71,12 +81,14 @@ const updateKesehatanSiswa = asyncHandler(async (req, res) => {
       req.body
     );
     if (!kesehatanSiswa) {
-      return res.status(400).send({
+      return res.status(400).json({
+        error: true,
         message: "id tidak terdaftar",
       });
     }
 
     return res.status(201).json({
+      error: false,
       message: "data kesehatan siswa berhasil diupdate",
     });
   } catch (error) {
