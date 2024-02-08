@@ -27,11 +27,10 @@ const createKesehatanSiswa = asyncHandler(async (req, res) => {
 
     return res.status(201).json({
       error: false,
-      message: "data kesehatan siswa berhasil ditambahkan",
+      message: "Data kesehatan siswa berhasil ditambahkan",
       data: kesehatanSiswa,
     });
   } catch (error) {
-    console.log(error.message);
     res.status(500).send({
       error: true,
       message: error.message,
@@ -55,6 +54,8 @@ const getKesehatanSiswa = asyncHandler(async (req, res) => {
     // console.log(req);
 
     return res.status(200).json({
+      error: false,
+      message: "success",
       data: kesehatanSiswa,
     });
   } catch (error) {
@@ -72,6 +73,7 @@ const updateKesehatanSiswa = asyncHandler(async (req, res) => {
 
     if (!req.body) {
       return res.status(400).send({
+        error: true,
         message: "tidak ada kolom yang terisi",
       });
     }
@@ -90,10 +92,14 @@ const updateKesehatanSiswa = asyncHandler(async (req, res) => {
     return res.status(201).json({
       error: false,
       message: "data kesehatan siswa berhasil diupdate",
+      data: kesehatanSiswa,
     });
   } catch (error) {
     console.log(error.message);
-    res.status(500).send({ message: error.message });
+    res.status(500).json({
+      error: true,
+      message: error.message,
+    });
   }
 });
 

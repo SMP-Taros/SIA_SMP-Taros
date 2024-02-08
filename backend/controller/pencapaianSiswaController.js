@@ -25,13 +25,17 @@ const createPencapaianSiswa = asyncHandler(async (req, res) => {
 
     const PencapaianSiswa = await pencapaianSiswa.create(newPencapaianSiswa);
 
-    return res.status(201).json({
+    return res.status(201).send({
+      status: "success",
       message: "data kesehatan siswa berhasil ditambahkan",
       data: PencapaianSiswa,
     });
   } catch (error) {
     console.log(error.message);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 
@@ -43,16 +47,23 @@ const getPencapaianSiswa = asyncHandler(async (req, res) => {
     });
 
     if (!PencapaianSiswa) {
-      return res.status(401).send("siswa tidak ditemukan");
+      return res.status(401).send({
+        status: "fail",
+        message: "siswa tidak ditemukan",
+      });
     }
     // console.log(req);
 
-    return res.status(200).json({
+    return res.status(200).send({
+      status: "success",
       data: PencapaianSiswa,
     });
   } catch (error) {
     console.log(error.massage);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 
@@ -62,11 +73,10 @@ const updatePencapaianSiswa = asyncHandler(async (req, res) => {
 
     if (!req.body) {
       return res.status(400).send({
+        status: "fail",
         message: "tidak ada kolom yang terisi",
       });
     }
-
-    console.log(id);
 
     const PencapaianSiswa = await pencapaianSiswa.findOneAndUpdate(
       { siswa_id: id },
@@ -74,16 +84,21 @@ const updatePencapaianSiswa = asyncHandler(async (req, res) => {
     );
     if (!PencapaianSiswa) {
       return res.status(400).send({
+        status: "fail",
         message: "id tidak terdaftar",
       });
     }
 
-    return res.status(201).json({
+    return res.status(201).send({
+      status: "success",
       message: "data pencapaian siswa berhasil diupdate",
     });
   } catch (error) {
     console.log(error.message);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 

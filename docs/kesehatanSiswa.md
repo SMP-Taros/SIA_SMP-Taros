@@ -8,7 +8,6 @@ Request Body :
 
 ```json
 {
-  "siswa_id": "1"*,
   "golongan_darah": "A",
   "penyakit_pernah_diderita": "asma",
   "kelainan_jasmani": "none",
@@ -21,7 +20,7 @@ Response Body Success:
 
 ```json
 {
-  "error": false,
+  "status": "succes",
   "message": "data kesehatan berhasil ditambahkan",
   "data": {
     "siswa_id": "1",
@@ -38,7 +37,17 @@ Response Body Failed:
 
 ```json
 {
-  "error": true
+  "status": "fail",
+  "message": error.message,
+}
+```
+
+Process Failed:
+
+```json
+{
+  "status": "error",
+  "message": error.message
 }
 ```
 
@@ -50,7 +59,6 @@ Request Body :
 
 ```json
 {
-  "siswa_id": "1"*,
   "golongan_darah": "A",
   "penyakit_yang_pernah_diderita": "asma",
   "kelainan_jasmani": "none",
@@ -63,7 +71,7 @@ Response Body Success:
 
 ```json
 {
-  "error": false,
+  "status": "success",
   "message": "Berhasil membuat siswa",
   "data": {
     "siswa_id": "1"*,
@@ -80,8 +88,17 @@ Response Body Failed:
 
 ```json
 {
-  "error": true,
+  "status": "fail",
   "message": error.message,
+}
+```
+
+Process Failed:
+
+```json
+{
+  "status": "error",
+  "message": error.message
 }
 ```
 
@@ -93,7 +110,6 @@ Request Body :
 
 ```json
 {
-  "siswa_id": "1"*,
   "golongan_darah": "A",
   "penyakit_yang_pernah_diderita": "asma",
   "kelainan_jasmani": "none",
@@ -106,16 +122,8 @@ Response Body Success:
 
 ```json
 {
-  "error": false,
-  "message": "Update kesehatan berhasil",
-  "data": {
-    "siswa_id": "1"*,
-    "golongan_darah": "A",
-    "penyakit_yang_pernah_diderita": "asma",
-    "kelainan_jasmani": "none",
-    "berat_badan": "58",
-    "tinggi_badan": "200"
-  }
+  "status": "success",
+  "message": "Data kesehatan berhasil di update"
 }
 ```
 
@@ -123,7 +131,16 @@ Response Body Failed:
 
 ```json
 {
-  "error": true,
+  "status": "fail",
   "message": error.message,
+}
+```
+
+Process Failed:
+
+```json
+{
+  "status": "error",
+  "message": error.message
 }
 ```

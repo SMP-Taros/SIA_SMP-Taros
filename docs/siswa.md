@@ -31,26 +31,27 @@ Response Body Success:
 
 ```json
 {
+  "status": "success",
+  "message": "siswa berhasil ditambahkan",
   "data": {
     "nama": "arip"*,
-  "NIS": "12335434"*,
-  "jenis_kelamin": "Laki Laki"*,
-  "NISN": "0390489585"*,
-  "tempat_lahir": "wonogiri"*,
-  "tanggal_lahir": "12 Januari 2004"*,
-  "NIK": "298238383"*,
-  "agama": "islam"*,
-  "status": "Anak Kandung"*,
-  "anak_ke": "2"*,
-  "jumlah_saudara_kandung": "3"*,
-  "status_anak": "yatim",
-  "alamat": "Batang"*,
-  "jarak_rumah_sekolah": "500km"*,
-  "asal_sekolah": "smp2"*,
-  "alamat_asal_sekolah": "rejo"*,
-  "nisn": "0959595"*
+    "NIS": "12335434"*,
+    "jenis_kelamin": "Laki Laki"*,
+    "NISN": "0390489585"*,
+    "tempat_lahir": "wonogiri"*,
+    "tanggal_lahir": "12 Januari 2004"*,
+    "NIK": "298238383"*,
+    "agama": "islam"*,
+    "status": "Anak Kandung"*,
+    "anak_ke": "2"*,
+    "jumlah_saudara_kandung": "3"*,
+    "status_anak": "yatim",
+    "alamat": "Batang"*,
+    "jarak_rumah_sekolah": "500km"*,
+    "asal_sekolah": "smp2"*,
+    "alamat_asal_sekolah": "rejo"*,
+    "nisn": "0959595"*
   },
-  "meesage": "siswa berhasil ditambahkan"
 }
 ```
 
@@ -58,7 +59,17 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "data tidak lengkap"
+  "status": "fail",
+  "message" : error.message
+}
+```
+
+Process Failed:
+
+```json
+{
+  "status": "error",
+  "message": error.message
 }
 ```
 
@@ -94,26 +105,8 @@ Response Body Success:
 
 ```json
 {
-  "data": {
-    "nama": "arip"*,
-  "NIS": "12335434"*,
-  "jenis_kelamin": "Laki Laki"*,
-  "NISN": "0390489585"*,
-  "tempat_lahir": "wonogiri"*,
-  "tanggal_lahir": "12 Januari 2004"*,
-  "NIK": "298238383"*,
-  "agama": "islam"*,
-  "status": "Anak Kandung"*,
-  "anak_ke": "2"*,
-  "jumlah_saudara_kandung": "3"*,
-  "status_anak": "yatim",
-  "alamat": "Batang"*,
-  "jarak_rumah_sekolah": "500km"*,
-  "asal_sekolah": "smp2"*,
-  "alamat_asal_sekolah": "rejo"*,
-  "nisn": "0959595"*
-  },
-  "meesage": "siswa berhasil di update"
+  "status": "success",
+  "message": "siswa berhasil di update"
 }
 ```
 
@@ -121,7 +114,17 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "data tidak boleh kosong"
+  "status": "fail",
+  "message": error.message
+}
+```
+
+Process Failed:
+
+```json
+{
+  "status": "error",
+  "message": error.message
 }
 ```
 
@@ -133,6 +136,7 @@ Response Body Success:
 
 ```json
 {
+  "status": "success",
   "data": {
     "nama": "arip",
     "NIS": "02938",
@@ -147,7 +151,17 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "data masih kosong"
+  "status": "fail",
+  "message": "data masih kosong"
+}
+```
+
+Process Failed:
+
+```json
+{
+  "status": "error",
+  "message": error.message
 }
 ```
 
@@ -155,36 +169,29 @@ Response Body Failed:
 
 Endpoint: DEL /api/siswa/:id
 
-Request Body :
-
-```json
-{
-  "id": "unique-id"
-}
-```
-
 Response Body Success:
 
 ```json
 {
+  "status": "success",
   "data": {
     "nama": "arip"*,
-  "NIS": "12335434"*,
-  "jenis_kelamin": "Laki Laki"*,
-  "NISN": "0390489585"*,
-  "tempat_lahir": "wonogiri"*,
-  "tanggal_lahir": "12 Januari 2004"*,
-  "NIK": "298238383"*,
-  "agama": "islam"*,
-  "status": "Anak Kandung"*,
-  "anak_ke": "2"*,
-  "jumlah_saudara_kandung": "3"*,
-  "status_anak": "yatim",
-  "alamat": "Batang"*,
-  "jarak_rumah_sekolah": "500km"*,
-  "asal_sekolah": "smp2"*,
-  "alamat_asal_sekolah": "rejo"*,
-  "nisn": "0959595"*
+    "NIS": "12335434"*,
+    "jenis_kelamin": "Laki Laki"*,
+    "NISN": "0390489585"*,
+    "tempat_lahir": "wonogiri"*,
+    "tanggal_lahir": "12 Januari 2004"*,
+    "NIK": "298238383"*,
+    "agama": "islam"*,
+    "status": "Anak Kandung"*,
+    "anak_ke": "2"*,
+    "jumlah_saudara_kandung": "3"*,
+    "status_anak": "yatim",
+    "alamat": "Batang"*,
+    "jarak_rumah_sekolah": "500km"*,
+    "asal_sekolah": "smp2"*,
+    "alamat_asal_sekolah": "rejo"*,
+    "nisn": "0959595"*
   }
 }
 ```
@@ -193,7 +200,17 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "id tidak ditemukan"
+  "status": "fail",
+  "messages": "id tidak ditemukan"
+}
+```
+
+Process Failed:
+
+```json
+{
+  "status": "error",
+  "message": error.message
 }
 ```
 
@@ -203,16 +220,11 @@ Endpoint: DEL /api/siswa/:id
 
 Request Body :
 
-```json
-{
-  "id": "unique-id"
-}
-```
-
 Response Body Success:
 
 ```json
 {
+  "status": "success",
   "message": "siswa berhasil dihapus"
 }
 ```
@@ -221,6 +233,16 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "id tidak ditemukan"
+  "status": "success",
+  "message": "id tidak ditemukan"
+}
+```
+
+Process Failed:
+
+```json
+{
+  "status": "error",
+  "message": error.message
 }
 ```
