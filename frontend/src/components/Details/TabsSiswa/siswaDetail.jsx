@@ -215,7 +215,7 @@ const DetailSiswa = (props) => {
             )}
           </Box>
 
-          <Box display="flex" justifyContent="flex-end">
+          <Box display="flex" justifyContent="flex-end" marginTop="20px">
             <Button
               variant="contained"
               startIcon={<EditIcon />}

@@ -7,14 +7,11 @@ import {
   IconButton,
   useTheme,
   Stack,
-  Tooltip,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogTitle,
+  CircularProgress,
 } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
+import { DataGrid } from "@mui/x-data-grid";
 
 import InputBase from "@mui/material/InputBase";
 // import { useContext } from "react";
@@ -22,18 +19,13 @@ import { ColorModeContext, tokens } from "../../Theme";
 import * as React from "react";
 
 import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
 
 import SearchIcon from "@mui/icons-material/Search";
 import Template from "../Template/TemplateScreen";
-import { Add, Info, Delete } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Add, Info } from "@mui/icons-material";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 
 import {
@@ -42,6 +34,7 @@ import {
 } from "../../slices/guruApiSlice";
 
 import { useEffect, useState } from "react";
+import CustomBreadcrumbs from "../../components/CustomBreadcrumbs.jsx";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -62,6 +55,7 @@ const Guru = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -70,6 +64,11 @@ const Guru = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  function infoClickHandler(row) {
+    navigate(`/guru/${row.id}`);
+  }
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -80,33 +79,90 @@ const Guru = () => {
     setPage(0);
   };
 
-  const { data, isLoading } = useGetAllGuruQuery();
-  //const { Delete, isDeleteLoading } = useDeleteGuruMutation();
-  const [rows, setRows] = useState([]);
+  const { data, isLoading, isError } = useGetAllGuruQuery();
 
+  let rows;
+  //console.log(isLoading, isError);
+  if (!isLoading && !isError) {
+    rows = data.data.map((row, index) => ({ rowNumber: index + 1, ...row }));
+  }
+  //console.log(nameData);
+  const [guru, setGuru] = useState("");
+  const [searchVal, setSearchVal] = useState("");
+  function handleSearchClick(e) {
+    if (searchVal === "") {
+      setGuru(rows);
+      return;
+    }
+    const filterBySearch = rows.filter((item) => {
+      return item["nama"].toLowerCase().includes(searchVal.toLowerCase());
+    });
+    setGuru(filterBySearch);
+  }
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (!isLoading && data) {
-          var fetchedRows = data.data;
-          setRows(fetchedRows);
-        } else {
-          console.log("Data is undefined");
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
+    console.log(guru);
+  }, [guru]);
 
-    fetchData();
-  }, [isLoading, data]);
+  const columns = [
+    { field: "rowNumber", headerName: "NO", width: 90 },
+    {
+      field: "nama",
+      headerName: "Nama",
+      width: 200,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "nuptk",
+      headerName: "NUPTK",
+      type: "number",
+      width: 200,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "nipy",
+      headerName: "NIPY",
+      width: 200,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "status_kepegawaian",
+      headerName: "Status Kepegawaian",
+      width: 200,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <IconButton
+            type="button"
+            style={{ color: colors.blueAccent[500] }}
+            onClick={(e) => {
+              infoClickHandler(params.row);
+            }}
+          >
+            <Info />
+          </IconButton>
+        );
+      },
+    },
+  ];
 
   return (
     <Template>
       <Box component="div" width="100%" padding="40px" paddingRight="70px">
         <Grid container justifyContent="space-between">
           <Grid item>
-            <Header title="Data Master > Guru" />
+            {/* <Header title="Data Master > Guru" /> */}
+            <CustomBreadcrumbs></CustomBreadcrumbs>
           </Grid>
           <Grid item>
             <Typography variant="h2" fontSize="20px" marginTop="24px">
@@ -164,119 +220,33 @@ const Guru = () => {
               <TableContainer
                 sx={{ maxHeight: 440, width: "100%", border: "none" }}
               >
-                <Table stickyHeader aria-label="sticky table">
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell
-                        key="nama"
-                        align={"right"}
-                        style={{ minWidth: 170 }}
-                      >
-                        Nama
-                      </StyledTableCell>
-                      <StyledTableCell
-                        key="nuptk"
-                        align={"right"}
-                        style={{ minWidth: 80 }}
-                      >
-                        NUPTK
-                      </StyledTableCell>
-                      <StyledTableCell
-                        key="status_kepegawaian"
-                        align={"right"}
-                        style={{ minWidth: 80 }}
-                      >
-                        Status Kepegawaian
-                      </StyledTableCell>
-                      <StyledTableCell
-                        key="nipy"
-                        align={"right"}
-                        style={{ minWidth: 80 }}
-                      >
-                        NIPY
-                      </StyledTableCell>
-                      <StyledTableCell
-                        key="action"
-                        align={"right"}
-                        style={{ minWidth: 80 }}
-                      >
-                        Aksi
-                      </StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow
-                        key={row.name}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
-                        <TableCell component="th" align="right" scope="row">
-                          {row.nama}
-                        </TableCell>
-                        <TableCell align="right">{row.nuptk}</TableCell>
-                        <TableCell align="right">
-                          {row.status_kepegawaian}
-                        </TableCell>
-                        <TableCell align="right">{row.nipy}</TableCell>
-                        <TableCell align="right">
-                          <Tooltip title="Detail Guru">
-                            <IconButton
-                              component={Link}
-                              to={`/guru/${row.id}`}
-                              type="button"
-                              style={{ color: colors.blueAccent[500] }}
-                              // onClick={() => dispatch({ type: 'UPDATE_ROOM', payload: params.row })}
-                            >
-                              <Info />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip title="Delete">
-                            <IconButton
-                              style={{ color: colors.redAccent[500] }}
-                              onClick={handleClickOpen}
-                            >
-                              <Delete />
-                            </IconButton>
-                          </Tooltip>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                {!isLoading ? (
+                  <DataGrid
+                    rows={!guru ? rows : guru}
+                    columns={columns}
+                    initialState={{
+                      pagination: {
+                        paginationModel: { page: 0, pageSize: 5 },
+                      },
+                    }}
+                    pageSizeOptions={[5, 10]}
+                    checkboxSelection
+                    disableRowSelectionOnClick
+                    getRowId={(row) => row.id}
+                  />
+                ) : (
+                  <Box
+                    sx={{ display: "flex", height: 200 }}
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <CircularProgress />
+                  </Box>
+                )}
               </TableContainer>
-              <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
             </Paper>
           </CardContent>
         </Card>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-        >
-          <DialogTitle id="alert-dialog-title">
-            {"Yakin Ingin Menghapus?"}
-          </DialogTitle>
-          <DialogActions>
-            <Button
-              onClick={handleClose}
-              autoFocus 
-              // onClick={() => deleteGuru(params.row, currentUser, dispatch)}
-            >
-              Ya
-            </Button>
-            <Button onClick={handleClose}>Tidak</Button>
-          </DialogActions>
-        </Dialog>
       </Box>
     </Template>
   );
