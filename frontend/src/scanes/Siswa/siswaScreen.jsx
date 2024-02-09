@@ -10,69 +10,36 @@ import {
   CircularProgress,
 } from "@mui/material";
 
-import { styled } from "@mui/material/styles";
 import { DataGrid } from "@mui/x-data-grid";
 
 import InputBase from "@mui/material/InputBase";
 // import { useContext } from "react";
-import { ColorModeContext, tokens } from "../../Theme";
+import { tokens } from "../../Theme";
 import * as React from "react";
 
 import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+
 import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
 
 import SearchIcon from "@mui/icons-material/Search";
 import Template from "../Template/TemplateScreen";
-import AddIcon from "@mui/icons-material/Add";
-import { Link, useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
+import { useNavigate } from "react-router-dom";
+
 // import Icon from "../../assets/icon/edit";
 import EditIcon from "@mui/icons-material/Edit";
-import { Delete, Info } from "@mui/icons-material";
+import { Info } from "@mui/icons-material";
 
-import {
-  useDeleteSiswaMutation,
-  useGetAllSiswaQuery,
-} from "../../slices/siswaApiSlice";
+import { useGetAllSiswaQuery } from "../../slices/siswaApiSlice";
 
 import { useEffect, useState } from "react";
 import CustomBreadcrumbs from "../../components/CustomBreadcrumbs.jsx";
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-    border: "none",
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
 
 const Siswa = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { data, isLoading, isError } = useGetAllSiswaQuery();
-  //const { Delete, isDeleteLoading } = useDeleteSiswaMutation();
-  // const [rows, setRows] = useState([]);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+
   const navigate = useNavigate();
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
 
   function infoClickHandler(row) {
     navigate(`/siswa/${row.nisn}`);
@@ -103,8 +70,8 @@ const Siswa = () => {
   const columns = [
     { field: "rowNumber", headerName: "NO", width: 90 },
     {
-      field: "_id",
-      headerName: "ID",
+      field: "nis",
+      headerName: "NIS",
       width: 150,
       headerAlign: "center",
       align: "center",
@@ -160,30 +127,6 @@ const Siswa = () => {
     },
   ];
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       // console.log("isLoading:", isLoading);
-  //       // console.log("data:", data);
-  //
-  //       if (!isLoading && data) {
-  //         var fetchedRows = data.data;
-  //         // console.log("fetchedRows:", fetchedRows);
-  //         setRows(fetchedRows); // Update the state with the fetched rows
-  //       } else {
-  //         console.log("Data is undefined");
-  //       }
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
-  //
-  //   fetchData();
-  // }, [isLoading, data]); // Adding 'isLoading' and 'data' to the dependency array
-
-  // console.log("rows:", rows);
-
-  // const colorMode = useContext(ColorModeContext);
   return (
     <Template>
       <Box
@@ -232,7 +175,7 @@ const Siswa = () => {
                     </IconButton>
                   </Box>
 
-                  <IconButton
+                  {/* <IconButton
                     component={Link}
                     to="/siswa/create"
                     type="button"
@@ -243,7 +186,7 @@ const Siswa = () => {
                     }}
                   >
                     <AddIcon />
-                  </IconButton>
+                  </IconButton> */}
                 </Stack>
               </Grid>
             </Grid>

@@ -1,4 +1,4 @@
-import { Box, Grid, Button, Stack, TextField } from "@mui/material";
+import { Box, Grid, Button, Stack, TextField, Select } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../../Theme";
@@ -12,6 +12,7 @@ import {
 } from "../../../slices/siswaApiSlice";
 
 import DetailInformationGrid from "../../Form/DetailInformationGrid.jsx";
+import SelectComponent from "../../Form/selectComponent.jsx";
 
 import { InformationDialog } from "../../Dialog/InformationDialog.jsx";
 import ConfirmationDialog from "../../Dialog/ConfirmationDialog.jsx";
@@ -31,14 +32,42 @@ const DetailSiswa = (props) => {
   });
   const [image, setImage] = useState();
   const imageData = new FormData();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+
+  const jenis_kelamin = [
+    {
+      value: "Laki-Laki",
+      label: "Laki-Laki",
+    },
+    {
+      value: "Perempuan",
+      label: "Perempuan",
+    },
+  ];
+  const status_anak = [
+    {
+      value: "Yatim",
+      label: "Yatim",
+    },
+    {
+      value: "Piatu",
+      label: "Piatu",
+    },
+    {
+      value: "Yatim Piatu",
+      label: "Yatim Piatu",
+    },
+    {
+      value: "Lengkap",
+      label: "Lengkap",
+    },
+  ];
+
   let detail;
   var token = props.id;
   if (!isLoading) {
     detail = data.data;
   }
-  console.log(detail, formData);
+
   useEffect(() => {
     if (detail) {
       setFormData(detail);
@@ -47,6 +76,7 @@ const DetailSiswa = (props) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setFormData({
       ...formData,
       [name]: value,
@@ -100,7 +130,7 @@ const DetailSiswa = (props) => {
       <ConfirmationDialog
         isOpen={openConfModal}
         content="Perubahan pada data siswa tidak bisa dikembalikan !"
-        onAgree={updateData && uploadHandler}
+        onAgree={image ? uploadHandler : updateData}
         onClose={() => {
           setOpenConfModal(false);
           setFormData(detail);
@@ -163,12 +193,13 @@ const DetailSiswa = (props) => {
                   title="NIS"
                   inputValue={formData.nis}
                 ></DetailInformationGrid>
-                <DetailInformationGrid
+                <SelectComponent
                   title="Jenis Kelamin"
-                  inputName="jenis_kelamin"
-                  inputValue={formData.jenis_kelamin}
                   onInputChange={handleInputChange}
-                ></DetailInformationGrid>
+                  inputLabel={formData.jenis_kelamin}
+                  options={jenis_kelamin}
+                  inputName="jenis_kelamin"
+                ></SelectComponent>
                 <DetailInformationGrid
                   title="Tempat Lahir"
                   inputName="tempat_lahir"
@@ -211,6 +242,14 @@ const DetailSiswa = (props) => {
                   inputValue={formData.status_anak}
                   onInputChange={handleInputChange}
                 ></DetailInformationGrid>
+                <SelectComponent
+                  title="Status"
+                  inputName="status_anak"
+                  inputValue={formData.status_anak}
+                  onInputChange={handleInputChange}
+                  inputLabel={formData.status_anak}
+                  options={status_anak}
+                ></SelectComponent>
               </>
             )}
           </Box>

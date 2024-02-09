@@ -111,8 +111,6 @@ const getuserProfile = asyncHandler(async (req, res) => {
 
 const updateUserProfile = asyncHandler(async (req, res) => {
   try {
-    console.log("re1 file :", req.params);
-
     const { id } = req.params;
     const updateFields = { ...req.body };
 
@@ -140,11 +138,16 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
       const updatedUser = await user.save();
 
-      res.json({
-        _id: updatedUser._id,
-        username: updatedUser.username,
-        nama_lengkap: updatedUser.nama_lengkap,
-        email: updatedUser.email,
+      res.send({
+        status: "success",
+        message: "Data Berhasil Di update",
+        data: {
+          _id: user._id,
+          username: user.username,
+          nama_lengkap: user.nama_lengkap,
+          email: user.email,
+          profil: user.profil,
+        },
       });
     } else {
       res.status(404);
