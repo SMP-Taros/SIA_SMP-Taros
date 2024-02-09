@@ -213,7 +213,11 @@ const Siswa = () => {
               </Grid>
               <Grid item>
                 <Stack direction="row">
-                  <Box backgroundColor={colors.primary[400]} borderRadius="3px">
+                  <Box
+                    backgroundColor={colors.primary[400]}
+                    borderRadius="3px"
+                    marginRight={2}
+                  >
                     <InputBase
                       sx={{ ml: 2, flex: 1 }}
                       placeholder="Enter Keyword"
@@ -233,6 +237,10 @@ const Siswa = () => {
                     to="/siswa/create"
                     type="button"
                     sx={{ p: 1 }}
+                    style={{
+                      background: colors.greenAccent[500],
+                      borderRadius: 10,
+                    }}
                   >
                     <AddIcon />
                   </IconButton>
