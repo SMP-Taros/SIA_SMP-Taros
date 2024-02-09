@@ -233,7 +233,7 @@ Response Body Failed:
 
 ```json
 {
-  "status": "success",
+  "status": "fail",
   "message": "id tidak ditemukan"
 }
 ```

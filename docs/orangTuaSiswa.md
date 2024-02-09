@@ -146,7 +146,7 @@ Response Body Failed:
 ```json
 {
   "status": "fail",
-  "message": "id salah"
+  "message": "siswa tidak ditemukan"
 }
 ```
 
@@ -204,7 +204,7 @@ Response Body Failed:
 ```json
 {
   "status": "fail",
-  "message": "id salah"
+  "message": "siswa tidak ditemukan"
 }
 ```
 

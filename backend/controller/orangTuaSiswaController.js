@@ -1,7 +1,5 @@
 import orangTuaSiswa from "../models/orangTuaSiswaModel.js";
-import Siswa from "../models/siswaModel.js";
 import asyncHandler from "express-async-handler";
-import { ObjectId } from "mongoose";
 
 const createOrangTuaSiswa = asyncHandler(async (req, res) => {
   try {
@@ -39,7 +37,8 @@ const createOrangTuaSiswa = asyncHandler(async (req, res) => {
       !tahun_lahir_ibu ||
       !penghasilan_perbulan_ibu
     ) {
-      return res.status(401).json({
+      return res.status(401).send({
+        status: "fail",
         message: "data tidak lengkap",
       });
     }
@@ -70,13 +69,16 @@ const createOrangTuaSiswa = asyncHandler(async (req, res) => {
 
     const OrangTuaSiswa = await orangTuaSiswa.create(newOrangTuaSiswa);
 
-    return res.status(201).json({
+    return res.status(201).send({
+      status: "success",
       message: "data Orang Tua siswa berhasil ditambahkan",
       data: OrangTuaSiswa,
     });
   } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 
@@ -88,16 +90,21 @@ const getOrangTuaSiswa = asyncHandler(async (req, res) => {
     });
 
     if (!OrangTuaSiswa) {
-      return res.status(401).send("siswa tidak ditemukan");
+      return res.status(401).send({
+        status: "fail",
+        message: "siswa tidak ditemukan",
+      });
     }
-    // console.log(req);
 
-    return res.status(200).json({
+    return res.status(200).send({
+      status: success,
       data: OrangTuaSiswa,
     });
   } catch (error) {
-    console.log(error.massage);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 
@@ -107,6 +114,7 @@ const updateOrangTuaSiswa = asyncHandler(async (req, res) => {
 
     if (!req.body) {
       return res.status(400).send({
+        status: "fail",
         message: "tidak ada kolom yang terisi",
       });
     }
@@ -117,16 +125,20 @@ const updateOrangTuaSiswa = asyncHandler(async (req, res) => {
     );
     if (!OrangTuaSiswa) {
       return res.status(400).send({
+        status: "success",
         message: "id tidak terdaftar",
       });
     }
 
-    return res.status(201).json({
+    return res.status(201).send({
+      status: "success",
       message: "data orang tua siswa berhasil diupdate",
     });
   } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 

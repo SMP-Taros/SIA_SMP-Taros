@@ -83,7 +83,8 @@ const createCalonSiswa = asyncHandler(async (req, res) => {
       !tipe_pembayaran
     ) {
       // console.log(request.body.nama)
-      return res.status(400).send({
+      return res.status(401).send({
+        status: "fail",
         message: "Send all required fields",
       });
     }
@@ -139,19 +140,22 @@ const createCalonSiswa = asyncHandler(async (req, res) => {
     const calonSiswa = await CalonSiswa.create(newSiswa);
 
     return res.status(201).json({
+      status: "success",
       message: "siswa berhasil ditambahkan",
       data: calonSiswa,
     });
   } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 const confirmCalonSiswa = asyncHandler(async (req, res) => {
   try {
     const { id } = req.body;
     const calonSiswa = await CalonSiswa.findById(id);
-    console.log(req.body);
+
     let {
       nama,
       jenis_kelamin,
@@ -226,6 +230,7 @@ const confirmCalonSiswa = asyncHandler(async (req, res) => {
       !penghasilan_perbulan_ibu
     ) {
       return res.status(400).send({
+        status: "fail",
         message: "Send all required fields",
       });
     }
@@ -295,13 +300,16 @@ const confirmCalonSiswa = asyncHandler(async (req, res) => {
 
     const deleteCalonSiswa = await CalonSiswa.findByIdAndDelete(id);
 
-    return res.status(201).json({
+    return res.status(201).send({
+      status: "success",
       message: "konfirmasi siswa berhasil",
-      data: siswa,
     });
   } catch (error) {
     console.log(error.message);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 
@@ -320,12 +328,14 @@ const getCalonSiswa = asyncHandler(async (req, res) => {
     });
 
     return res.status(200).json({
-      count: calonSiswa.length,
+      status: "success",
       data: formattedData,
     });
   } catch (error) {
-    console.log(error.massage);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 
@@ -335,15 +345,22 @@ const getDetailCalonSiswa = asyncHandler(async (req, res) => {
     const calonSiswa = await CalonSiswa.findById(id);
 
     if (!calonSiswa) {
-      return res.status(401).send("siswa tidak ditemukan");
+      return res.status(401).send({
+        status: "fail",
+        message: "siswa tidak ditemukan",
+      });
     }
 
-    return res.status(200).json({
+    return res.status(200).send({
+      status: "success",
       data: calonSiswa,
     });
   } catch (error) {
     console.log(error.massage);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 
@@ -353,13 +370,22 @@ const deleteCalonSiswa = asyncHandler(async (req, res) => {
     const calonSiswa = await CalonSiswa.findByIdAndDelete(id);
 
     if (!calonSiswa) {
-      return res.status(401).json({ message: "Siswa not found" });
+      return res.status(401).send({
+        status: "fail",
+        message: "Siswa not found",
+      });
     }
 
-    return res.status(201).send("Siswa deleted");
+    return res.status(201).send({
+      status: success,
+      message: "calon siswa berhasil dihapus",
+    });
   } catch (error) {
     console.log(error.massage);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 

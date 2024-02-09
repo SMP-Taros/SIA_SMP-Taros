@@ -25,14 +25,14 @@ const createKesehatanSiswa = asyncHandler(async (req, res) => {
 
     const kesehatanSiswa = await KesehatanSiswa.create(newKesehatanSiswa);
 
-    return res.status(201).json({
-      error: false,
+    return res.status(201).send({
+      status: "success",
       message: "Data kesehatan siswa berhasil ditambahkan",
       data: kesehatanSiswa,
     });
   } catch (error) {
     res.status(500).send({
-      error: true,
+      status: "error",
       message: error.message,
     });
   }
@@ -47,21 +47,19 @@ const getKesehatanSiswa = asyncHandler(async (req, res) => {
 
     if (!kesehatanSiswa) {
       return res.status(401).json({
-        error: true,
+        status: "fail",
         message: "Siswa tidak ditemukan",
       });
     }
     // console.log(req);
 
     return res.status(200).json({
-      error: false,
-      message: "success",
+      status: "success",
       data: kesehatanSiswa,
     });
   } catch (error) {
-    console.log(error.massage);
     res.status(500).send({
-      error: true,
+      status: "error",
       message: error.message,
     });
   }
@@ -73,7 +71,7 @@ const updateKesehatanSiswa = asyncHandler(async (req, res) => {
 
     if (!req.body) {
       return res.status(400).send({
-        error: true,
+        error: "fail",
         message: "tidak ada kolom yang terisi",
       });
     }
@@ -83,21 +81,20 @@ const updateKesehatanSiswa = asyncHandler(async (req, res) => {
       req.body
     );
     if (!kesehatanSiswa) {
-      return res.status(400).json({
-        error: true,
+      return res.status(400).send({
+        status: "fail",
         message: "id tidak terdaftar",
       });
     }
 
-    return res.status(201).json({
-      error: false,
+    return res.status(201).send({
+      status: "success",
       message: "data kesehatan siswa berhasil diupdate",
       data: kesehatanSiswa,
     });
   } catch (error) {
-    console.log(error.message);
     res.status(500).json({
-      error: true,
+      status: "error",
       message: error.message,
     });
   }

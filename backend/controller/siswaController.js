@@ -42,6 +42,7 @@ const createSiswa = asyncHandler(async (req, res) => {
     ) {
       // console.log(request.body.nama)
       return res.status(400).send({
+        status: "fail",
         message: "Send all required fields",
       });
     }
@@ -66,13 +67,16 @@ const createSiswa = asyncHandler(async (req, res) => {
 
     const siswa = await Siswa.create(newSiswa);
 
-    return res.status(201).json({
+    return res.status(201).send({
+      status: "success",
       message: "siswa berhasil ditambahkan",
       data: siswa,
     });
   } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 
@@ -81,16 +85,19 @@ const getSiswa = asyncHandler(async (req, res) => {
     const siswa = await Siswa.find({});
 
     const formattedData = siswa.map((val) => {
-      return val
+      return val;
     });
 
     return res.status(200).json({
-      count: siswa.length,
+      status: "success",
       data: formattedData,
     });
   } catch (error) {
     console.log(error.massage);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 
@@ -100,16 +107,21 @@ const getdetailSiswa = asyncHandler(async (req, res) => {
     const siswa = await Siswa.findOne({ nisn: id });
 
     if (!siswa) {
-      return res.status(401).send("siswa tidak ditemukan");
+      return res.status(401).send({
+        status: "fail",
+        message: "siswa tidak ditemukan",
+      });
     }
 
-    return res.status(200).json({
+    return res.status(200).send({
+      status: "success",
       data: siswa,
     });
   } catch (error) {
-    console.log(req.params);
-    // console.log(error.massage);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 const updateSiswa = asyncHandler(async (req, res) => {
@@ -137,7 +149,10 @@ const updateSiswa = asyncHandler(async (req, res) => {
 
     if (!req.body) {
       // console.log(request.body.nama)
-      return res.status(400).send("none of your fields have been filled");
+      return res.status(400).send({
+        status: "fail",
+        message: "tidak ada field yang terisi",
+      });
     }
 
     const { id } = req.params;
@@ -153,17 +168,21 @@ const updateSiswa = asyncHandler(async (req, res) => {
     );
 
     if (!siswa) {
-      return res.status(400).json({ message: "Siswa not found" });
+      return res.status(400).send({
+        status: "fail",
+        message: "Siswa tidak ditemukan",
+      });
     }
 
-    // const newSiswa = Siswa.findById(id);
-
-    return res.status(201).json({
+    return res.status(201).send({
+      status: "success",
       message: "siswa berhasil di update",
     });
   } catch (error) {
-    console.log(error.massage);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 
@@ -176,13 +195,17 @@ const deleteSiswa = asyncHandler(async (req, res) => {
     const orangtuaSiswa = await OrangTuaSiswa.findOneAndDelete(id);
 
     if (!siswa) {
-      return res.status(401).json({ message: "Siswa not found" });
+      return res.status(401).send({
+        status: "fail",
+        message: "Siswa tidak ditemukan",
+      });
     }
-
     return res.status(201).send("Siswa deleted");
   } catch (error) {
-    console.log(error.massage);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      status: "error",
+      message: error.message,
+    });
   }
 });
 

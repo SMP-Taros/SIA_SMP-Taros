@@ -20,7 +20,7 @@ Response Body Success:
 
 ```json
 {
-  "status": "succes",
+  "status": "success",
   "message": "data kesehatan berhasil ditambahkan",
   "data": {
     "siswa_id": "1",
@@ -72,7 +72,6 @@ Response Body Success:
 ```json
 {
   "status": "success",
-  "message": "Berhasil membuat siswa",
   "data": {
     "siswa_id": "1"*,
     "golongan_darah": "A",
