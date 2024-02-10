@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Guru from "../models/guruModels.js";
+import {error_response} from "../utils/jsonResponse.js";
 
 const createGuru = asyncHandler(async (req, res) => {
   try {
@@ -93,7 +94,6 @@ const createGuru = asyncHandler(async (req, res) => {
 const getGuru = asyncHandler(async (req, res) => {
   try {
     const guru = await Guru.find({});
-
     if (!guru) {
       return res.status(401).send("belum ada data");
     }
@@ -109,8 +109,8 @@ const getGuru = asyncHandler(async (req, res) => {
     });
 
     return res.status(200).json({
-      count: guru.length,
-      data: formattedData,
+      status: "success",
+      data: guru,
     });
   } catch (error) {
     console.log(error.massage);
@@ -122,17 +122,22 @@ const getdetailGuru = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const guru = await Guru.findById(id);
-
+    console.log(guru)
     if (!guru) {
-      return response.status(400).send("guru tidak ditemukan");
+      return res.status(400).json({
+        status: "error",
+        message: "data guru tidak ditemukan",
+        data: null
+      });
     }
 
     return res.status(200).json({
+      status: "success",
       data: guru,
     });
   } catch (error) {
-    console.log(error.massage);
-    res.status(500).send({ message: error.message });
+    console.log(error);
+    res.status(500).send({ status: "error", message: error.message });
   }
 });
 
@@ -185,7 +190,7 @@ const updateGuru = asyncHandler(async (req, res) => {
     const guru = await Guru.findByIdAndUpdate(id, req.body);
 
     if (!guru) {
-      return res.status(400).json({ message: "guru tidak ditemukan" });
+      return res.status(404).json({ message: "guru tidak ditemukan" });
     }
 
     const newGuru = await Guru.findById(id);
@@ -196,7 +201,7 @@ const updateGuru = asyncHandler(async (req, res) => {
     });
   } catch (error) {
     console.log(error.massage);
-    res.status(500).send({ message: error.message });
+    res.status(400).send({ message: error.message });
   }
 });
 
@@ -206,13 +211,12 @@ const deleteGuru = asyncHandler(async (req, res) => {
     const guru = await Guru.findByIdAndDelete(id, req.body);
 
     if (!guru) {
-      return res.status(400).json({ message: "Guru tidak ditemukan" });
+      return res.status(404).json({ message: "Guru tidak ditemukan" });
     }
 
-    return res.status(201).send("Guru berhasil dihapus");
+    return res.status(202).send({status: "success", message: "Guru berhasil dihapus"});
   } catch (error) {
-    console.log(error.massage);
-    res.status(500).send({ message: error.message });
+    res.status(400).send(fail(error_response(error.message)));
   }
 });
 

@@ -21,6 +21,7 @@ Response Body Success:
 
 ```json
 {
+  "status": "success",
   "data": {
     "username": "admin",
     "password": "123",
@@ -28,7 +29,8 @@ Response Body Success:
     "email": "agus@gmail.com",
     "NIPTK": "08272346",
     "nomor_telepon": "089373536"
-  }
+  },
+  "message": "Berhasil menambah data user"
 }
 ```
 
@@ -36,7 +38,8 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "NIPTK sudah terdaftar"
+  "status": "error",
+  "message": "NIPTK sudah terdaftar"
 }
 ```
 
@@ -57,9 +60,16 @@ Response Body Success:
 
 ```json
 {
+  "status": "success",
   "data": {
-    "token": "unique-token"
-  }
+      "username": "admin",
+      "password": "123",
+      "nama_lengkap": "tubagus agus",
+      "email": "agus@gmail.com",
+      "NIPTK": "08272346",
+      "nomor_telepon": "089373536"
+  },
+  "message": "Berhasil login"
 }
 ```
 
@@ -67,7 +77,8 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "username or password wrong"
+  "status": "error",
+  "message": "username or password wrong"
 }
 ```
 
@@ -79,6 +90,7 @@ Response Body Success:
 
 ```json
 {
+  "status": "success",
   "data": {
     "nama": "Sri rejeki",
     "NUPTK": "12335434",
@@ -94,7 +106,8 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "unauthorized"
+  "status": "error",
+  "message": "unauthorized"
 }
 ```
 
@@ -123,6 +136,7 @@ Response Body Success:
 
 ```json
 {
+  "status": "success",
   "data": {
     "username": "admin3",
     "password": "123",
@@ -130,7 +144,8 @@ Response Body Success:
     "email": "agus@gmail.com",
     "NIPTK": "08272346",
     "nomor_telepon": "089373536"
-  }
+  },
+  "message": "Berhasil update data user"
 }
 ```
 
@@ -138,7 +153,8 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "NIPTK sudah terdaftar"
+  "status": "error",
+  "message": "NIPTK sudah terdaftar"
 }
 ```
 
@@ -154,6 +170,7 @@ Response Body Success:
 
 ```json
 {
+  "status": "success",
   "message": "User logged out"
 }
 ```
@@ -162,6 +179,7 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "Unauthorized"
+  "status": "error",
+  "message": "Unauthorized"
 }
 ```

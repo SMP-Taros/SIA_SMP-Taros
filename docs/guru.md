@@ -33,6 +33,7 @@ Response Body Success:
 
 ```json
 {
+  "status": "success",
   "data": {
     "nama": "Sri",
     "nuptk": "12335434",
@@ -53,7 +54,7 @@ Response Body Success:
     "nama_pasangan": "Rahman",
     "pekerjaan_pasangan": "nganggur"
   },
-  "meesage": "guru berhasil ditambahkan"
+  "message": "guru berhasil ditambahkan"
 }
 ```
 
@@ -61,7 +62,8 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "NUPTK sudah terdaftar tidak lengkap"
+  "status": "error",
+  "message": "NUPTK sudah terdaftar tidak lengkap"
 }
 ```
 
@@ -98,6 +100,7 @@ Response Body Success:
 
 ```json
 {
+  "status": "success",
   "data": {
     "nama": "Sri rejeki",
     "NUPTK": "12335434",
@@ -118,7 +121,7 @@ Response Body Success:
     "nama_pasangan": "Rahman",
     "pekerjaan_pasangan": "nganggur"
   },
-  "meesage": "guru berhasil di perbarui"
+  "message": "guru berhasil di perbarui"
 }
 ```
 
@@ -126,7 +129,8 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "data tidak boleh kosong"
+  "status": "error",
+  "message": "data tidak boleh kosong"
 }
 ```
 
@@ -138,6 +142,7 @@ Response Body Success:
 
 ```json
 {
+  "status": "success",
   "data": {
     "nama": "Sri rejeki",
     "NUPTK": "12335434",
@@ -153,7 +158,8 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "Belum ada data"
+  "status": "error",
+  "message": "Belum ada data"
 }
 ```
 
@@ -165,7 +171,6 @@ Request Body :
 
 ```json
 {
-  "id": "unique-id"
 }
 ```
 
@@ -173,6 +178,7 @@ Response Body Success:
 
 ```json
 {
+  "status": "success",
   "data": {
     "nama": "Sri rejeki",
     "NUPTK": "12335434",
@@ -200,7 +206,8 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "guru tidak ditemukan"
+  "status": "error",
+  "message": "guru tidak ditemukan"
 }
 ```
 
@@ -212,7 +219,6 @@ Request Body :
 
 ```json
 {
-  "id": "unique-id"
 }
 ```
 
@@ -220,6 +226,7 @@ Response Body Success:
 
 ```json
 {
+  "status": "success",
   "message": "guru berhasil dihapus"
 }
 ```
@@ -228,6 +235,7 @@ Response Body Failed:
 
 ```json
 {
-  "errors": "id tidak ditemukan"
+  "status": "error",
+  "message": "id tidak ditemukan"
 }
 ```
