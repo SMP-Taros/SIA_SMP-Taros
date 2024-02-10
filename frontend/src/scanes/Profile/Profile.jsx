@@ -21,6 +21,9 @@ import { useEffect, useState } from "react";
 import { useUpdateUserMutation } from "../../slices/userApiSlice";
 import { setCredentials } from "../../slices/authSlice";
 
+import { InformationDialog } from "../../components/Dialog/InformationDialog.jsx";
+import ConfirmationDialog from "../../components/Dialog/ConfirmationDialog.jsx";
+
 const Profile = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -29,6 +32,13 @@ const Profile = () => {
   const [nama_lengkap, setNama_lengkap] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [formData, setFormData] = useState({});
+  const [openConfModal, setOpenConfModal] = useState(false);
+  const [infoModal, setInfoModal] = useState({
+    isOpen: false,
+    msg: "Berhasil ubah data!",
+  });
 
   const [image, setImage] = useState();
   const imageData = new FormData();
@@ -43,49 +53,99 @@ const Profile = () => {
     setEmail(userInfo.email || "");
   }, [userInfo.email, userInfo.nama_lengkap]);
 
+  // const updateHandler = async (e) => {
+  //   e.preventDefault();
+  //   console.log(userInfo._id);
+  //   if (password !== confirmPassword) {
+  //     toast.error("Password tidak sama");
+  //   } else {
+  //     try {
+  //       const res = await updateProfile({
+  //         id: userInfo._id,
+  //         nama_lengkap,
+  //         email,
+  //         password,
+  //       }).unwrap();
+  //       console.log(res);
+  //       dispatch(setCredentials(res));
+  //       toast.success("Profil berhasil diupdate");
+  //     } catch (err) {
+  //       toast.error(err?.data?.message || err.error);
+  //     }
+  //   }
+  // };
+
+  let detail;
+  if (!isLoading) {
+    detail = userInfo;
+  }
+
+  useEffect(() => {
+    if (detail) {
+      setFormData(detail);
+    }
+  }, [detail]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "nama_lengkap") {
-      setNama_lengkap(value);
-    } else if (name === "email") {
-      setEmail(value);
-    } else if (name === "password") {
-      setPassword(value);
-    } else if (name === "confirmPassword") {
-      setConfirmPassword(value);
-    }
+    console.log(name, value);
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
-  const updateHandler = async (e) => {
+  const onSubmitForm = (e) => {
     e.preventDefault();
+    setOpenConfModal(true);
+  };
+
+  async function updateData() {
+    setOpenConfModal(false);
     if (password !== confirmPassword) {
       toast.error("Password tidak sama");
     } else {
-      try {
-        const res = await updateProfile({
-          _id: userInfo._id,
-          nama_lengkap,
-          email,
-          password,
-        }).unwrap();
-        console.log(res);
-        dispatch(setCredentials(res));
-        toast.success("Profil berhasil diupdate");
-      } catch (err) {
-        toast.error(err?.data?.message || err.error);
+      var res = await updateProfile({
+        id: userInfo._id,
+        data: formData,
+      }).unwrap();
+
+      dispatch(setCredentials(res.data));
+
+      if (res.message === "success") {
+        setInfoModal((prevState) => {
+          return { ...prevState, isOpen: true };
+        });
+      } else {
+        setInfoModal((prevState) => {
+          return { msg: res.message, isOpen: true };
+        });
       }
     }
-  };
+  }
 
-  const uploadHandler = (e) => {
+  const uploadHandler = async (e) => {
     e.preventDefault();
     //console.log(image);
     imageData.append("file", image);
     //console.log(image);
-    const res = updateProfile({
+    const res = await updateProfile({
       data: imageData,
       id: userInfo._id,
     }).unwrap();
+
+    dispatch(setCredentials(res.data));
+
+    if (res.message === "success") {
+      setInfoModal((prevState) => {
+        return { ...prevState, isOpen: true };
+      });
+    } else {
+      setInfoModal((prevState) => {
+        return { msg: res.message, isOpen: true };
+      });
+    }
+    window.location.reload();
   };
 
   function handleFileInputChange(e) {
@@ -96,6 +156,24 @@ const Profile = () => {
   return (
     <Template>
       <Box component="div" width="100%" padding="40px" paddingRight="70px">
+        <ConfirmationDialog
+          isOpen={openConfModal}
+          content="Perubahan pada data siswa tidak bisa dikembalikan !"
+          onAgree={image ? uploadHandler : updateData}
+          onClose={() => {
+            setOpenConfModal(false);
+            setFormData(detail);
+          }}
+        ></ConfirmationDialog>
+        <InformationDialog
+          isOpen={infoModal.isOpen}
+          content="Berhasil mengubah data !"
+          onClose={() =>
+            setInfoModal((prevState) => {
+              return { ...prevState, isOpen: false };
+            })
+          }
+        ></InformationDialog>
         <Grid container justifyContent="space-between">
           <Grid item>
             <Header title="Profile" />
@@ -122,7 +200,7 @@ const Profile = () => {
                     width="250px"
                     height="250px"
                     src={`http://localhost:5555/images/${
-                      !userInfo ? "user.png" : userInfo.profil
+                      !userInfo.profil ? "user.png" : userInfo.profil
                     }`}
                     style={{ cursor: "pointer", borderRadius: "50%" }}
                   />
@@ -142,7 +220,7 @@ const Profile = () => {
                       width: "100px",
                       marginTop: "10px",
                     }}
-                    onClick={uploadHandler}
+                    onClick={onSubmitForm}
                   >
                     Upload
                   </Button>
@@ -153,7 +231,7 @@ const Profile = () => {
           <Grid item xs={8}>
             <Card>
               <CardContent>
-                <form onSubmit={updateHandler}>
+                <form onSubmit={onSubmitForm}>
                   <Typography
                     variant="h4"
                     fontWeight="bold"
@@ -190,14 +268,14 @@ const Profile = () => {
                       <TextField
                         required
                         id="outlined-basic"
-                        label="Nama Lengkap"
+                        // label="Nama Lengkap"
                         name="nama_lengkap"
                         type="text"
                         variant="outlined"
                         size="small"
                         margin="normal"
                         fullWidth
-                        value={nama_lengkap}
+                        value={formData.nama_lengkap}
                         onChange={handleInputChange}
                       />
                       <TextField
